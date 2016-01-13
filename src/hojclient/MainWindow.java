@@ -1106,13 +1106,13 @@ public class MainWindow extends javax.swing.JFrame {
     	} catch (Exception e){System.out.println(e);}
     	*/
     	
-    	System.setSecurityManager(new RMISecurityManager());
+    	//System.setSecurityManager(new RMISecurityManager());
     	
     	//String RMIosoite = "rmi://" + osoite + "/tehdas";
-    	String RMIosoite ="rmi://localhost:2020/tehdas";
+    	String RMIosoite ="tehdas";
     	
     	try {
-    		Registry registry = LocateRegistry.getRegistry(2020);
+    		Registry registry = LocateRegistry.getRegistry("37.219.142.105", 2020);
     		Tehdas tehdas = (Tehdas) registry.lookup(RMIosoite);
     		tehdas.testimetodi(2);
     		

@@ -26,6 +26,7 @@ public class TehdasServer {
 		
 			Naming.rebind("//localhost:2020/tehdas", tehdas);
 			
+			
 		} catch (Exception e) {
 			System.out.println("Error: " + e);
 		}
