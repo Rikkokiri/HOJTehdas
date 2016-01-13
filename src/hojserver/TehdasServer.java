@@ -5,7 +5,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.*;
 
-public class TehdasSever {
+public class TehdasServer {
 
 	public static void main(String args[]){
 		
@@ -17,9 +17,15 @@ public class TehdasSever {
 			//Ei tarvita 
 			//Tehdas stub = (Tehdas) UnicastRemoteObject.exportObject(tehdas, 0);
 			
-			Registry registry = LocateRegistry.getRegistry();
-			registry.rebind("juomatehdas", tehdas); //TODO Vaihda nimi?
+			Registry registry = LocateRegistry.createRegistry(2020);
+			//Registry registry = LocateRegistry.getRegistry();
+			
+			System.out.println(registry); //for testing
+			
+			//registry.rebind("juomatehdas", tehdas); //TODO Vaihda nimi?
 		
+			Naming.rebind("//localhost:2020/tehdas", tehdas);
+			
 		} catch (Exception e) {
 			System.out.println("Error: " + e);
 		}

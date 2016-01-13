@@ -8,7 +8,7 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 	
 	
 	public TehdasImp() throws RemoteException {
-		
+		super();
 	}
 		
 	//Just for the firt test.
