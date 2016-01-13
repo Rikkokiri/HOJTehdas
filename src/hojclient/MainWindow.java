@@ -605,7 +605,7 @@ public class MainWindow extends javax.swing.JFrame {
         proc1Status.setPreferredSize(new java.awt.Dimension(100, 20));
 
         proc1Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        proc1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hojclient/icons/conveyor.jpg"))); // NOI18N
+        proc1Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hojclient/icons/processor.jpg"))); // NOI18N
         proc1Label.setText("Processor 1");
         proc1Label.setFocusable(false);
         proc1Label.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -619,7 +619,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         proc2Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        proc2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hojclient/icons/conveyor.jpg"))); // NOI18N
+        proc2Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hojclient/icons/processor.jpg"))); // NOI18N
         proc2Label.setText("Processor 2");
         proc2Label.setFocusable(false);
         proc2Label.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -673,7 +673,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         proc3Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        proc3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hojclient/icons/conveyor.jpg"))); // NOI18N
+        proc3Label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hojclient/icons/processor.jpg"))); // NOI18N
         proc3Label.setText("Processor 3");
         proc3Label.setFocusable(false);
         proc3Label.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1087,6 +1087,8 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void signInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInActionPerformed
         // TODO Mitä tehdään kun käyttäjä kirjautuu
+  
+    	
     }//GEN-LAST:event_signInActionPerformed
 
     private void startProcLoad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProcLoad1ActionPerformed
@@ -1210,6 +1212,7 @@ public class MainWindow extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+    	if (args.length < 1 ){ System.exit(0); }
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
