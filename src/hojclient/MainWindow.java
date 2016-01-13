@@ -1095,7 +1095,7 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO Mitä tehdään kun käyttäjä kirjautuu
     	
     	System.setSecurityManager(new RMISecurityManager());
-    	String RMIosoite = "rmi://" + osoite + "/tehdas";
+    	String RMIosoite = "rmi://" + osoite + "/juomatehdas";
     	try {
     		Tehdas tehdas = (Tehdas)Naming.lookup(RMIosoite);
     	} catch (Exception e){System.out.println(e);}
