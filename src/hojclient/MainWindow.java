@@ -6,7 +6,11 @@
 package hojclient;
 
 import java.rmi.*;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.rmi.server.*;
+
+import hojserver.Tehdas;
 
 /**
  *
@@ -1094,11 +1098,25 @@ public class MainWindow extends javax.swing.JFrame {
     private void signInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInActionPerformed
         // TODO Mitä tehdään kun käyttäjä kirjautuu
     	
+    	/*
     	System.setSecurityManager(new RMISecurityManager());
     	String RMIosoite = "rmi://" + osoite + "/tehdas";
     	try {
     		Tehdas tehdas = (Tehdas)Naming.lookup(RMIosoite);
     	} catch (Exception e){System.out.println(e);}
+    	*/
+    	
+    	System.setSecurityManager(new RMISecurityManager());
+    	
+    	String RMIosoite = "rmi://" + osoite + "/tehdas";
+    	
+    	try {
+    		Registry registry = LocateRegistry.getRegistry();
+    		Tehdas tehdas = (Tehdas) registry.lookup(RMIosoite);
+    		tehdas.testimetodi(2);
+    		
+    	} catch (Exception e){System.out.println(e);}
+    	
     	
     }//GEN-LAST:event_signInActionPerformed
 
