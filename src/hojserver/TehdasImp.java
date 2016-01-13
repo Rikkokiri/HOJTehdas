@@ -12,7 +12,7 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 	}
 		
 	//Just for the firt test.
-	public void testimetodi(int repeat){
+	public void testimetodi(int repeat) throws RemoteException {
 		for(int i = 0; i < repeat; i++){
 			System.out.println("Testing, testing...");
 		}
