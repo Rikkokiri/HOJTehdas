@@ -5,16 +5,22 @@
  */
 package hojclient;
 
+import java.rmi.*;
+import java.rmi.server.*;
+
 /**
  *
  * @author jaanle
  */
 public class MainWindow extends javax.swing.JFrame {
+	
+	private String osoite;
 
     /**
      * Creates new form MainWindow
      */
-    public MainWindow() {
+    public MainWindow(String o) {
+    	osoite = o;
         initComponents();
     }
 
@@ -1087,7 +1093,12 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void signInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInActionPerformed
         // TODO Mitä tehdään kun käyttäjä kirjautuu
-  
+    	
+    	System.setSecurityManager(new RMISecurityManager());
+    	String RMIosoite = "rmi://" + osoite + "/tehdas";
+    	try {
+    		Tehdas tehdas = (Tehdas)Naming.lookup(RMIosoite);
+    	} catch (Exception e){System.out.println(e);}
     	
     }//GEN-LAST:event_signInActionPerformed
 
@@ -1212,7 +1223,9 @@ public class MainWindow extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-    	if (args.length < 1 ){ System.exit(0); }
+    	if (args.length < 1){
+    		System.exit(0);
+    		}
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -1234,7 +1247,7 @@ public class MainWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainWindow().setVisible(true);
+                new MainWindow(args[0]).setVisible(true);
             }
         });
     }
