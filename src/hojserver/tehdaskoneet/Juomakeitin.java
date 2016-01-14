@@ -8,10 +8,35 @@ package hojserver.tehdaskoneet;
 
 public class Juomakeitin {
 
+	private final int vesitilavuus = 10000; //litraa
+	private final int ainetilavuus = 2000; //kiloa
+	private final int prosessointiaika = 20; //sekuntia
+	
+	private String kayttaja; //String vai jokin muu?
 	
 	
 	public Juomakeitin(){
+	
+		kayttaja = null; // ???
 		
 	}
+	
+	/**
+	 * 
+	 * @param k
+	 */
+	public void setKayttaja(String k){
+		kayttaja = k;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getKayttaja(){
+		return kayttaja;
+	}
+	
+	
 	
 }
