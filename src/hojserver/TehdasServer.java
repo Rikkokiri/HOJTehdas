@@ -24,7 +24,7 @@ public class TehdasServer {
 			
 			//registry.rebind("juomatehdas", tehdas); //TODO Vaihda nimi?
 		
-			Naming.rebind("//localhost:2020/tehdas", tehdas);
+			Naming.rebind("//127.0.0.1:2020/tehdas", tehdas);
 			
 			
 		} catch (Exception e) {
