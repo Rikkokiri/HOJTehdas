@@ -10,6 +10,20 @@ package hojserver.tehdaskoneet;
 
 public class Ruuvikuljetin {
 
+	private boolean käynnissä;
+	
+	public Ruuvikuljetin(){
+		
+	} //konstruktori
+	
+	/**
+	 * Metodi, joka yksinkertaisesti kertoo, onko ruuvikuljetin parhaillaan käynnissä.
+	 * @return
+	 */
+	public boolean onkoKäynnissä(){
+		return käynnissä;
+	}
+	
 	
 	
 }
