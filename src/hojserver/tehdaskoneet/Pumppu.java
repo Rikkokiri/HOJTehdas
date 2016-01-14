@@ -10,8 +10,20 @@ package hojserver.tehdaskoneet;
 
 public class Pumppu {
 
+	private boolean käynnissä;
+	
 	public Pumppu(){
-		
+		käynnissä = false;
 	}
+	
+	/**
+	 * Metodi, joka kertoo onko pumppu parhaillaan käytössä.
+	 * @return
+	 */
+	public boolean onkoKäynnissä(){
+		return käynnissä;
+	}
+	
+	
 	
 }
