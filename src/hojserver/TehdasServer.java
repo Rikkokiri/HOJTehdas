@@ -11,6 +11,8 @@ public class TehdasServer {
 		
 		try{
 			
+			System.setProperty("java.security.policy", "server.policy");
+			
 			//http://docs.oracle.com/javase/6/docs/technotes/guides/rmi/hello/hello-world.html
 			
 			TehdasImp tehdas = new TehdasImp();

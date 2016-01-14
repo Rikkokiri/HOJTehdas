@@ -34,6 +34,9 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 	}
 	
 	
+	/**
+	 * Metodi, jolla luodaan kaikki tehtaan koneet.
+	 */
 	public void alustaKoneet(){
 		/* 
 		 * Olisi varmaan voinut toteuttaa kompaktimmin, mutta oh well...
@@ -63,8 +66,6 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		for(int i = 0; i < kypsytyssäiliöt.length; i++){
 			kypsytyssäiliöt[i] = new Kypsytys();
 		}
-	
+
 	}
-	
-	
 }

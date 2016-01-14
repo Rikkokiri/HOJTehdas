@@ -1106,7 +1106,9 @@ public class MainWindow extends javax.swing.JFrame {
     	} catch (Exception e){System.out.println(e);}
     	*/
     	
-    	//System.setSecurityManager(new RMISecurityManager());
+    	System.setProperty("java.security.policy", "client.policy");
+    	
+    	System.setSecurityManager(new RMISecurityManager());
     	
     	//String RMIosoite = "rmi://" + osoite + "/tehdas";
     	String RMIosoite ="tehdas";
