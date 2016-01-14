@@ -2,16 +2,17 @@ package hojserver;
 
 import java.rmi.*;
 import java.rmi.server.*;
+
 import hojserver.tehdaskoneet.*;
 
 public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 	
-	//Arrayna vai arraylistin? 
+	//Arrayna vai arraylistin? -Array k‰y hyvin
 	private Siilo[] siilot;
 	private Ruuvikuljetin[] ruuvikuljettimet;
 	private Pumppu[] pumput;
 	private Juomakeitin[] juomakeittimet;
-	private Kypsytys[] kypsytyss√§ili√∂t;
+	private Kypsytys[] kypsytyssailiot;   //Ei ‰‰kkˆsi‰ mielell‰‰n nimiksi. Ei oikeen tyk‰nnyt niist‰ kun pullasin pˆyt‰koneelle
 	
 	public TehdasImp() throws RemoteException {
 		super();
@@ -20,7 +21,7 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		ruuvikuljettimet = new Ruuvikuljetin[3]; //3 kuljetinta
 		pumput = new Pumppu[4]; //4 pumppua
 		juomakeittimet = new Juomakeitin[3];
-		kypsytyss√§ili√∂t = new Kypsytys[10]; //10 kypsytyss√§ili√∂t√§
+		kypsytyssailiot	  = new Kypsytys[10]; //10 kypsytyss√§ili√∂t√§
 		
 		alustaKoneet();
 		
@@ -33,10 +34,18 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		}
 	}
 	
+	// Metdoti joka antaa kaiken tiedon tehtaan tilasta
+	// Tosin mink‰laisina paketteina?
+	public Object getData() throws RemoteException{
+		Object a = new Object();;
+		return a;
+	}
 	
 	public void alustaKoneet(){
 		/* 
 		 * Olisi varmaan voinut toteuttaa kompaktimmin, mutta oh well...
+		 * - Noh, alustaminenhan on kertaluonteinen operaatio, joten sen kompaktiudella ei oikeastaan ole
+		 * juurikaan v‰li‰. Ja minusta t‰m‰ on kyll‰ ihan kompakti.
 		 */
 		
 		//Siilot, 4 kpl
@@ -52,6 +61,7 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		//Pumput, 4 kpl
 		//Pit√§isik√∂ pullotukseen viev√§t pumput ja keittimist√§ kypsytykseen siirt√§v√§t pumput eritell√§?
 		//Jopa kirjoittaa erilliset luokat? Onko j√§rke√§?
+		//Kannattaa minusta erikseen. Niill‰ on kuitenkin eri teht‰v‰t.
 		
 		
 		//Juomakeittimet, 3 kpl
@@ -60,8 +70,8 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		}
 		
 		//Kypsytyss√§ili√∂t, 10 kpl
-		for(int i = 0; i < kypsytyss√§ili√∂t.length; i++){
-			kypsytyss√§ili√∂t[i] = new Kypsytys();
+		for(int i = 0; i < kypsytyssailiot.length; i++){
+			kypsytyssailiot[i] = new Kypsytys();
 		}
 	
 	}
