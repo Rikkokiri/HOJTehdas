@@ -13,21 +13,45 @@ public class Siilo {
 	private final int kapasiteetti = 10000; //kiloa
 	private int täyttöaste; //0-10000 kiloa
 	
-	
 	public Siilo(){
-		
+		//Oletusarvoisesti siilo on tyhjä
+		täyttöaste = 0;
 	}
 	
 	//---- GETTERS AND SETTERS ----
+	
+	public int getKapasiteetti(){
+		return kapasiteetti;
+	}
 	
 	public int getTäyttöaste(){
 		return täyttöaste;
 	}
 	
-	public void setTäyttöaste(int täyttö){
-
+	/**
+	 * 
+	 * @param täyttö
+	 */
+	public void resetTäyttöaste(int täyttö){ 
+		if(täyttö <= kapasiteetti){
+			täyttöaste = täyttö;
+		} else{
+			täyttöaste = kapasiteetti;
+		}
 	}
 	
+	/**
+	 * 
+	 * @param lisäys
+	 */
+	public void lisääSiiloon(int lisäys){
+		if(täyttöaste + lisäys <= kapasiteetti){
+			täyttöaste += lisäys;
+		}
+		else{
+			//TODO
+		}
+	}
 	
 	
 }
