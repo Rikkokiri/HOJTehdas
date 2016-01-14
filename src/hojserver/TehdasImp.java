@@ -61,7 +61,8 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		//Pumput, 4 kpl
 		//Pit√§isik√∂ pullotukseen viev√§t pumput ja keittimist√§ kypsytykseen siirt√§v√§t pumput eritell√§?
 		//Jopa kirjoittaa erilliset luokat? Onko j√§rke√§?
-		//Kannattaa minusta erikseen. Niill‰ on kuitenkin eri teht‰v‰t.
+		// - Kannattaa minusta erikseen. Niill‰ on kuitenkin eri teht‰v‰t.
+		// - Sama kysymys her‰si myˆs ruuvikuljettimista
 		
 		
 		//Juomakeittimet, 3 kpl
@@ -74,6 +75,62 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 			kypsytyssailiot[i] = new Kypsytys();
 		}
 	
+	}
+
+
+	public void login(String kayttajaNimi) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void siilonLataus() throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void siilonVaraus(int siilonNro) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void prosessorinLataus(int kuljettimennro) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void prosessorinVaraus(int prosessorinNro, String kayttaja)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void prosessorinKaynnistys(int prosessorinNro)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void sailoidenTaytto(int pumpunNro) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void sailionVaraus(int sailionNro) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void pullojenTaytto(int pumpunNro) throws RemoteException {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
