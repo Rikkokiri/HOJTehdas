@@ -108,7 +108,7 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 	}
 
 
-	public void prosessorinLataus(int kuljettimennro) throws RemoteException {
+	public void prosessorinLataus(int kuljettimenNro, int maara) throws RemoteException {
 		// TODO Auto-generated method stub
 		
 	}

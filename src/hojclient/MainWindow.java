@@ -22,6 +22,7 @@ public class MainWindow extends javax.swing.JFrame {
 	
 	private String osoite;
 	private String kayttajaNimi;
+	Tehdas tehdas;
 
 	private JLabel[] siloLabels;
 	private JLabel[] processorLabels;
@@ -1108,7 +1109,9 @@ public class MainWindow extends javax.swing.JFrame {
     private void startSiloLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startSiloLoadActionPerformed
         // TODO Mitä tehdään, kun siilojen täytön ruuvikuljetin käynnistetään?
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.siilonLataus();
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_startSiloLoadActionPerformed
 
@@ -1123,7 +1126,7 @@ public class MainWindow extends javax.swing.JFrame {
     	try {
     		Registry registry = LocateRegistry.getRegistry(2020);
 
-    		Tehdas tehdas = (Tehdas) registry.lookup(RMIosoite);
+    		tehdas = (Tehdas) registry.lookup(RMIosoite);
     		tehdas.testimetodi(2);
     		
     	} catch (Exception e){System.out.println(e);}
@@ -1144,194 +1147,246 @@ public class MainWindow extends javax.swing.JFrame {
     private void startProcLoad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProcLoad1ActionPerformed
         // TODO Mitä tehdään kun keittimen täytön ruuvikuljetin 1 käynnistetään
     	if (signIn.isSelected()){
-    		
-    	}
+    		try{
+    			tehdas.prosessorinLataus(1, 0);
+    		}catch (RemoteException e) {System.out.println(e);}
+    		}
     }//GEN-LAST:event_startProcLoad1ActionPerformed
 
     private void startProcLoad2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProcLoad2ActionPerformed
         // TODO Mitä tehdään kun keittimen täytön ruuvikuljetin 1 käynnistetään
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.prosessorinLataus(2);
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_startProcLoad2ActionPerformed
 
     private void reserveSilo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveSilo1ActionPerformed
         // TODO Mitä tehdään kun siilo1 varataan?
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.siilonVaraus(1);
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_reserveSilo1ActionPerformed
 
     private void reserveSilo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveSilo2ActionPerformed
         // TODO Mitä tehdään kun siilo2 varataan?
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.siilonVaraus(2);
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_reserveSilo2ActionPerformed
 
     private void reserveSilo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveSilo3ActionPerformed
         // TODO Mitä tehdään kun siilo3 varataan?
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.siilonVaraus(3);
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_reserveSilo3ActionPerformed
 
     private void reserveSilo4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveSilo4ActionPerformed
         // TODO Mitä tehdään kun siilo4 varataan?
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.siilonVaraus(4);
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_reserveSilo4ActionPerformed
 
     private void reserveProc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveProc1ActionPerformed
         // TODO Mitä tehdään kun keitin1 varataan?
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.prosessorinVaraus(1, kayttajaNimi);
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_reserveProc1ActionPerformed
 
     private void startProc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProc1ActionPerformed
         // TODO Mitä tehdään kun keitin1 käynnistetään?
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.prosessorinKaynnistys(1);
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_startProc1ActionPerformed
 
     private void reserveProc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveProc2ActionPerformed
         // TODO Mitä tehdään kun keitin2 varataan?
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.prosessorinVaraus(2, kayttajaNimi);
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_reserveProc2ActionPerformed
 
     private void startProc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProc2ActionPerformed
         // TODO Mitä tehdään kun keitin2 käynnistetään?
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.prosessorinKaynnistys(2);
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_startProc2ActionPerformed
 
     private void reserveProc3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveProc3ActionPerformed
         // TODO Mitä tehdään kun keitin3 varataan?
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.prosessorinVaraus(3, kayttajaNimi);
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_reserveProc3ActionPerformed
 
     private void startProc3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProc3ActionPerformed
         // TODO Mitä tehdään kun keitin3 käynnistetään?
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.prosessorinKaynnistys(3);
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_startProc3ActionPerformed
 
     private void startPump1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startPump1ActionPerformed
         // TODO Mitä tehdään kun pumppu1 käynnistetään?
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.sailoidenTaytto(1);
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_startPump1ActionPerformed
 
     private void startPump2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startPump2ActionPerformed
         // TODO Mitä tehdään kun pumppu2 käynnistetään?
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.sailoidenTaytto(2);
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_startPump2ActionPerformed
 
     private void startBpump1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startBpump1ActionPerformed
         // TODO Mitä tehdään kun pumppu1 pullotukseen käynnistetään?
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.pullojenTaytto(1);
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_startBpump1ActionPerformed
 
     private void startBpump2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startBpump2ActionPerformed
         // TODO Mitä tehdään kun pumppu2 pullotukseen käynnistetään?
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.pullojenTaytto(2);
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_startBpump2ActionPerformed
 
     private void reserveTank1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank1ActionPerformed
         // TODO Mitä tehdään kun säiliö1 varataan?
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.sailionVaraus(1);
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_reserveTank1ActionPerformed
 
     private void reserveTank2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank2ActionPerformed
         // TODO Mitä tehdään kun säiliö2 varataan?
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.sailionVaraus(2);
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_reserveTank2ActionPerformed
 
     private void reserveTank3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank3ActionPerformed
         // TODO Mitä tehdään kun säiliö3 varataan?
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.sailionVaraus(3);
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_reserveTank3ActionPerformed
 
     private void reserveTank4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank4ActionPerformed
         // TODO Mitä tehdään kun säiliö4 varataan?
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.sailionVaraus(4);
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_reserveTank4ActionPerformed
 
     private void reserveTank5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank5ActionPerformed
         // TODO Mitä tehdään kun säiliö5 varataan?
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.sailionVaraus(5);
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_reserveTank5ActionPerformed
 
     private void reserveTank6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank6ActionPerformed
         // TODO Mitä tehdään kun säiliö6 varataan?
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.sailionVaraus(6);
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_reserveTank6ActionPerformed
 
     private void reserveTank7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank7ActionPerformed
         // TODO Mitä tehdään kun säiliö7 varataan?
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.sailionVaraus(7);
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_reserveTank7ActionPerformed
 
     private void reserveTank8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank8ActionPerformed
         // TODO Mitä tehdään kun säiliö8 varataan?
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.sailionVaraus(8);
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_reserveTank8ActionPerformed
 
     private void reserveTank9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank9ActionPerformed
         // TODO Mitä tehdään kun säiliö9 varataan?
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.sailionVaraus(9);
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_reserveTank9ActionPerformed
 
     private void reserveTank10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank10ActionPerformed
         // TODO Mitä tehdään kun säiliö10 varataan?
     	if (signIn.isSelected()){
-    		
+    		try{
+    			tehdas.sailionVaraus(10);
+    		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_reserveTank10ActionPerformed
 
     private void procLoadAmount2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procLoadAmount2ActionPerformed
-        // TODO add your handling code here:
+        // TODO Prosessoreiden täytön määrä
     	if (signIn.isSelected()){
     		
     	}
     }//GEN-LAST:event_procLoadAmount2ActionPerformed
 
     private void procLoadAmount1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procLoadAmount1ActionPerformed
-        // TODO add your handling code here:
+        // TODO Prosessoreiden täytön määrä
     	if (signIn.isSelected()){
     		
     	}
