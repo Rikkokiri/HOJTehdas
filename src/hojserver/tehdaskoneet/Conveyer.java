@@ -8,11 +8,11 @@ package hojserver.tehdaskoneet;
 - Siilo tai keitin ei saa ylitäyttyä
  */
 
-public class Ruuvikuljetin {
+public class Conveyer {
 
 	private boolean käynnissä;
 	
-	public Ruuvikuljetin(){
+	public Conveyer(){
 		
 	} //konstruktori
 	
