@@ -23,7 +23,5 @@ public class Ruuvikuljetin {
 	public boolean onkoKäynnissä(){
 		return käynnissä;
 	}
-	
-	
-	
+
 }
