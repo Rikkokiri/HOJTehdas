@@ -14,6 +14,8 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 	private Processor[] juomakeittimet;
 	private Tank[] kypsytyssailiot;   //Ei ��kk�si� mielell��n nimiksi. Ei oikeen tyk�nnyt niist� kun pullasin p�yt�koneelle
 	
+	
+	
 	public TehdasImp() throws RemoteException {
 		super();
 		
@@ -32,6 +34,14 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		for(int i = 0; i < repeat; i++){
 			System.out.println("Testing, testing...");
 		}
+		
+		try {
+			System.out.println(RemoteServer.getClientHost());
+		} catch (ServerNotActiveException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	// Metdoti joka antaa kaiken tiedon tehtaan tilasta
