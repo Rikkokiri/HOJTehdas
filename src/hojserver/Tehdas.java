@@ -29,4 +29,12 @@ public interface Tehdas extends Remote {
 	
 	public void pullojenTaytto(int pumpunNro) throws RemoteException;
 	
+	public int[] siilojenAineMaara() throws RemoteException;
+	
+	public int[] prosessorienTila() throws RemoteException;
+	
+	public int[] sailioidenJuomanMaara() throws RemoteException;
+	
+	public boolean[] nappienTila() throws RemoteException;
+	
 }

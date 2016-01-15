@@ -16,8 +16,6 @@ public class TehdasServer {
 			//http://docs.oracle.com/javase/6/docs/technotes/guides/rmi/hello/hello-world.html
 			
 			TehdasImp tehdas = new TehdasImp();
-			//Ei tarvita 
-			//Tehdas stub = (Tehdas) UnicastRemoteObject.exportObject(tehdas, 0);
 			
 			Registry registry = LocateRegistry.createRegistry(2020);
 			//Registry registry = LocateRegistry.getRegistry();
