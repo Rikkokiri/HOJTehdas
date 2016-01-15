@@ -1135,7 +1135,7 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO Mitä tehdään kun keittimen täytön ruuvikuljetin 1 käynnistetään
     	if (signIn.isSelected()){
     		try{
-    			tehdas.prosessorinLataus(1);
+    			tehdas.prosessorinLataus(1, 0);
     		}catch (RemoteException e) {System.out.println(e);}
     		}
     }//GEN-LAST:event_startProcLoad1ActionPerformed
