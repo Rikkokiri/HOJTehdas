@@ -19,6 +19,7 @@ import hojserver.Tehdas;
 public class MainWindow extends javax.swing.JFrame {
 	
 	private String osoite;
+	private String kayttajaNimi;
 
     /**
      * Creates new form MainWindow
@@ -1098,19 +1099,9 @@ public class MainWindow extends javax.swing.JFrame {
     private void signInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInActionPerformed
         // TODO Mitä tehdään kun käyttäjä kirjautuu
     	
-    	/*
-    	System.setSecurityManager(new RMISecurityManager());
-    	String RMIosoite = "rmi://" + osoite + "/juomatehdas";
-    	try {
-    		Tehdas tehdas = (Tehdas)Naming.lookup(RMIosoite);
-    	} catch (Exception e){System.out.println(e);}
-    	*/
-    	
-    	System.setProperty("java.security.policy", "client.policy");
-    	
-    	System.setSecurityManager(new RMISecurityManager());
-    	
-    	//String RMIosoite = "rmi://" + osoite + "/tehdas";
+    	// Onko jo painettu?
+    	if (signIn.isSelected()){
+
     	String RMIosoite ="tehdas";
     	
     	try {
@@ -1120,6 +1111,16 @@ public class MainWindow extends javax.swing.JFrame {
     		tehdas.testimetodi(2);
     		
     	} catch (Exception e){System.out.println(e);}
+    	
+    	// Otetaan kirjoitettu k�ytt�j�nimi talteen
+    	kayttajaNimi = userName.getText();
+    	
+    	} // if
+    	
+    	// Jos signin nappi on alhaalla niin ...
+    	else{
+    		
+    	}
     	
     	
     }//GEN-LAST:event_signInActionPerformed
