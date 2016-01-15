@@ -10,18 +10,18 @@ package hojserver.tehdaskoneet;
 
 public class Pump {
 
-	private boolean käynnissä;
+	private boolean running;
 	
 	public Pump(){
-		käynnissä = false;
+		running = false;
 	}
 	
 	/**
-	 * Metodi, joka kertoo onko pumppu parhaillaan käytössä.
+	 * Methods tells is the pump currently running.
 	 * @return
 	 */
-	public boolean onkoKäynnissä(){
-		return käynnissä;
+	public boolean isRunning(){
+		return running;
 	}
 	
 	
