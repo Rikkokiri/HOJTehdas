@@ -10,52 +10,52 @@ public class Processor {
 
 	//Muuttujien nimet ovat jotenkin älyttömän typerän kuuluisia, mutta ne nyt tulivat mieleen.
 	//Voi - ja varmaan kannattaa - vaihtaa myöhemmin.
-	private final int vesitilavuus = 10000; //litraa
-	private final int ainetilavuus = 2000; //kiloa
-	private final int prosessointiaika = 20; //sekuntia
+	private final int waterAmountVolume = 10000; //litraa
+	private final int materialAmountVolume = 2000; //kiloa
+	private final int processingtime = 20; //sekuntia
 	
-	private int vesimäärä;
-	private int ainemäärä;
+	private int waterAmount;
+	private int materialAmount;
 	
-	private String käyttäjä; //String vai jokin muu?
+	private String user; //String vai jokin muu?
 	
 	public Processor(){
-		käyttäjä = null; // ???
+		user = null; // ???
 		//Oletuksena keittimessä ei ole vettä eikä raaka-ainetta
-		vesimäärä = 0;
-		ainemäärä = 0;
+		waterAmount = 0;
+		materialAmount = 0;
 		
 	} //konstruktori
 
-	// <<<< KÄYTTÄJÄ >>>>
+	// <<<< USER >>>>
 	
-	public void setKäyttäjä(String k){
-		käyttäjä = k;
+	public void setUser(String k){
+		user = k;
 	}
 	
-	public String getKäyttäjä(){
-		return käyttäjä;
+	public String getUser(){
+		return user;
 	}
 	
 	
 	// <<<< VESI JA RAAKA-AINE >>>>
 	
 	// --- Getterit ---
-	public int getVesimäärä(){
-		return vesimäärä;
+	public int getWaterAmount(){
+		return waterAmount;
 	}
 	
-	public int getAinemäärä(){
-		return ainemäärä;
+	public int getMaterialAmount(){
+		return materialAmount;
 	}
 	
 	/**
 	 * Metodi, jolla tyhjennetään keitin, kun juoma on valmista.
 	 */
 	//JÄRKEVÄ????
-	public void tyhjennäKeitin(){
-		vesimäärä = 0;
-		ainemäärä = 0;
+	public void emptyingProcessor(){
+		waterAmount = 0;
+		materialAmount = 0;
 	}
 	
 	
