@@ -10,43 +10,43 @@ package hojserver.tehdaskoneet;
 
 public class Silo {
 
-	private final int kapasiteetti = 10000; //kiloa
-	private int täyttöaste; //0-10000 kiloa
+	private final int capacity = 10000; //kiloa
+	private int filled; //0-10000 kiloa				//Not happy with the name, but I'll go with this
 	
 	public Silo(){
 		//Oletusarvoisesti siilo on tyhjä
-		täyttöaste = 0;
+		filled = 0;
 	}
 	
 	//---- GETTERS AND SETTERS ----
 	
 	public int getKapasiteetti(){
-		return kapasiteetti;
+		return capacity;
 	}
 	
 	public int getTäyttöaste(){
-		return täyttöaste;
+		return filled;
 	}
 	
 	/**
 	 * 
-	 * @param täyttö
+	 * @param fill
 	 */
-	public void resetTäyttöaste(int täyttö){ 
-		if(täyttö <= kapasiteetti){
-			täyttöaste = täyttö;
+	public void resetFilled(int fill){ 
+		if(fill <= capacity){
+			filled = fill;
 		} else{
-			täyttöaste = kapasiteetti;
+			filled = capacity;
 		}
 	}
 	
 	/**
 	 * 
-	 * @param lisäys
+	 * @param addition
 	 */
-	public void lisääSiiloon(int lisäys){
-		if(täyttöaste + lisäys <= kapasiteetti){
-			täyttöaste += lisäys;
+	public void fillSilo(int addition){
+		if(filled + addition <= capacity){
+			filled += addition;
 		}
 		else{
 			//TODO
