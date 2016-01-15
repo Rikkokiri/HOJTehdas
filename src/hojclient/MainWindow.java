@@ -10,6 +10,8 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.*;
 
+import javax.swing.JLabel;
+
 import hojserver.Tehdas;
 
 /**
@@ -21,6 +23,10 @@ public class MainWindow extends javax.swing.JFrame {
 	private String osoite;
 	private String kayttajaNimi;
 
+	private JLabel[] siloLabels;
+	private JLabel[] processorLabels;
+	private JLabel[] tankLabels;
+	
     /**
      * Creates new form MainWindow
      */
@@ -130,6 +136,13 @@ public class MainWindow extends javax.swing.JFrame {
         procLoadAmount1 = new javax.swing.JTextField();
         procLoadAmount2 = new javax.swing.JTextField();
 
+        //Listat
+        siloLabels = new JLabel[]{silo1Label, silo2Label, silo3Label, silo4Label};
+        processorLabels = new JLabel[]{proc1User, proc2User, proc3User};
+    	tankLabels = new JLabel[]{tank1Label, tank2Label, tank3Label, tank4Label, tank5Label, tank6Label, tank7Label, tank8Label, tank9Label, tank10Label};
+        
+    	
+    	
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         siloPanel.setBackground(new java.awt.Color(204, 204, 204));
