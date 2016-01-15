@@ -1183,6 +1183,7 @@ public class MainWindow extends javax.swing.JFrame {
     			maaraInt = Integer.parseInt(maara);
     		} catch (NumberFormatException e) {
     			maaraInt = -1;
+    			System.out.println("Load processor: Not valid value!");
     		}
     		
     		try{
@@ -1436,14 +1437,7 @@ public class MainWindow extends javax.swing.JFrame {
      * @throws RemoteException 
      */
     private void update() throws RemoteException{ //Is it okay to add throw?
-    	
-    	/*
-		siloLabels;
-		processorLabels;
-		tankLabels;
-		
-    	 */
-    	
+
     	//>>> UPDATE LABELS <<<
     	
     	//Update silo labels to show amount of material
