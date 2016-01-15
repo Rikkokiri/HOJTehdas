@@ -17,7 +17,7 @@ public interface Tehdas extends Remote {
 	
 	public void siilonVaraus(int siilonNro) throws RemoteException;
 	
-	public void prosessorinLataus(int kuljettimennro) throws RemoteException;
+	public void prosessorinLataus(int kuljettimeNro) throws RemoteException;
 	
 	public void prosessorinVaraus(int prosessorinNro, String kayttaja)throws RemoteException;
 	
