@@ -30,7 +30,12 @@ public class MainWindow extends javax.swing.JFrame {
 	private JLabel[] siloLabels;
 	private JLabel[] processorLabels;
 	private JLabel[] tankLabels;
-	private JToggleButton[] buttonlist;
+	private JToggleButton[] conveyerStartButtons;
+	private JToggleButton[] reserveSiloButtons;
+	private JToggleButton[] reserveProcessorButtons;
+	private JToggleButton[] startProcessorButtons;
+	private JToggleButton[] startPumpButtons;
+	private JToggleButton[] reserveTankButtons;
 	
     /**
      * Creates new form MainWindow
@@ -146,24 +151,25 @@ public class MainWindow extends javax.swing.JFrame {
         processorLabels = new JLabel[]{proc1User, proc2User, proc3User};
     	tankLabels = new JLabel[]{tank1Label, tank2Label, tank3Label, tank4Label, tank5Label, tank6Label, tank7Label, tank8Label, tank9Label, tank10Label};
         
-    	buttonlist = new JToggleButton[]{
-    			startSiloLoad,
-    			
-    			//Reserve silos
-    			reserveSilo1, reserveSilo2, reserveSilo3, reserveSilo4,
-    			//Start conveyers that load the processors
-    			startProcLoad1, startProcLoad2,
-    			//Reserve and start processors
-    			reserveProc1, startProc1,
-    			reserveProc2, startProc2,
-    			reserveProc3, startProc3,
-    			//Start pumps
-    			startPump1, startPump2,
-    			//Start bottle pumps
-    			startBpump1, startBpump2, 
-    			//Tanks
-    			reserveTank1, reserveTank2, reserveTank3, reserveTank4, reserveTank5, reserveTank6,	
-    	};
+    	//Buttons that start the conveyers
+    	conveyerStartButtons = new JToggleButton[]{startSiloLoad, startProcLoad1, startProcLoad2};
+    	
+    	//Buttons that reserve silos
+    	reserveSiloButtons = new JToggleButton[]{reserveSilo1, reserveSilo2, reserveSilo3, reserveSilo4};
+    	
+    	//Buttons that reserve processors
+    	reserveProcessorButtons = new JToggleButton[]{reserveProc1, reserveProc2, reserveProc3};
+    	
+    	//Buttons that start processors
+    	startProcessorButtons = new JToggleButton[]{startProc1, startProc2, startProc3};
+    	
+    	//Buttons that start pumps
+    	startPumpButtons = new JToggleButton[]{startPump1, startPump2, startBpump1, startBpump2};
+    	
+    	//Buttons that reserve tanks
+    	reserveTankButtons = new JToggleButton[]{
+    			reserveTank1, reserveTank2, reserveTank3, reserveTank4, reserveTank5,
+    			reserveTank6, reserveTank7, reserveTank8, reserveTank9, reserveTank10};
     	
     	
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
