@@ -1433,10 +1433,80 @@ public class MainWindow extends javax.swing.JFrame {
     
     /**
      * Method for updating information on the client.
+     * @throws RemoteException 
      */
-    private void update(){
+    private void update() throws RemoteException{ //Is it okay to add throw?
     	
-    
+    	/*
+		siloLabels;
+		processorLabels;
+		tankLabels;
+		
+    	 */
+    	
+    	//>>> UPDATE LABELS <<<
+    	
+    	//Update silo labels to show amount of material
+    	int[] siiloissa = tehdas.siilojenAineMaara();
+    	
+    	for(int i = 0; i < siiloissa.length; i++){
+    		siloLabels[i].setText(Integer.toString(siiloissa[i]));
+    	}
+    	
+    	//Update processor labels
+    	//TODO
+    	
+    	
+    	//Update tank labels
+    	int[] sailioissa = tehdas.sailioidenJuomanMaara();
+    	
+    	for(int i = 0; i < sailioissa.length; i++){
+    		tankLabels[i].setText(Integer.toString(sailioissa[i]));
+    	}
+    	
+    	//>>> UPDATE BUTTONS <<<
+    	
+    	//Update startSiloLoad & startProcLoad-buttons
+    	boolean[] conveyers = tehdas.nappiRuuvikuljettimet();
+    	
+    	for(int i = 0; i < conveyers.length; i++){
+    		conveyerStartButtons[i].setSelected(conveyers[i]);
+    	}
+    	
+    	//Update reserveSilo-buttons
+    	boolean[] siilonapit = tehdas.nappiSiilot();
+    	
+    	for(int i = 0; i < siilonapit.length; i++){
+    		reserveSiloButtons[i].setSelected(siilonapit[i]);
+    	}
+    	
+    	//Update startProc-buttons
+    	boolean[] prosStart = tehdas.nappiProsessoritStart();
+    	
+    	for(int i = 0; i < prosStart.length; i++){
+    		startProcessorButtons[i].setSelected(prosStart[i]);
+    	}
+    	
+    	//Update reserveProc-buttons
+    	boolean[] prosReserve = tehdas.nappiProsessoritReserved();
+    	
+    	for(int i = 0; i < prosReserve.length; i++){
+    		reserveProcessorButtons[i].setSelected(prosReserve[i]);
+    	}
+    	
+    	//Update startPump & startBPump-buttons
+    	boolean[] nappiPumput = tehdas.nappiPumput();
+    	
+    	for(int i = 0; i < nappiPumput.length; i++){
+    		startPumpButtons[i].setSelected(nappiPumput[i]);
+    	}
+    	
+    	//Update reserveTank-buttons
+    	boolean[] nappiTankit = tehdas.nappiKypsytyssailiot();
+    	
+    	for(int i = 0; i < nappiTankit.length; i++){
+    		reserveTankButtons[i].setSelected(nappiTankit[i]);
+    	}
     	
     }
 
