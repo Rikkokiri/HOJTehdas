@@ -41,6 +41,10 @@ public class Processor {
 		return user;
 	}
 	
+	public void setReserved(boolean r){
+		reserved = r;
+	}
+	
 	
 	// <<<< VESI JA RAAKA-AINE >>>>
 	
@@ -67,6 +71,10 @@ public class Processor {
 	
 	public boolean isRunning(){
 		return running;
+	}
+	
+	public void setRunning(boolean r){
+		running = r;
 	}
 	
 	/**

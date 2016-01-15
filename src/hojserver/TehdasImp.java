@@ -86,7 +86,6 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		
 	}
 
-
 	public void ruuvihihnanKaynnistys() throws RemoteException {
 		ruuvikuljettimet[0].setRunning(true);
 	}
@@ -94,41 +93,33 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 	public void siilonVaraus(int siilonNro) throws RemoteException {
 		siilot[siilonNro].setReserved(true);
 	}
-
 	public void prosessorinLataus(int kuljettimenNro, int maara) throws RemoteException {
 		ruuvikuljettimet[kuljettimenNro].setRunning(true);
+		ruuvikuljettimet[kuljettimenNro].setLimit(maara);
 	}
-
 
 	public void prosessorinVaraus(int prosessorinNro, String kayttaja)
 			throws RemoteException {
-		// TODO Auto-generated method stub
-		
+		juomakeittimet[prosessorinNro].setUser(kayttaja);
+		juomakeittimet[prosessorinNro].setReserved(true);
 	}
-
 
 	public void prosessorinKaynnistys(int prosessorinNro)
 			throws RemoteException {
-		// TODO Auto-generated method stub
-		
+		juomakeittimet[prosessorinNro].setRunning(true);		
 	}
 
-
 	public void sailoidenTaytto(int pumpunNro) throws RemoteException {
-		// TODO Auto-generated method stub
-		
+		pumput[pumpunNro].runPump();
 	}
 
 
 	public void sailionVaraus(int sailionNro) throws RemoteException {
-		// TODO Auto-generated method stub
-		
+		kypsytyssailiot[sailionNro].setReserved(true);		
 	}
 
-
 	public void pullojenTaytto(int pumpunNro) throws RemoteException {
-		// TODO Auto-generated method stub
-		
+		pumput[pumpunNro].runPump();
 	}
 
 	
@@ -208,46 +199,38 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 	}
 
 	public void ruuvihihnanKaynnistysVapautus() throws RemoteException {
-		// TODO Auto-generated method stub
-		
+		ruuvikuljettimet[0].setRunning(false);
 	}
 
 	public void siilonVarausVapautus(int siilonNro) throws RemoteException {
-		// TODO Auto-generated method stub
-		
+		siilot[siilonNro].setReserved(false);
 	}
 
-	public void prosessorinLatausVapautus(int kuljettimeNro, int maara)
+	public void prosessorinLatausVapautus(int kuljettimeNro)
 			throws RemoteException {
-		// TODO Auto-generated method stub
-		
+		ruuvikuljettimet[kuljettimeNro].setRunning(false);
 	}
 
-	public void prosessorinVarausVapautus(int prosessorinNro, String kayttaja)
+	public void prosessorinVarausVapautus(int prosessorinNro)
 			throws RemoteException {
-		// TODO Auto-generated method stub
-		
+		juomakeittimet[prosessorinNro].setReserved(false);
 	}
 
 	public void prosessorinKaynnistysVapautus(int prosessorinNro)
 			throws RemoteException {
-		// TODO Auto-generated method stub
-		
+		juomakeittimet[prosessorinNro].setRunning(false);
 	}
 
 	public void sailoidenTayttoVapautus(int pumpunNro) throws RemoteException {
-		// TODO Auto-generated method stub
-		
+		pumput[pumpunNro].stopPump();
 	}
 
 	public void sailionVarausVapautus(int sailionNro) throws RemoteException {
-		// TODO Auto-generated method stub
-		
+		kypsytyssailiot[sailionNro].setReserved(false);
 	}
 
 	public void pullojenTayttoVapautus(int pumpunNro) throws RemoteException {
-		// TODO Auto-generated method stub
-		
+		pumput[pumpunNro].stopPump();
 	}
 
 	
