@@ -10,7 +10,7 @@ package hojserver.tehdaskoneet;
 
 public class Conveyer {
 
-	private boolean käynnissä;
+	private boolean running;
 	
 	public Conveyer(){
 		
@@ -20,8 +20,8 @@ public class Conveyer {
 	 * Metodi, joka yksinkertaisesti kertoo, onko ruuvikuljetin parhaillaan käynnissä.
 	 * @return
 	 */
-	public boolean onkoKäynnissä(){
-		return käynnissä;
+	public boolean isRunning(){
+		return running;
 	}
 
 }
