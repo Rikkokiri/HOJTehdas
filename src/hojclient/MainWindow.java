@@ -148,6 +148,7 @@ public class MainWindow extends javax.swing.JFrame {
         
     	buttonlist = new JToggleButton[]{
     			startSiloLoad,
+    			
     			//Reserve silos
     			reserveSilo1, reserveSilo2, reserveSilo3, reserveSilo4,
     			//Start conveyers that load the processors
