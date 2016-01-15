@@ -1404,7 +1404,12 @@ public class MainWindow extends javax.swing.JFrame {
     	}
     }//GEN-LAST:event_procLoadAmount1ActionPerformed
     
+    /**
+     * Method for updating information on the client.
+     */
     private void update(){
+    	
+    
     	
     }
 
