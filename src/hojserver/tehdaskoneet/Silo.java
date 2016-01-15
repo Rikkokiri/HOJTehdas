@@ -73,6 +73,7 @@ public class Silo {
 		if(take <= degreeOfFilling){
 			degreeOfFilling -= take;
 		} else {
+			//Testaamista varten?
 			System.out.println("Tried to take " + take + " kilos but only " + degreeOfFilling + " kilos in silo. Taking " + degreeOfFilling + " kilos.");
 			degreeOfFilling = 0;
 		}
