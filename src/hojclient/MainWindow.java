@@ -11,6 +11,8 @@ import java.rmi.registry.Registry;
 import java.rmi.server.*;
 
 import javax.swing.JLabel;
+import javax.swing.JToggleButton;
+
 import com.sun.xml.internal.ws.util.StringUtils;
 
 import hojserver.Tehdas;
@@ -28,6 +30,7 @@ public class MainWindow extends javax.swing.JFrame {
 	private JLabel[] siloLabels;
 	private JLabel[] processorLabels;
 	private JLabel[] tankLabels;
+	private JToggleButton[] buttonlist;
 	
     /**
      * Creates new form MainWindow
@@ -143,6 +146,23 @@ public class MainWindow extends javax.swing.JFrame {
         processorLabels = new JLabel[]{proc1User, proc2User, proc3User};
     	tankLabels = new JLabel[]{tank1Label, tank2Label, tank3Label, tank4Label, tank5Label, tank6Label, tank7Label, tank8Label, tank9Label, tank10Label};
         
+    	buttonlist = new JToggleButton[]{
+    			startSiloLoad,
+    			//Reserve silos
+    			reserveSilo1, reserveSilo2, reserveSilo3, reserveSilo4,
+    			//Start conveyers that load the processors
+    			startProcLoad1, startProcLoad2,
+    			//Reserve and start processors
+    			reserveProc1, startProc1,
+    			reserveProc2, startProc2,
+    			reserveProc3, startProc3,
+    			//Start pumps
+    			startPump1, startPump2,
+    			//Start bottle pumps
+    			startBpump1, startBpump2, 
+    			//Tanks
+    			reserveTank1, reserveTank2, reserveTank3, reserveTank4, reserveTank5, reserveTank6,	
+    	};
     	
     	
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);

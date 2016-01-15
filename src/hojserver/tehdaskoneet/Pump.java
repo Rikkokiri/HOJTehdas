@@ -11,9 +11,26 @@ package hojserver.tehdaskoneet;
 public class Pump {
 
 	private boolean running;
+	private Processor origin;
+	private Tank target;
 	
 	public Pump(){
 		running = false;
+		origin = null;
+		target = null;
+	}
+	
+	/**
+	 * Method that starts running the pump.
+	 */
+	public void runPump(){
+		running = true;
+	}
+	
+	public void stopPump(){
+		running = false;
+		//origin = null;
+		//target = null;
 	}
 	
 	/**
@@ -23,7 +40,5 @@ public class Pump {
 	public boolean isRunning(){
 		return running;
 	}
-	
-	
-	
+
 }
