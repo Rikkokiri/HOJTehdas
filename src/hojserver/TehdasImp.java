@@ -144,5 +144,33 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
+	public int[] siilojenAineMaara() throws RemoteException {
+		int[] sam = new int[4];
+		sam[0] = siilot[0].getTäyttöaste();
+		sam[1] = siilot[1].getTäyttöaste();
+		sam[2] = siilot[2].getTäyttöaste();
+		sam[3] = siilot[3].getTäyttöaste();
+		return sam;
+	}
+
+	
+	public int[] prosessorienTila() throws RemoteException {
+		
+		return null;
+	}
+
+	
+	public int[] sailioidenJuomanMaara() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	public boolean[] nappienTila() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

@@ -11,6 +11,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.*;
 
 import javax.swing.JLabel;
+import com.sun.xml.internal.ws.util.StringUtils;
 
 import hojserver.Tehdas;
 
@@ -1147,17 +1148,28 @@ public class MainWindow extends javax.swing.JFrame {
     private void startProcLoad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProcLoad1ActionPerformed
         // TODO Mitä tehdään kun keittimen täytön ruuvikuljetin 1 käynnistetään
     	if (signIn.isSelected()){
+    		
+    		String maara = procLoadAmount1.getText();
+    		int maaraInt;
+    		
+    		try {
+    			maaraInt = Integer.parseInt(maara);
+    		} catch (NumberFormatException e) {
+    			maaraInt = -1;
+    		}
+    		
     		try{
-    			tehdas.prosessorinLataus(1, 0);
+    			tehdas.prosessorinLataus(1, maaraInt);
     		}catch (RemoteException e) {System.out.println(e);}
     		}
+    	
     }//GEN-LAST:event_startProcLoad1ActionPerformed
 
     private void startProcLoad2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProcLoad2ActionPerformed
         // TODO Mitä tehdään kun keittimen täytön ruuvikuljetin 1 käynnistetään
     	if (signIn.isSelected()){
     		try{
-    			tehdas.prosessorinLataus(2);
+    			tehdas.prosessorinLataus(2, 0);
     		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_startProcLoad2ActionPerformed
@@ -1391,6 +1403,10 @@ public class MainWindow extends javax.swing.JFrame {
     		
     	}
     }//GEN-LAST:event_procLoadAmount1ActionPerformed
+    
+    private void update(){
+    	
+    }
 
     /**
      * @param args the command line arguments

@@ -12,10 +12,11 @@ public class Processor {
 	//Voi - ja varmaan kannattaa - vaihtaa myöhemmin.
 	private final int waterAmountVolume = 10000; //litraa
 	private final int materialAmountVolume = 2000; //kiloa
-	private final int processingtime = 20; //sekuntia
+	private final int processingtime = 20000; //millisekuntia
 	
 	private int waterAmount;
 	private int materialAmount;
+	private int progress;
 	
 	private String user; //String vai jokin muu?
 	
