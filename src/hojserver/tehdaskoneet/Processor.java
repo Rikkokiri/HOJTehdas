@@ -6,7 +6,7 @@ package hojserver.tehdaskoneet;
 - prosessoi juomaa 20 sekuntia
  */
 
-public class Juomakeitin {
+public class Processor {
 
 	//Muuttujien nimet ovat jotenkin älyttömän typerän kuuluisia, mutta ne nyt tulivat mieleen.
 	//Voi - ja varmaan kannattaa - vaihtaa myöhemmin.
@@ -19,7 +19,7 @@ public class Juomakeitin {
 	
 	private String käyttäjä; //String vai jokin muu?
 	
-	public Juomakeitin(){
+	public Processor(){
 		käyttäjä = null; // ???
 		//Oletuksena keittimessä ei ole vettä eikä raaka-ainetta
 		vesimäärä = 0;

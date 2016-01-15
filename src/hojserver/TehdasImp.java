@@ -8,20 +8,20 @@ import hojserver.tehdaskoneet.*;
 public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 	
 	//Arrayna vai arraylistin? -Array k�y hyvin
-	private Siilo[] siilot;
-	private Ruuvikuljetin[] ruuvikuljettimet;
-	private Pumppu[] pumput;
-	private Juomakeitin[] juomakeittimet;
-	private Kypsytys[] kypsytyssailiot;   //Ei ��kk�si� mielell��n nimiksi. Ei oikeen tyk�nnyt niist� kun pullasin p�yt�koneelle
+	private Silo[] siilot;
+	private Conveyer[] ruuvikuljettimet;
+	private Pump[] pumput;
+	private Processor[] juomakeittimet;
+	private Tank[] kypsytyssailiot;   //Ei ��kk�si� mielell��n nimiksi. Ei oikeen tyk�nnyt niist� kun pullasin p�yt�koneelle
 	
 	public TehdasImp() throws RemoteException {
 		super();
 		
-		siilot = new Siilo[4]; //4 siiloa
-		ruuvikuljettimet = new Ruuvikuljetin[3]; //3 kuljetinta
-		pumput = new Pumppu[4]; //4 pumppua
-		juomakeittimet = new Juomakeitin[3];
-		kypsytyssailiot	  = new Kypsytys[10]; //10 kypsytyssäiliötä
+		siilot = new Silo[4]; //4 siiloa
+		ruuvikuljettimet = new Conveyer[3]; //3 kuljetinta
+		pumput = new Pump[4]; //4 pumppua
+		juomakeittimet = new Processor[3];
+		kypsytyssailiot	  = new Tank[10]; //10 kypsytyssäiliötä
 		
 		alustaKoneet();
 		
@@ -53,12 +53,12 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		
 		//Siilot, 4 kpl
 		for(int i = 0; i < siilot.length; i++){
-			siilot[i] = new Siilo();
+			siilot[i] = new Silo();
 		}
 		
 		//Ruuvikuljettimet, 3 kpl
 		for(int i = 0; i < ruuvikuljettimet.length; i++){
-			ruuvikuljettimet[i] = new Ruuvikuljetin();
+			ruuvikuljettimet[i] = new Conveyer();
 		}
 		
 		//Pumput, 4 kpl
@@ -70,12 +70,12 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		
 		//Juomakeittimet, 3 kpl
 		for(int i = 0; i < juomakeittimet.length; i++){
-			juomakeittimet[i] = new Juomakeitin();
+			juomakeittimet[i] = new Processor();
 		}
 		
 		//Kypsytyssäiliöt, 10 kpl
 		for(int i = 0; i < kypsytyssailiot.length; i++){
-			kypsytyssailiot[i] = new Kypsytys();
+			kypsytyssailiot[i] = new Tank();
 		}
 
 	}

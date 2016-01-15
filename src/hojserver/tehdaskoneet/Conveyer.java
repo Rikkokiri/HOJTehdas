@@ -8,11 +8,11 @@ package hojserver.tehdaskoneet;
 - Siilo tai keitin ei saa ylitäyttyä
  */
 
-public class Ruuvikuljetin {
+public class Conveyer {
 
-	private boolean käynnissä;
+	private boolean running;
 	
-	public Ruuvikuljetin(){
+	public Conveyer(){
 		
 	} //konstruktori
 	
@@ -20,8 +20,8 @@ public class Ruuvikuljetin {
 	 * Metodi, joka yksinkertaisesti kertoo, onko ruuvikuljetin parhaillaan käynnissä.
 	 * @return
 	 */
-	public boolean onkoKäynnissä(){
-		return käynnissä;
+	public boolean isRunning(){
+		return running;
 	}
 
 }

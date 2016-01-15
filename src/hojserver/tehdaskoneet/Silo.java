@@ -8,12 +8,12 @@ package hojserver.tehdaskoneet;
 
  */
 
-public class Siilo {
+public class Silo {
 
 	private final int kapasiteetti = 10000; //kiloa
 	private int täyttöaste; //0-10000 kiloa
 	
-	public Siilo(){
+	public Silo(){
 		//Oletusarvoisesti siilo on tyhjä
 		täyttöaste = 0;
 	}

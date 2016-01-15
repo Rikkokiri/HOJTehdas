@@ -6,12 +6,12 @@ package hojserver.tehdaskoneet;
 - vain yksi pumppu voi täyttää tai tyhjentää säiliötä kerrallaan
  */
 
-public class Kypsytys {
+public class Tank {
 
 	private final int tilavuus = 10000; //litraa
 	private int nestemäärä;
 	
-	public Kypsytys(){
+	public Tank(){
 		nestemäärä = 0;
 	}
 	

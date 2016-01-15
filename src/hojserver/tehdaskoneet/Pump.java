@@ -8,11 +8,11 @@ package hojserver.tehdaskoneet;
 - Pullotukseen oletetaan mahtuvan aina niin paljon kuin säiliössä on juomaa
  */
 
-public class Pumppu {
+public class Pump {
 
 	private boolean käynnissä;
 	
-	public Pumppu(){
+	public Pump(){
 		käynnissä = false;
 	}
 	
