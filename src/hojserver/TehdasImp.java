@@ -174,33 +174,51 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 	}
 
 	public boolean[] nappiRuuvikuljettimet() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		boolean[] napit = new boolean[3];
+		for (int i = 0; i < 3; i++){
+			napit[i] = ruuvikuljettimet[i].isRunning();
+		}
+		return napit;
 	}
 
 	public boolean[] nappiSiilot() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		boolean[] napit = new boolean[4];
+		for (int i = 0; i < 4; i++){
+			napit[i] = siilot[i].isReserved();
+		}
+		return napit;
 	}
 
 	public boolean[] nappiProsessoritReserved() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		boolean[] napit = new boolean[3];
+		for (int i = 0; i < 3; i++){
+			napit[i] = juomakeittimet[i].isReserved();
+		}
+		return napit;
 	}
 
 	public boolean[] nappiProsessoritStart() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		boolean[] napit = new boolean[3];
+		for (int i = 0; i < 3; i++){
+			napit[i] = juomakeittimet[i].isRunning();
+		}
+		return napit;
 	}
 
 	public boolean[] nappiPumput() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		boolean[] napit = new boolean[4];
+		for (int i = 0; i < 4; i++){
+			napit[i] = pumput[i].isRunning();
+		}
+		return napit;
 	}
 
 	public boolean[] nappiKypsytyssailiot() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		boolean[] napit = new boolean[10];
+		for (int i = 0; i < 10; i++){
+			napit[i] = kypsytyssailiot[i].isReserved();
+		}
+		return napit;
 	}
 
 	

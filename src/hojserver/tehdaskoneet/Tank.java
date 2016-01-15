@@ -10,6 +10,7 @@ public class Tank {
 
 	private final int tilavuus = 10000; //litraa
 	private int nestemäärä;
+	private boolean reserved;
 	
 	public Tank(){
 		nestemäärä = 0;
@@ -17,6 +18,10 @@ public class Tank {
 	
 	public int getNestemäärä(){
 		return nestemäärä;
+	}
+	
+	public boolean isReserved(){
+		return reserved;
 	}
 	
 	/*

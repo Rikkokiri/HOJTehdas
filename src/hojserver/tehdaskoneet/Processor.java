@@ -61,6 +61,14 @@ public class Processor {
 		progress =  progress + maara;
 	}
 	
+	public boolean isReserved(){
+		return reserved;
+	}
+	
+	public boolean isRunning(){
+		return running;
+	}
+	
 	/**
 	 * Metodi, jolla tyhjennetään keitin, kun juoma on valmista.
 	 */
