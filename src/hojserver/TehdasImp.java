@@ -44,13 +44,6 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		
 	}
 	
-	// Metdoti joka antaa kaiken tiedon tehtaan tilasta
-	// Tosin mink�laisina paketteina?
-	public Object getData() throws RemoteException{
-		Object a = new Object();;
-		return a;
-	}
-	
 	/**
 	 * Metodi, jolla luodaan kaikki tehtaan koneet.
 	 */
@@ -72,11 +65,9 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		}
 		
 		//Pumput, 4 kpl
-		//Pitäisikö pullotukseen vievät pumput ja keittimistä kypsytykseen siirtävät pumput eritellä?
-		//Jopa kirjoittaa erilliset luokat? Onko järkeä?
-		// - Kannattaa minusta erikseen. Niill� on kuitenkin eri teht�v�t.
-		// - Sama kysymys her�si my�s ruuvikuljettimista
-		
+		for (int i = 0; i < pumput.length; i++){
+			pumput[i] = new Pump();
+		}
 		
 		//Juomakeittimet, 3 kpl
 		for(int i = 0; i < juomakeittimet.length; i++){
@@ -96,21 +87,16 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 	}
 
 
-	public void siilonLataus() throws RemoteException {
-		// TODO Auto-generated method stub
-		
+	public void ruuvihihnanKaynnistys() throws RemoteException {
+		ruuvikuljettimet[0].setRunning(true);
 	}
-
-
+	
 	public void siilonVaraus(int siilonNro) throws RemoteException {
-		// TODO Auto-generated method stub
-		
+		siilot[siilonNro].setReserved(true);
 	}
-
 
 	public void prosessorinLataus(int kuljettimenNro, int maara) throws RemoteException {
-		// TODO Auto-generated method stub
-		
+		ruuvikuljettimet[kuljettimenNro].setRunning(true);
 	}
 
 
@@ -219,6 +205,49 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 			napit[i] = kypsytyssailiot[i].isReserved();
 		}
 		return napit;
+	}
+
+	public void ruuvihihnanKaynnistysVapautus() throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void siilonVarausVapautus(int siilonNro) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void prosessorinLatausVapautus(int kuljettimeNro, int maara)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void prosessorinVarausVapautus(int prosessorinNro, String kayttaja)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void prosessorinKaynnistysVapautus(int prosessorinNro)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void sailoidenTayttoVapautus(int pumpunNro) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void sailionVarausVapautus(int sailionNro) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void pullojenTayttoVapautus(int pumpunNro) throws RemoteException {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

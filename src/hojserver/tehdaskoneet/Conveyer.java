@@ -11,10 +11,19 @@ package hojserver.tehdaskoneet;
 public class Conveyer {
 
 	private boolean running;
+	private int limit;
 	
 	public Conveyer(){
-		
+		limit = -1;
 	} //konstruktori
+	
+	public void setRunning(boolean r){
+		running = r;
+	}
+	
+	public void setLimit(int l){
+		limit = l;
+	}
 	
 	/**
 	 * Metodi, joka yksinkertaisesti kertoo, onko ruuvikuljetin parhaillaan käynnissä.

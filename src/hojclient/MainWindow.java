@@ -1138,7 +1138,7 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO Mitä tehdään, kun siilojen täytön ruuvikuljetin käynnistetään?
     	if (signIn.isSelected()){
     		try{
-    			tehdas.siilonLataus();
+    			tehdas.ruuvihihnanKaynnistys();
     		}catch (RemoteException e) {System.out.println(e);}
     	}
     }//GEN-LAST:event_startSiloLoadActionPerformed

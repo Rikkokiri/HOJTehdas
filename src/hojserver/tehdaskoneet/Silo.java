@@ -34,6 +34,10 @@ public class Silo {
 		return reserved;
 	}
 	
+	public void setReserved(boolean r){
+		reserved = r;
+	}
+	
 	/**
 	 * 
 	 * @param fill
