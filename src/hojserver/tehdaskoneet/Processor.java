@@ -50,6 +50,14 @@ public class Processor {
 		return materialAmount;
 	}
 	
+	public int getProgress(){
+		return progress;
+	}
+	
+	public void process(int maara){
+		progress =  progress + maara;
+	}
+	
 	/**
 	 * Metodi, jolla tyhjennetään keitin, kun juoma on valmista.
 	 */

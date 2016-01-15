@@ -148,28 +148,34 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 	
 	public int[] siilojenAineMaara() throws RemoteException {
 		int[] sam = new int[4];
-		sam[0] = siilot[0].getTäyttöaste();
-		sam[1] = siilot[1].getTäyttöaste();
-		sam[2] = siilot[2].getTäyttöaste();
-		sam[3] = siilot[3].getTäyttöaste();
+		sam[0] = siilot[0].getDegreeOfFilling();
+		sam[1] = siilot[1].getDegreeOfFilling();
+		sam[2] = siilot[2].getDegreeOfFilling();
+		sam[3] = siilot[3].getDegreeOfFilling();
 		return sam;
 	}
 
-	
+	// prosentteina
 	public int[] prosessorienTila() throws RemoteException {
-		
-		return null;
+		int[] tila = new int[3];
+		tila[0] = (juomakeittimet[0].getProgress() / 20000) * 100;
+		tila[1] = (juomakeittimet[1].getProgress() / 20000) * 100;
+		tila[2] = (juomakeittimet[2].getProgress() / 20000) * 100;
+		return tila;
 	}
 
 	
 	public int[] sailioidenJuomanMaara() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		int[] sjm = new int[10];
+		for (int i = 0; i < 10; i++){
+			sjm[i] = kypsytyssailiot[i].getNestemäärä();
+		}
+		return sjm;
 	}
 
 	
 	public boolean[] nappienTila() throws RemoteException {
-		// TODO Auto-generated method stub
+		int[] tilat = new int[1];
 		return null;
 	}
 	
