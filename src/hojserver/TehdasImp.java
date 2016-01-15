@@ -173,10 +173,35 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		return sjm;
 	}
 
-	
-	public boolean[] nappienTila() throws RemoteException {
-		int[] tilat = new int[1];
+	public boolean[] nappiRuuvikuljettimet() throws RemoteException {
+		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public boolean[] nappiSiilot() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean[] nappiProsessoritReserved() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean[] nappiProsessoritStart() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean[] nappiPumput() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean[] nappiKypsytyssailiot() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }

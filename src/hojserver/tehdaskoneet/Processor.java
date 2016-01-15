@@ -18,6 +18,9 @@ public class Processor {
 	private int materialAmount;
 	private int progress;
 	
+	private boolean running;
+	private boolean reserved;
+	
 	private String user; //String vai jokin muu?
 	
 	public Processor(){

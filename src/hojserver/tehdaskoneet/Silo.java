@@ -12,6 +12,7 @@ public class Silo {
 
 	private final int capacity = 10000; //kiloa
 	private int degreeOfFilling; //0-10000 kiloa				//Not happy with the name, but I'll go with this
+	private boolean reserved;
 	
 	//Constructor
 	public Silo(){
@@ -27,6 +28,10 @@ public class Silo {
 	
 	public int getDegreeOfFilling(){
 		return degreeOfFilling;
+	}
+	
+	public boolean isReserved(){
+		return reserved;
 	}
 	
 	/**
