@@ -8,7 +8,7 @@ package hojserver.tehdaskoneet;
 - Pullotukseen oletetaan mahtuvan aina niin paljon kuin säiliössä on juomaa
  */
 
-public class Pump {
+public class Pump extends Thread {
 
 	private boolean running;
 	private Processor origin;

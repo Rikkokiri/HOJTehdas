@@ -6,7 +6,7 @@ package hojserver.tehdaskoneet;
 - prosessoi juomaa 20 sekuntia
  */
 
-public class Processor {
+public class Processor extends Thread {
 
 	//Muuttujien nimet ovat jotenkin älyttömän typerän kuuluisia, mutta ne nyt tulivat mieleen.
 	//Voi - ja varmaan kannattaa - vaihtaa myöhemmin.
