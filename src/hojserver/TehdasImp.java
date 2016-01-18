@@ -11,7 +11,7 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 	private Silo[] siilot;
 	private Conveyer[] ruuvikuljettimet;
 	private Pump[] pumput;
-	private Processor[] juomakeittimet;
+	private Processor[] prosessorit;
 	private Tank[] kypsytyssailiot;   //Ei ��kk�si� mielell��n nimiksi. Ei oikeen tyk�nnyt niist� kun pullasin p�yt�koneelle
 	
 	
@@ -22,7 +22,7 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		siilot = new Silo[4]; //4 siiloa
 		ruuvikuljettimet = new Conveyer[3]; //3 kuljetinta
 		pumput = new Pump[4]; //4 pumppua
-		juomakeittimet = new Processor[3];
+		prosessorit = new Processor[3];
 		kypsytyssailiot	  = new Tank[10]; //10 kypsytyssäiliötä
 		
 		alustaKoneet();
@@ -64,13 +64,13 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 
 	public void prosessorinVaraus(int prosessorinNro, String kayttaja)
 			throws RemoteException {
-		juomakeittimet[prosessorinNro].setUser(kayttaja);
-		juomakeittimet[prosessorinNro].setReserved(true);
+		prosessorit[prosessorinNro].setUser(kayttaja);
+		prosessorit[prosessorinNro].setReserved(true);
 	}
 
 	public void prosessorinKaynnistys(int prosessorinNro)
 			throws RemoteException {
-		juomakeittimet[prosessorinNro].setRunning(true);		
+		prosessorit[prosessorinNro].setRunning(true);		
 	}
 
 	public void sailoidenTaytto(int pumpunNro) throws RemoteException {
@@ -99,9 +99,9 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 	// prosentteina
 	public int[] prosessorienTila() throws RemoteException {
 		int[] tila = new int[3];
-		tila[0] = (juomakeittimet[0].getProgress() / 20000) * 100;
-		tila[1] = (juomakeittimet[1].getProgress() / 20000) * 100;
-		tila[2] = (juomakeittimet[2].getProgress() / 20000) * 100;
+		tila[0] = (prosessorit[0].getProgress() / 20000) * 100;
+		tila[1] = (prosessorit[1].getProgress() / 20000) * 100;
+		tila[2] = (prosessorit[2].getProgress() / 20000) * 100;
 		return tila;
 	}
 
@@ -133,7 +133,7 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 	public boolean[] nappiProsessoritReserved() throws RemoteException {
 		boolean[] napit = new boolean[3];
 		for (int i = 0; i < 3; i++){
-			napit[i] = juomakeittimet[i].isReserved();
+			napit[i] = prosessorit[i].isReserved();
 		}
 		return napit;
 	}
@@ -141,7 +141,7 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 	public boolean[] nappiProsessoritStart() throws RemoteException {
 		boolean[] napit = new boolean[3];
 		for (int i = 0; i < 3; i++){
-			napit[i] = juomakeittimet[i].isRunning();
+			napit[i] = prosessorit[i].isRunning();
 		}
 		return napit;
 	}
@@ -177,12 +177,12 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 
 	public void prosessorinVarausVapautus(int prosessorinNro)
 			throws RemoteException {
-		juomakeittimet[prosessorinNro].setReserved(false);
+		prosessorit[prosessorinNro].setReserved(false);
 	}
 
 	public void prosessorinKaynnistysVapautus(int prosessorinNro)
 			throws RemoteException {
-		juomakeittimet[prosessorinNro].setRunning(false);
+		prosessorit[prosessorinNro].setRunning(false);
 	}
 
 	public void sailoidenTayttoVapautus(int pumpunNro) throws RemoteException {
@@ -210,21 +210,34 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		//Siilot, 4 kpl
 		for(int i = 0; i < siilot.length; i++){
 			siilot[i] = new Silo();
+			siilot[i].start();
+		}
+		
+		//Juomakeittimet, 3 kpl
+		for(int i = 0; i < prosessorit.length; i++){
+			prosessorit[i] = new Processor();
+			prosessorit[i].start();
 		}
 		
 		//Ruuvikuljettimet, 3 kpl
 		for(int i = 0; i < ruuvikuljettimet.length; i++){
-			ruuvikuljettimet[i] = new Conveyer();
+			if(i == 0){
+				ruuvikuljettimet[i] = new SiloConveyer(siilot);
+				ruuvikuljettimet[i].start(); //Start thread
+			} else {
+				ruuvikuljettimet[i] = new ProcessorConveyer(siilot, prosessorit);
+				ruuvikuljettimet[i].start(); //Start thread
+			}
 		}
 		
 		//Pumput, 4 kpl
 		for (int i = 0; i < pumput.length; i++){
-			pumput[i] = new Pump();
-		}
-		
-		//Juomakeittimet, 3 kpl
-		for(int i = 0; i < juomakeittimet.length; i++){
-			juomakeittimet[i] = new Processor();
+			if(i < 2){
+			pumput[i] = new TankPump(prosessorit, kypsytyssailiot);
+			} else {
+				pumput[i] = new BottlePump(kypsytyssailiot);
+				pumput[i].start();
+			}
 		}
 		
 		//Kypsytyssäiliöt, 10 kpl
