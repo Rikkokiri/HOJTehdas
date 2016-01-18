@@ -48,11 +48,29 @@ public class Silo extends Thread {
 		reserved = r;
 	}
 	
+	//------------------
+	
+	//>>>> RUN-METODI <<<<
+	public void run(){
+		
+		//TODO
+		
+		while(tila == KoneenTila.EMPTYING){
+			//???
+			
+		}
+		
+		while(tila == KoneenTila.FILLING){
+			//???
+			
+		}
+		
+	}
 	
 	//------------------
 	/**
-	 * 
-	 * @return
+	 * Method tells whether the silo is full or not
+	 * @return boolean true if silo is full, false if silo is not full
 	 */
 	public boolean isFull(){
 		if(degreeOfFilling < capacity){
