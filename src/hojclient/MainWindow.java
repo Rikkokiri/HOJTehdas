@@ -1152,7 +1152,7 @@ public class MainWindow extends javax.swing.JFrame {
     	String RMIosoite ="tehdas";
     	
     	try {
-    		Registry registry = LocateRegistry.getRegistry(2020);
+    		Registry registry = LocateRegistry.getRegistry("37.219.135.190", 2020);
 
     		tehdas = (Tehdas) registry.lookup(RMIosoite);
     		tehdas.testimetodi(2);

@@ -1,8 +1,8 @@
 package hojserver.tehdaskoneet;
 
 public enum KoneenTila {
-	TYHJENNYS,
-	TÄYTTÖ,
-	VAPAA,
-	PROSESSI
+	EMPTYING,
+	FILLING,
+	FREE,
+	PROSESSING
 }

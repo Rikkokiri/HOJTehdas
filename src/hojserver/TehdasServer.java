@@ -30,5 +30,6 @@ public class TehdasServer {
 		} catch (Exception e) {
 			System.out.println("Error: " + e);
 		}
+		
 	} //main
 } // class TehdasServer
