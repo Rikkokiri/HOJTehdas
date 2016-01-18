@@ -2,8 +2,11 @@ package hojserver.tehdaskoneet;
 
 public class BottlePump extends Pump {
 
-	public BottlePump(){
+	private Tank[] tanks;
+	
+	public BottlePump(Tank[] tanks){
 		super();
+		this.tanks = tanks;
 	}
 	
 	
