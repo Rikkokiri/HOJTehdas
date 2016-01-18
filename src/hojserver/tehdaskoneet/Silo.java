@@ -44,15 +44,41 @@ public class Silo extends Thread {
 		return reserved;
 	}
 	
+	/**
+	 * Metodilla muutetaan siilon varauksen tilaa. Asetetaan siis vapaaksi/varatuksi.
+	 * @param r
+	 */
 	public void setReserved(boolean r){
 		reserved = r;
+		
+		//TODO Miten varauksen tekemiseen / vapauttamiseen reagoidaan eri tiloissa
+		
+		
 	}
 	
+	//------------------
+	
+	//>>>> RUN-METODI <<<<
+	public void run(){
+		
+		//TODO
+		
+		while(tila == KoneenTila.EMPTYING){
+			//???
+			
+		}
+		
+		while(tila == KoneenTila.FILLING){
+			//???
+			
+		}
+		
+	}
 	
 	//------------------
 	/**
-	 * 
-	 * @return
+	 * Method tells whether the silo is full or not
+	 * @return boolean true if silo is full, false if silo is not full
 	 */
 	public boolean isFull(){
 		if(degreeOfFilling < capacity){
