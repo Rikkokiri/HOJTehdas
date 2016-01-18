@@ -40,6 +40,20 @@ public class Silo extends Thread {
 		reserved = r;
 	}
 	
+	
+	//------------------
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isFull(){
+		if(degreeOfFilling < capacity){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	/**
 	 * 
 	 * @param fill
