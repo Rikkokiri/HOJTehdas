@@ -6,7 +6,7 @@ package hojserver.tehdaskoneet;
 - vain yksi pumppu voi täyttää tai tyhjentää säiliötä kerrallaan
  */
 
-public class Tank {
+public class Tank extends Thread {
 
 	private final int tilavuus = 10000; //litraa
 	private int nestemäärä;

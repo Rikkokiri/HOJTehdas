@@ -44,43 +44,7 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		
 	}
 	
-	/**
-	 * Metodi, jolla luodaan kaikki tehtaan koneet.
-	 */
-	public void alustaKoneet(){
-		/* 
-		 * Olisi varmaan voinut toteuttaa kompaktimmin, mutta oh well...
-		 * - Noh, alustaminenhan on kertaluonteinen operaatio, joten sen kompaktiudella ei oikeastaan ole
-		 * juurikaan v�li�. Ja minusta t�m� on kyll� ihan kompakti.
-		 */
-		
-		//Siilot, 4 kpl
-		for(int i = 0; i < siilot.length; i++){
-			siilot[i] = new Silo();
-		}
-		
-		//Ruuvikuljettimet, 3 kpl
-		for(int i = 0; i < ruuvikuljettimet.length; i++){
-			ruuvikuljettimet[i] = new Conveyer();
-		}
-		
-		//Pumput, 4 kpl
-		for (int i = 0; i < pumput.length; i++){
-			pumput[i] = new Pump();
-		}
-		
-		//Juomakeittimet, 3 kpl
-		for(int i = 0; i < juomakeittimet.length; i++){
-			juomakeittimet[i] = new Processor();
-		}
-		
-		//Kypsytyssäiliöt, 10 kpl
-		for(int i = 0; i < kypsytyssailiot.length; i++){
-			kypsytyssailiot[i] = new Tank();
-		}
-
-	}
-
+	
 	public void login(String kayttajaNimi) throws RemoteException {
 		// TODO Auto-generated method stub
 		
@@ -233,5 +197,41 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		pumput[pumpunNro].stopPump();
 	}
 
-	
+	/**
+	 * Metodi, jolla luodaan kaikki tehtaan koneet.
+	 */
+	public void alustaKoneet(){
+		/* 
+		 * Olisi varmaan voinut toteuttaa kompaktimmin, mutta oh well...
+		 * - Noh, alustaminenhan on kertaluonteinen operaatio, joten sen kompaktiudella ei oikeastaan ole
+		 * juurikaan v�li�. Ja minusta t�m� on kyll� ihan kompakti.
+		 */
+		
+		//Siilot, 4 kpl
+		for(int i = 0; i < siilot.length; i++){
+			siilot[i] = new Silo();
+		}
+		
+		//Ruuvikuljettimet, 3 kpl
+		for(int i = 0; i < ruuvikuljettimet.length; i++){
+			ruuvikuljettimet[i] = new Conveyer();
+		}
+		
+		//Pumput, 4 kpl
+		for (int i = 0; i < pumput.length; i++){
+			pumput[i] = new Pump();
+		}
+		
+		//Juomakeittimet, 3 kpl
+		for(int i = 0; i < juomakeittimet.length; i++){
+			juomakeittimet[i] = new Processor();
+		}
+		
+		//Kypsytyssäiliöt, 10 kpl
+		for(int i = 0; i < kypsytyssailiot.length; i++){
+			kypsytyssailiot[i] = new Tank();
+			kypsytyssailiot[i].start();
+		}
+
+	}
 }

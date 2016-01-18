@@ -8,7 +8,7 @@ package hojserver.tehdaskoneet;
 
  */
 
-public class Silo {
+public class Silo extends Thread {
 
 	private final int capacity = 10000; //kiloa
 	private int degreeOfFilling; //0-10000 kiloa				//Not happy with the name, but I'll go with this
