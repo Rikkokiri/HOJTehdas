@@ -15,17 +15,19 @@ public class SiloConveyer extends Conveyer {
 				if (siilot[i].getDegreeOfFilling() <= siilot[i].getCapacity() 
 						&& (siilot[i].getTila() == KoneenTila.FREE || siilot[i].getTila() == KoneenTila.FILLING) && siilot[i].isReserved()
 						&& !running ){
+					//TODO KORJAA!!!
 					
 					siilot[i].setTila(KoneenTila.FILLING);
 					siilot[i].addToSilo(20);
-					running = true;
+					System.out.println(siilot[i].getDegreeOfFilling() + " " + i);
 					
 				}//if	
 			}//for
-			running = false;
-			try{
-			this.wait(100);
-			}catch (Exception e){System.out.println(e);}
+			synchronized(this){
+				try{
+					this.wait(100);
+				}catch (Exception e){System.out.println(e);}
+			}
 			
 		}//while
 	}//run
