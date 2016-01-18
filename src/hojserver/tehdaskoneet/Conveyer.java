@@ -8,7 +8,7 @@ package hojserver.tehdaskoneet;
 - Siilo tai keitin ei saa ylitäyttyä
  */
 
-public class Conveyer {
+public class Conveyer extends Thread {
 
 	private boolean running;
 	private int limit;
