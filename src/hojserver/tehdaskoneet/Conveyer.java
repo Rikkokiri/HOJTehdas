@@ -10,7 +10,7 @@ package hojserver.tehdaskoneet;
 
 public class Conveyer extends Thread {
 
-	private boolean running;
+	protected boolean running;
 	private int limit;
 	
 	public Conveyer(){

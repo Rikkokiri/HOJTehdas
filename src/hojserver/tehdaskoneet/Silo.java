@@ -32,6 +32,14 @@ public class Silo extends Thread {
 		return degreeOfFilling;
 	}
 	
+	public KoneenTila getTila(){
+		return tila;
+	}
+	
+	public void  setTila(KoneenTila t){
+		tila = t;
+	}
+	
 	public boolean isReserved(){
 		return reserved;
 	}
