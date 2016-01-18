@@ -13,11 +13,13 @@ public class Silo extends Thread {
 	private final int capacity = 10000; //kiloa
 	private int degreeOfFilling; //0-10000 kiloa				//Not happy with the name, but I'll go with this
 	private boolean reserved;
+	private KoneenTila tila;
 	
 	//Constructor
 	public Silo(){
 		//Oletusarvoisesti siilo on tyhjä
 		degreeOfFilling = 0;
+		tila = KoneenTila.FREE;
 	}
 	
 	//---- GETTERS AND SETTERS ----

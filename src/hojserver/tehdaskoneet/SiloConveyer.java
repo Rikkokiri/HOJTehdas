@@ -1,12 +1,17 @@
 package hojserver.tehdaskoneet;
 
-public class SiloConveyer {
+public class SiloConveyer extends Conveyer {
 
-	public SiloConveyer(){
+	private Silo[] siilot;
+	
+	public SiloConveyer(Silo[] s){
 		super();
+		siilot = s;
 	}
 	
-	
+	public void run(){
+		
+	}
 	
 }
 
