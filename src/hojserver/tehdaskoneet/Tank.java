@@ -24,6 +24,10 @@ public class Tank {
 		return reserved;
 	}
 	
+	public void setReserved(boolean r){
+		reserved = r;
+	}
+	
 	/*
 	public void setNestemäärä(int m){
 		if(m <= tilavuus){

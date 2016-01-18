@@ -21,11 +21,11 @@ public interface Tehdas extends Remote {
 	
 	public void prosessorinLataus(int kuljettimeNro, int maara) throws RemoteException;
 	
-	public void prosessorinLatausVapautus(int kuljettimeNro, int maara) throws RemoteException;
+	public void prosessorinLatausVapautus(int kuljettimeNro) throws RemoteException;
 	
 	public void prosessorinVaraus(int prosessorinNro, String kayttaja)throws RemoteException;
 	
-	public void prosessorinVarausVapautus(int prosessorinNro, String kayttaja)throws RemoteException;
+	public void prosessorinVarausVapautus(int prosessorinNro)throws RemoteException;
 	
 	public void prosessorinKaynnistys(int prosessorinNro) throws RemoteException;
 	
