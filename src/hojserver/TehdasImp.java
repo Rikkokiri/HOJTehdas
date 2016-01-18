@@ -168,20 +168,18 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 
 	public void siilonVarausVapautus(int siilonNro) throws RemoteException {
 		siilot[siilonNro].setReserved(false);
+		
 	}
 
-	public void prosessorinLatausVapautus(int kuljettimeNro)
-			throws RemoteException {
+	public void prosessorinLatausVapautus(int kuljettimeNro) throws RemoteException {
 		ruuvikuljettimet[kuljettimeNro].setRunning(false);
 	}
 
-	public void prosessorinVarausVapautus(int prosessorinNro)
-			throws RemoteException {
+	public void prosessorinVarausVapautus(int prosessorinNro) throws RemoteException {
 		prosessorit[prosessorinNro].setReserved(false);
 	}
 
-	public void prosessorinKaynnistysVapautus(int prosessorinNro)
-			throws RemoteException {
+	public void prosessorinKaynnistysVapautus(int prosessorinNro) throws RemoteException {
 		prosessorit[prosessorinNro].setRunning(false);
 	}
 
@@ -197,6 +195,15 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		pumput[pumpunNro].stopPump();
 	}
 
+	//----------------------------------------------------------
+	// : METODIT KONEIDEN TILOJEN MUUTTAMISEEN
+	
+
+	
+	
+	
+	//----------------------------------------------------------
+	
 	/**
 	 * Metodi, jolla luodaan kaikki tehtaan koneet.
 	 */

@@ -44,8 +44,16 @@ public class Silo extends Thread {
 		return reserved;
 	}
 	
+	/**
+	 * Metodilla muutetaan siilon varauksen tilaa. Asetetaan siis vapaaksi/varatuksi.
+	 * @param r
+	 */
 	public void setReserved(boolean r){
 		reserved = r;
+		
+		//TODO Miten varauksen tekemiseen / vapauttamiseen reagoidaan eri tiloissa
+		
+		
 	}
 	
 	//------------------
