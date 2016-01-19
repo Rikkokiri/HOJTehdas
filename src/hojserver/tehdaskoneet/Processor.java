@@ -114,6 +114,23 @@ public class Processor extends Thread {
 		running = r;
 	}
 	
+	public void addMaterial(int maara){
+		materialAmount = materialAmount + maara;
+	}
+	
+	public KoneenTila getTila(){
+		return tila;
+	}
+	
+	public boolean isFull(){
+		if (materialAmount >= materialAmountVolume){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
 	/**
 	 * Metodi, jolla tyhjennetään keitin, kun juoma on valmista.
 	 */
