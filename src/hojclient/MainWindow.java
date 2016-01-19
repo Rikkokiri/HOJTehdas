@@ -1230,15 +1230,15 @@ public class MainWindow extends javax.swing.JFrame {
     	if (signIn.isSelected()){
     		if (reserveSiloButtons[0].isSelected()){
     			try{
-    				tehdas.siilonVaraus(1);
+    				tehdas.siilonVaraus(0);
     			}catch (RemoteException e) {System.out.println(e);}
-    			}
-    		}// if res
+    		}
 			else{
 				try{
 					tehdas.siilonVarausVapautus(0);
 				} catch (RemoteException e) {System.out.println(e);}
 			}// else
+    	}
     }//GEN-LAST:event_reserveSilo1ActionPerformed
 
     private void reserveSilo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveSilo2ActionPerformed
@@ -1248,13 +1248,13 @@ public class MainWindow extends javax.swing.JFrame {
     			try{
     				tehdas.siilonVaraus(1);
     			}catch (RemoteException e) {System.out.println(e);}
-    			}
-    		}// if res
+    		}// if res 
 			else{
 				try{
 					tehdas.siilonVarausVapautus(1);
 				} catch (RemoteException e) {System.out.println(e);}
 			}// else
+    	}
     }//GEN-LAST:event_reserveSilo2ActionPerformed
 
     private void reserveSilo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveSilo3ActionPerformed
@@ -1264,13 +1264,13 @@ public class MainWindow extends javax.swing.JFrame {
     			try{
     				tehdas.siilonVaraus(2);
     			}catch (RemoteException e) {System.out.println(e);}
-    			}
     		}// if res
 			else{
 				try{
 					tehdas.siilonVarausVapautus(2);
 				} catch (RemoteException e) {System.out.println(e);}
 			}// else
+    	}
     }//GEN-LAST:event_reserveSilo3ActionPerformed
 
     private void reserveSilo4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveSilo4ActionPerformed
@@ -1280,13 +1280,13 @@ public class MainWindow extends javax.swing.JFrame {
     			try{
     				tehdas.siilonVaraus(3);
     			}catch (RemoteException e) {System.out.println(e);}
-    			}
     		}// if res
 			else{
 				try{
 					tehdas.siilonVarausVapautus(3);
 				} catch (RemoteException e) {System.out.println(e);}
 			}// else
+    	}
     }//GEN-LAST:event_reserveSilo4ActionPerformed
 
     private void reserveProc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveProc1ActionPerformed
