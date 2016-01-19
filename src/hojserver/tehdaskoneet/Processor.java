@@ -98,6 +98,10 @@ public class Processor extends Thread {
 		return progress;
 	}
 	
+	public int getMaterialAmountVolume(){
+		return materialAmountVolume;
+	}
+	
 	public void process(int maara){
 		progress =  progress + maara;
 	}
