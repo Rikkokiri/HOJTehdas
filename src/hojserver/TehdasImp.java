@@ -216,7 +216,6 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		//Siilot, 4 kpl
 		for(int i = 0; i < siilot.length; i++){
 			siilot[i] = new Silo();
-			siilot[i].start();
 		}
 		
 		//Juomakeittimet, 3 kpl
