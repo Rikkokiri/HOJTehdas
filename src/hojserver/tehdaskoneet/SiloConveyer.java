@@ -49,5 +49,15 @@ public class SiloConveyer extends Conveyer {
 		}//while
 	}//run
 	
+	public void setRunning(boolean r){
+		if (!r){
+			for (int i = 0; i < 4; i++){
+				if (siilot[i].getTila() == KoneenTila.FILLING){
+					siilot[i].setTila(KoneenTila.FREE);
+				}
+			}
+		}
+		running = r;
+	}
 }
 
