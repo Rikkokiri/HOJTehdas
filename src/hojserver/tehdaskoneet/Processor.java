@@ -103,6 +103,7 @@ public class Processor extends Thread {
 			 */
 			if(tila != KoneenTila.EMPTYING && tila != KoneenTila.FILLING && tila != KoneenTila.READY && !isEmpty()){
 				running = r;
+				tila = KoneenTila.PROSESSING;
 			} else {
 				System.out.println("Prosessorin " + this + " start-painiketta ei voi painaa.");
 			}
