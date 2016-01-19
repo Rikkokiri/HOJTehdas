@@ -60,6 +60,11 @@ public class Silo {
 			
 		}
 		
+		// Jos varaus poistetaan niin tila muutetaan
+		if (!r){
+			tila = KoneenTila.FREE;
+		}
+		
 		reserved = r;
 
 	}
@@ -116,8 +121,8 @@ public class Silo {
 	}
 	
 	public void removeFromSilo(int sub){
-		if (degreeOfFilling - sub < 0){
-			degreeOfFilling -= sub;
+		if (degreeOfFilling - sub >= 0){
+			degreeOfFilling = degreeOfFilling - sub;
 		}
 		else {
 			//TODO
