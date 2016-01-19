@@ -49,11 +49,19 @@ public class Silo {
 	 * @param r
 	 */
 	public void setReserved(boolean r){
-		reserved = r;
 		
 		//TODO Miten varauksen tekemiseen / vapauttamiseen reagoidaan eri tiloissa
 		
+		if(tila == KoneenTila.EMPTYING){
+			//TODO
+		}
+		if(tila == KoneenTila.FILLING){
+			//TODO
+			
+		}
 		
+		reserved = r;
+
 	}
 	
 	//------------------

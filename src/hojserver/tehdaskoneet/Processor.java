@@ -18,7 +18,7 @@ public class Processor extends Thread {
 	private int materialAmount;
 	private int progress;
 	
-	private boolean running;
+	private boolean running; //Turha?
 	private boolean reserved;
 	
 	private KoneenTila tila;
@@ -37,9 +37,21 @@ public class Processor extends Thread {
 	//>>>> RUN-METODI <<<<<
 	
 	public void run(){
-	
-		while(tila == KoneenTila.PROSESSING){
-			
+		//Keittimen run-metodissa ei tapahdu muuta kuin juoman keittäminen 20 sekuntia
+		
+		while(running && tila == KoneenTila.PROSESSING){ 		//Tuplaehto turhaan?
+			synchronized (this) {
+				try {
+					this.wait(processingtime);
+					//Kun on odotettu prosessointiajan verran, juoma valmis
+					running = false;
+					// TODO Mihin tilaan keitin asetetaan?
+					//this.setTila( ? );
+				} catch (InterruptedException e) {
+					System.out.println("Juomakeittimen prosessointi keskeytyi");
+					e.printStackTrace();
+				}
+			}
 		}
 		
 	}
