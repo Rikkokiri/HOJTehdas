@@ -30,6 +30,10 @@ public class MainWindow extends javax.swing.JFrame {
 	private JLabel[] siloLabels;
 	private JLabel[] processorLabels;
 	private JLabel[] tankLabels;
+	private JLabel[] conveyerStatus;
+	private JLabel[] pumpStatus;
+	private JLabel[] processorStatus;
+	private JLabel[] processorAmount;
 	private JToggleButton[] conveyerStartButtons;
 	private JToggleButton[] reserveSiloButtons;
 	private JToggleButton[] reserveProcessorButtons;
@@ -147,10 +151,15 @@ public class MainWindow extends javax.swing.JFrame {
         procLoadAmount2 = new javax.swing.JTextField();
 
         //Listat
-        siloLabels = new JLabel[]{silo1Label, silo2Label, silo3Label, silo4Label};
+        siloLabels = new JLabel[]{silo1Status, silo2Status, silo3Status, silo4Status};
         processorLabels = new JLabel[]{proc1User, proc2User, proc3User};
-    	tankLabels = new JLabel[]{tank1Label, tank2Label, tank3Label, tank4Label, tank5Label, tank6Label, tank7Label, tank8Label, tank9Label, tank10Label};
+    	tankLabels = new JLabel[]{tank1Status, tank2Status, tank3Status, tank4Status, tank5Status, tank6Status, tank7Status, tank8Status, tank9Status, tank10Status};
         
+    	conveyerStatus = new JLabel[]{siloLoadConvStatus, ProcLoadConvStatus1,procLoadConvStatus2};
+    	pumpStatus = new JLabel[]{pump1Status, pump2Status, bpump1Status, bpump2Status};
+    	processorStatus = new JLabel[]{proc1Status, proc2Status, proc3Status};
+    	processorAmount = new JLabel[]{proc1Label, proc2Label, proc3Label};
+    	
     	//Buttons that start the conveyers
     	conveyerStartButtons = new JToggleButton[]{startSiloLoad, startProcLoad1, startProcLoad2};
     	
@@ -983,7 +992,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         procLoadLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         procLoadLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hojclient/icons/conveyor.jpg"))); // NOI18N
-        procLoadLabel1.setText("Processor loading");
+        procLoadLabel1.setText("2Processor loading");
         procLoadLabel1.setFocusable(false);
         procLoadLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         procLoadLabel1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
@@ -1647,6 +1656,25 @@ public class MainWindow extends javax.swing.JFrame {
     	
     	for(int i = 0; i < siiloissa.length; i++){
     		siloLabels[i].setText(Integer.toString(siiloissa[i]));
+    	}
+    	
+    	//Update coveyer status labels
+    	for (int i = 0; i < 3; i++){
+    		if (tehdas.nappiRuuvikuljettimet()[i]){
+    			conveyerStatus[i].setText("Running");
+    		}
+    		else{
+    			conveyerStatus[i].setText("Waiting");
+    		}
+    	}
+    	
+    	for (int i = 0; i < 4; i++){
+    		if (tehdas.nappiPumput()[i]){
+    		pumpStatus[i].setText("Running");
+    		}
+    		else{
+        		pumpStatus[i].setText("Waiting");
+    		}
     	}
     	
     	//Update processor labels
