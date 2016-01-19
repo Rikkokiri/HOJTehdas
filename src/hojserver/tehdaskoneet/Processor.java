@@ -50,16 +50,17 @@ public class Processor extends Thread {
 					this.wait(processingtime);
 					//Kun on odotettu prosessointiajan verran, juoma valmis
 					running = false;
-					// TODO Mihin tilaan keitin asetetaan?
-					//this.setTila( ? );
+					//Valmis
+					this.setTila(KoneenTila.READY);
+					
 				} catch (InterruptedException e) {
-					System.out.println("Juomakeittimen prosessointi keskeytyi");
+					System.out.println("Juoman keittäminen keskeytyi keittimessä " + this);
 					e.printStackTrace();
 				}
 			}
-		}
+		}//while
 		
-	}
+	}//run
 	
 	
 	// <<<< TILA >>>>

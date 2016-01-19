@@ -21,8 +21,17 @@ public class TankPump extends Pump {
 	
 	public void run(){
 		//TODO
+		while(isRunning()){
+			for(Processor pros : processors){
+				if(pros.getTila() == KoneenTila.READY){
+					//Tyhjennä prosessori
+				}
+			} //for
+		} //while
+	} //run
+	
+	//public int findTank(){
 		
-		
-	}
+	//}
 	
 }

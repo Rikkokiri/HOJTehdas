@@ -19,47 +19,66 @@ public class BottlePump extends Pump {
 	
 	//>>>> RUN-metodi <<<<
 	public void run(){
-		//TODO
-	}
+		
+		while(isRunning()){
+			
+			for(Tank tank : tanks){
+				if(tank.canBeEmptied()){
+					//Tyhjennä tankki	
+				}
+			}//for
+		} //while 
+	} //run
 	
 	/**
 	 * Moves the amount 'amount' from tank to bottling
 	 * @param tanknumber
 	 * @param amount
 	 */
-	public void moveBeverage(int tanknumber, int amount){
+	/*
+	 * Tässä metodissa ei vain siinä mielessä ole mitään järkeä, että käyttäjä ei voi mitenkään antaa
+	 * pumpulle siirrettävää määrää.
+	 */
+	public synchronized void moveBeverage(int tanknumber, int amount){
 		
 		//Tarkista onko tankissa pyydetty määrä nestettä
 		if(tanks[tanknumber-1].getAmountOfLiquid() >= amount){
-			//Aloita siirtäminen...
+
+			tanks[tanknumber-1].setTila(KoneenTila.EMPTYING);
 			
+			//TODO Nykyinen ratkaisu ei mahdollista tankissa olevan määrän reaaliaikaista päivittämistä.
+			
+			//Aloita siirtäminen...
+			synchronized(this){
+				try {
+					System.out.println(amount + " litran siirtäminen kestää " + (amount/500)*100 + " sekuntia");
+					this.wait((amount/500)*100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			tanks[tanknumber-1].takeLiquid(amount);
 			
 		} else { 
 			//Tankissa ei ole pyydettyä määrää nestettä.
 			//TODO
 		}
-				
-		
-		
-		
-		/*
-		synchronized(this){
-			try {
-				this.wait((amount/500) * 100);
-				
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				System.out.println("Pumpun toiminta häiriintynyt");
-				e.printStackTrace();
-			}
-		}*/
+
 	}
 	
-	/**
-	 * Empties the whole tank.
-	 * @param tanknumber
-	 */
-	public void moveBeverage(int tanknumber){
+
+
+	public synchronized void moveBeverage(int tanknumber){
+		
+		/*
+		boolean emptyingStarted = false;
+		while(!emptyingStarted){
+			for(Tank tankki : tanks){
+				if(tankki.canBeEmptied()){
+					
+				}}}*/
 
 	}
 
