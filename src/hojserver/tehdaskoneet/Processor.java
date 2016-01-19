@@ -80,9 +80,59 @@ public class Processor extends Thread {
 	}
 	
 	public void setReserved(boolean r){
-		reserved = r;
+		
+	//>>> Reserve-painike vapautetaan...
+		if(r == false){
+			//...kun keitin on tyhjä
+
+
+			//...kun keitintä täytetään
+				
+			
+			//...kun juoman prosessointi on käynnissä
+				
+			
+			//...kun juoman prosessointi on valmis
+			
+			
+			//...kun keitintä tyhjennetään
+		}
+	//>>> Reserve-painike painetaan pohjaan...
+		if(r == true){
+		//...kun keitin on tyhjä
+		
+		
+		//...kun 
+		
+			
+		}
 	}
 	
+	//Start-painike
+	public void setRunning(boolean r){
+		
+		//Start-painike painetaan pohjaan...
+		if(r == true){
+			/*...kun
+			- keitintä ei täytetä eikä tyhjennetä
+			- keittimessä on jotain mitä prosessoida
+			- keitin ei ole tilassa READY (eli saanut juomaa valmiiksi)
+			 */
+			if(tila != KoneenTila.EMPTYING && tila != KoneenTila.FILLING && tila != KoneenTila.READY && !isEmpty()){
+				running = r;
+			} else {
+				System.out.println("")
+			}
+		}
+		
+		//Start-painike vapautetaan....
+		if(r == false){
+			if(tila == KoneenTila.READY){
+				running = false;
+			}
+			
+		}
+	}
 
 	// <<<< VESI JA RAAKA-AINE >>>>
 	
@@ -95,11 +145,17 @@ public class Processor extends Thread {
 		return materialAmount;
 	}
 	
+	public void addMaterial(int maara){
+		materialAmount = materialAmount + maara;
+	}
+	
+	// <<<< Tila jne. >>>>
+	
 	public int getProgress(){
 		return progress;
 	}
 	
-	public void process(int maara){
+	public void process(int maara){			//Mikä tämä metodi on?
 		progress =  progress + maara;
 	}
 	
@@ -110,15 +166,7 @@ public class Processor extends Thread {
 	public boolean isRunning(){
 		return running;
 	}
-	
-	public void setRunning(boolean r){
-		running = r;
-	}
-	
-	public void addMaterial(int maara){
-		materialAmount = materialAmount + maara;
-	}
-	
+		
 	public KoneenTila getTila(){
 		return tila;
 	}
@@ -130,6 +178,10 @@ public class Processor extends Thread {
 		else{
 			return false;
 		}
+	}
+	
+	public boolean isEmpty(){
+		return (materialAmount == 0 && waterAmount == 0);
 	}
 	
 	/**
