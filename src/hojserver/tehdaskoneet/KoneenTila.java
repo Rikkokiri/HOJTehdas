@@ -4,5 +4,6 @@ public enum KoneenTila {
 	EMPTYING,
 	FILLING,
 	FREE,
-	PROSESSING
+	PROSESSING,
+	FULL
 }

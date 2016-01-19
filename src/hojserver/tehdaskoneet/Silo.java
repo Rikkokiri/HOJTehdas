@@ -81,7 +81,7 @@ public class Silo extends Thread {
 	 * @return boolean true if silo is full, false if silo is not full
 	 */
 	public boolean isFull(){
-		if(degreeOfFilling < capacity){
+		if(degreeOfFilling >= capacity){
 			return true;
 		} else {
 			return false;

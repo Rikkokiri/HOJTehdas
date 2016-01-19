@@ -1133,6 +1133,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    // TODO Vapautuskutsut kun napit suljetaan
 
     private void startSiloLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startSiloLoadActionPerformed
         // TODO Mitä tehdään, kun siilojen täytön ruuvikuljetin käynnistetään?
@@ -1161,6 +1163,7 @@ public class MainWindow extends javax.swing.JFrame {
     	
     	// Otetaan kirjoitettu k�ytt�j�nimi talteen
     	kayttajaNimi = userName.getText();
+    	
     	
     	} // if
     	
