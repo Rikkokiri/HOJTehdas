@@ -1171,6 +1171,7 @@ public class MainWindow extends javax.swing.JFrame {
     	// Otetaan kirjoitettu k�ytt�j�nimi talteen
     	kayttajaNimi = userName.getText();
     	
+    	new BackgroundUpdater(this).start();
     	
     	} // if
     	
@@ -1637,8 +1638,8 @@ public class MainWindow extends javax.swing.JFrame {
      * Method for updating information on the client.
      * @throws RemoteException 
      */
-    private void update() throws RemoteException{ //Is it okay to add throw?
-
+    public void update() throws RemoteException{ //Is it okay to add throw?
+    	
     	//>>> UPDATE LABELS <<<
     	
     	//Update silo labels to show amount of material
