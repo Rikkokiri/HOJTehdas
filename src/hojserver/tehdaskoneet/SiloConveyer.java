@@ -15,6 +15,7 @@ public class SiloConveyer extends Conveyer {
 	public void run(){
 		while(true){
 			
+			
 			// Jos ehdot täynnä, niin aletaan täyttämään ylintä mahdollista siiloa
 			for (int i = 0; i < 4; i++){
 				if (!siilot[i].isFull() 

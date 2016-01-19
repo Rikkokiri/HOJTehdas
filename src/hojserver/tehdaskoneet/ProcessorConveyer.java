@@ -19,19 +19,21 @@ public class ProcessorConveyer extends Conveyer {
 		
 while(true){
 	
+			//TODO Limitin katsominen
+		
 			siloToBeEmptied = -1;			//Temporariset muuttujat tyhjennettäville/
-			processorToBeFilled = -1;		//täytettäville contanereille
+			processorToBeFilled = -1;		//täytettäville siiloille / prosesseille
 	
 			// Katsotaan mistä siilosta otetaan
 			for (int i = 0; i < 4; i++){
 				if (!silos[i].isEmpty() && 
 						( silos[i].getTila() == KoneenTila.FREE || silos[i].getTila() == KoneenTila.EMPTYING
-						|| silos[i].getTila() == KoneenTila.FULL ) && running && silos[i].isReserved() && reserved){
+						|| silos[i].getTila() == KoneenTila.FULL ) && running && silos[i].isReserved() && !reserved){
 					siloToBeEmptied = i;
 					reserved = true;
 					
-				}
-			}
+				} // if
+			} // for
 			
 			reserved = false;
 			
@@ -44,10 +46,13 @@ while(true){
 					reserved = true;
 				}//if	
 			}//for
+			
 			System.out.println("Siilo: " + siloToBeEmptied + " Prosessori: " + processorToBeFilled);
 			
+			
+			// poistetaan siilosta ja lisätään prosessoriin
 			if (siloToBeEmptied != -1 && processorToBeFilled != -1){
-				reserved = true;
+			
 				processors[processorToBeFilled].setTila(KoneenTila.FILLING);
 				processors[processorToBeFilled].addMaterial(200);
 				
