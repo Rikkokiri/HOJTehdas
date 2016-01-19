@@ -250,6 +250,5 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 			kypsytyssailiot[i] = new Tank();
 			kypsytyssailiot[i].start();
 		}
-
-	}
+	}//alustaKoneet
 }
