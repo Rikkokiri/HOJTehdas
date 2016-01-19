@@ -80,9 +80,43 @@ public class Processor extends Thread {
 	}
 	
 	public void setReserved(boolean r){
-		reserved = r;
+		//>>> Reserve-painike vapautetaan...
+		//Ok, kunhan prosessointi ei ole käynnissä
+		if(r == false && tila != KoneenTila.PROSESSING){
+			reserved = r;
+		}
+		//Reserve-painikkeen painaminen pohjaan on aina ok
+		if(r == true){
+			reserved = r;
+		}
 	}
-	
+
+	//Start-painike
+	public void setRunning(boolean r){
+		
+		//Start-painike painetaan pohjaan...
+		if(r == true){
+			/*...kun
+			- keitintä ei täytetä eikä tyhjennetä
+			- keittimessä on jotain mitä prosessoida
+			- keitin ei ole tilassa READY (eli saanut juomaa valmiiksi)
+			 */
+			if(tila != KoneenTila.EMPTYING && tila != KoneenTila.FILLING && tila != KoneenTila.READY && !isEmpty()){
+				running = r;
+			} else {
+				System.out.println("Prosessorin " + this + " start-painiketta ei voi painaa.");
+			}
+		}
+		
+		//Start-painike vapautetaan....
+		if(r == false){
+			//Keitin on täynnä tai vapaa ja ei tyhjä
+			if(tila == KoneenTila.READY || tila == KoneenTila.FULL || tila == KoneenTila.FREE){
+				running = false;
+			}
+		}//if
+		
+	}//setRunning
 
 	// <<<< VESI JA RAAKA-AINE >>>>
 	
@@ -94,6 +128,12 @@ public class Processor extends Thread {
 	public int getMaterialAmount(){
 		return materialAmount;
 	}
+	
+	public void addMaterial(int maara){
+		materialAmount = materialAmount + maara;
+	}
+	
+	// <<<< Tila jne. >>>>
 	
 	public int getProgress(){
 		return progress;
@@ -114,15 +154,7 @@ public class Processor extends Thread {
 	public boolean isRunning(){
 		return running;
 	}
-	
-	public void setRunning(boolean r){
-		running = r;
-	}
-	
-	public void addMaterial(int maara){
-		materialAmount = materialAmount + maara;
-	}
-	
+		
 	public KoneenTila getTila(){
 		return tila;
 	}
@@ -134,6 +166,10 @@ public class Processor extends Thread {
 		else{
 			return false;
 		}
+	}
+	
+	public boolean isEmpty(){
+		return (materialAmount == 0 && waterAmount == 0);
 	}
 	
 	/**

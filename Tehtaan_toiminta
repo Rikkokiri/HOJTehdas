@@ -8,3 +8,15 @@ Kysymyksiä
 
 - Mistä tiedetään mistä tankista pullotukseen vievän pumpun kuuluu ottaa?
 
+
+<<< Keitin >>>
+
+Start-painikkeen vapauttaminen:
+- Voi painaa pohjaan, kun
+	- keitintä ei täytetä eikä tyhjennetä
+	- keittimessä on jotain mitä prosessoida
+	- keitin ei ole tilassa READY (eli saanut juomaa valmiiksi)
+
+- Saa vapauttaa, kun
+	- prosessointi valmis
+	- prosessointia ei ole aloitettu

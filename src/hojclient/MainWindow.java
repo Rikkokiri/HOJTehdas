@@ -1170,7 +1170,7 @@ public class MainWindow extends javax.swing.JFrame {
     	String RMIosoite ="tehdas";
     	
     	try {
-    		Registry registry = LocateRegistry.getRegistry(2020);
+    		Registry registry = LocateRegistry.getRegistry(osoite, 2020);
 
     		tehdas = (Tehdas) registry.lookup(RMIosoite);
     		tehdas.testimetodi(2);
@@ -1743,7 +1743,7 @@ public class MainWindow extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-    	
+    		
     	if (args.length < 1){
     		System.exit(0);
     	}
@@ -1768,6 +1768,7 @@ public class MainWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+            	//MainWindow-luokan kontruktorille annetaan parametrina osoite
                 new MainWindow(args[0]).setVisible(true);
             }
         });
