@@ -25,6 +25,7 @@ public class TankPump extends Pump {
 			for(Processor pros : processors){
 				if(pros.getTila() == KoneenTila.READY){
 					//Tyhjennä prosessori
+					
 				}
 			} //for
 		} //while
