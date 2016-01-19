@@ -1244,7 +1244,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void reserveSilo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveSilo2ActionPerformed
         // TODO Mitä tehdään kun siilo2 varataan?
     	if (signIn.isSelected()){
-    		if (reserveSiloButtons[1].isSelected(){
+    		if (reserveSiloButtons[1].isSelected()){
     			try{
     				tehdas.siilonVaraus(1);
     			}catch (RemoteException e) {System.out.println(e);}
