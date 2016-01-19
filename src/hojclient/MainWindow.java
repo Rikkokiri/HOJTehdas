@@ -1171,6 +1171,7 @@ public class MainWindow extends javax.swing.JFrame {
     	// Otetaan kirjoitettu k�ytt�j�nimi talteen
     	kayttajaNimi = userName.getText();
     	
+    	new BackgroundUpdater(this).start();
     	
     	} // if
     	
@@ -1212,17 +1213,27 @@ public class MainWindow extends javax.swing.JFrame {
     private void startProcLoad2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProcLoad2ActionPerformed
         // TODO Mitä tehdään kun keittimen täytön ruuvikuljetin 2 käynnistetään
     	if (signIn.isSelected()){
-    		if (conveyerStartButtons[2].isSelected()){	
+    		if (conveyerStartButtons[2].isSelected()){
+    			String maara = procLoadAmount1.getText();
+    			int maaraInt;
+    		
+    			try {
+    				maaraInt = Integer.parseInt(maara);
+    			} catch (NumberFormatException e) {
+    				maaraInt = -1;
+    				System.out.println("Load processor: Not valid value!");
+    			}
+    		
     			try{
-    				tehdas.prosessorinLataus(2, 0);
+    				tehdas.prosessorinLataus(2, maaraInt);
     			}catch (RemoteException e) {System.out.println(e);}
-    		}// if start
+    		}
     		else{
     			try{
     			tehdas.prosessorinLatausVapautus(2);
     			} catch (RemoteException e) {System.out.println(e);}
-    		}
-    	}
+    		}// if start
+    	}// if log
     }//GEN-LAST:event_startProcLoad2ActionPerformed
 
     private void reserveSilo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveSilo1ActionPerformed
@@ -1627,8 +1638,8 @@ public class MainWindow extends javax.swing.JFrame {
      * Method for updating information on the client.
      * @throws RemoteException 
      */
-    private void update() throws RemoteException{ //Is it okay to add throw?
-
+    public void update() throws RemoteException{ //Is it okay to add throw?
+    	
     	//>>> UPDATE LABELS <<<
     	
     	//Update silo labels to show amount of material

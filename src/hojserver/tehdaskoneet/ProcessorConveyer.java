@@ -4,9 +4,12 @@ public class ProcessorConveyer extends Conveyer {
 	
 	private Silo[] silos;
 	private Processor[] processors;
+	
 	private boolean reserved;
 	private int siloToBeEmptied;
 	private int processorToBeFilled;
+	
+	private final int transferAmount = 200;
 	
 	
 	public ProcessorConveyer(Silo[] silos, Processor[] processors){
@@ -17,11 +20,11 @@ public class ProcessorConveyer extends Conveyer {
 	
 	public void run(){
 		
-while(true){
+		while(true){
 	
-			//TODO Limitin katsominen
-			
-			
+			if (limit == 0){
+				running = false;
+			}
 	
 			siloToBeEmptied = -1;			//Temporariset muuttujat tyhjennettäville/
 			processorToBeFilled = -1;		//täytettäville siiloille / prosesseille
@@ -54,17 +57,49 @@ while(true){
 			
 			// poistetaan siilosta ja lisätään prosessoriin
 			if (siloToBeEmptied != -1 && processorToBeFilled != -1){
-			
-				processors[processorToBeFilled].setTila(KoneenTila.FILLING);
-				processors[processorToBeFilled].addMaterial(200);
 				
+				// Tilojen muutokset
 				silos[siloToBeEmptied].setTila(KoneenTila.EMPTYING);
-				silos[siloToBeEmptied].removeFromSilo(200);
+				processors[processorToBeFilled].setTila(KoneenTila.FILLING);
+				
+				// Jos limit < transferAmount, niin siirretäänvain limitin verran, muuten normaalisti transferAmountin verran
+				if (limit < transferAmount && limit != -1){
+					processors[processorToBeFilled].addMaterial(limit);			
+					silos[siloToBeEmptied].removeFromSilo(limit);
+					limit = -1;
+					running = false;
+				}// if (l < t)
+				else{
+					// Jos prosessorissa vähemmän tilaa kuin mitä tranferAmount (Hyi!)
+					if(processors[processorToBeFilled].getMaterialAmountVolume() - processors[processorToBeFilled].getMaterialAmount() < transferAmount){
+						silos[siloToBeEmptied].removeFromSilo(processors[processorToBeFilled].getMaterialAmountVolume() 
+								- processors[processorToBeFilled].getMaterialAmount());
+						processors[processorToBeFilled].addMaterial(processors[processorToBeFilled].getMaterialAmountVolume() 
+								- processors[processorToBeFilled].getMaterialAmount());
+						System.out.println("wth1");
+					// Jos taas siilossa vähemmän jäljellä kuin tranferAmount
+					}else if (silos[siloToBeEmptied].getDegreeOfFilling() < transferAmount){
+							processors[processorToBeFilled].addMaterial(silos[siloToBeEmptied].getDegreeOfFilling());			
+							silos[siloToBeEmptied].emptySilo();
+							System.out.println("wth2");
+						}
+					// Ja ihan normi käytäntö
+					else {
+						processors[processorToBeFilled].addMaterial(transferAmount);			
+						silos[siloToBeEmptied].removeFromSilo(transferAmount);
+					}
+					
+				// Jos limit käytössä niin vähennetään sitä
+				if (limit != -1)
+					limit = limit - transferAmount;
+				}// else
 				
 				if (processors[processorToBeFilled].isFull()){
 					processors[processorToBeFilled].setTila(KoneenTila.FULL);
 				}
-			}
+				if (silos[siloToBeEmptied].isEmpty())
+					silos[siloToBeEmptied].setTila(KoneenTila.FREE); //?
+			} // if (jos siirretään)
 			
 
 			if (siloToBeEmptied != -1 && processorToBeFilled != -1){

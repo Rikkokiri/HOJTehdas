@@ -121,7 +121,7 @@ public class Processor extends Thread {
 			if(tila != KoneenTila.EMPTYING && tila != KoneenTila.FILLING && tila != KoneenTila.READY && !isEmpty()){
 				running = r;
 			} else {
-				System.out.println("")
+				System.out.println("Start-painiketta ei voi painaa.");
 			}
 		}
 		
@@ -155,7 +155,11 @@ public class Processor extends Thread {
 		return progress;
 	}
 	
-	public void process(int maara){			//Mikä tämä metodi on?
+	public int getMaterialAmountVolume(){
+		return materialAmountVolume;
+	}
+	
+	public void process(int maara){
 		progress =  progress + maara;
 	}
 	
