@@ -9,32 +9,53 @@ package hojserver.tehdaskoneet;
 public class Tank extends Thread {
 
 	private final int tilavuus = 10000; //litraa
-	private int nestemäärä;
+	private int amountOfLiquid;
 	private boolean reserved;
 	
 	public Tank(){
-		nestemäärä = 0;
+		amountOfLiquid = 0;
 	}
 	
-	public int getNestemäärä(){
-		return nestemäärä;
+	/**
+	 * Returns the amount of liquid in the tank.
+	 * @return
+	 */
+	public synchronized int getAmountOfLiquid(){
+		return amountOfLiquid;
 	}
 	
-	public boolean isReserved(){
+	public synchronized boolean isReserved(){
 		return reserved;
 	}
 	
-	public void setReserved(boolean r){
+	public synchronized void setReserved(boolean r){
 		reserved = r;
 	}
 	
-	/*
-	public void setNestemäärä(int m){
-		if(m <= tilavuus){
-			nestemäärä = m;
-		}else{
-			nestemäärä = tilavuus; // ???????
+	/**
+	 * Method for taking liquid from the tank.
+	 * @param amount
+	 */
+	public synchronized void takeLiquid(int amount){
+		if(amount <= amountOfLiquid){
+			amountOfLiquid -= amount;
+		} else {
+			//Yritetään ottaa tankista enemmän nestettä kuin siellä on.
+			//TODO
 		}
 	}
-	*/
+	
+	/**
+	 * Method for adding liquid to the tank.
+	 * @param amount
+	 */
+	public synchronized void addLiquid(int amount){
+		if(amount <=  tilavuus - amountOfLiquid){
+			amountOfLiquid += amount;
+		} else {
+			//Yritetään laittaa tankkiin enemmän nestettä kuin sinne mahtuu.
+			//TODO
+		}
+	}
+	
 }
