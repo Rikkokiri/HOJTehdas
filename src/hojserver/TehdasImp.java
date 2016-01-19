@@ -168,7 +168,6 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 
 	public void siilonVarausVapautus(int siilonNro) throws RemoteException {
 		siilot[siilonNro].setReserved(false);
-		
 	}
 
 	public void prosessorinLatausVapautus(int kuljettimeNro) throws RemoteException {
