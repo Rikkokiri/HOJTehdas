@@ -5,5 +5,6 @@ public enum KoneenTila {
 	FILLING,
 	FREE,
 	PROSESSING,
-	FULL
+	FULL,
+	READY
 }
