@@ -80,34 +80,17 @@ public class Processor extends Thread {
 	}
 	
 	public void setReserved(boolean r){
-		
-	//>>> Reserve-painike vapautetaan...
-		if(r == false){
-			//...kun keitin on tyhjä
-
-
-			//...kun keitintä täytetään
-				
-			
-			//...kun juoman prosessointi on käynnissä
-				
-			
-			//...kun juoman prosessointi on valmis
-			
-			
-			//...kun keitintä tyhjennetään
+		//>>> Reserve-painike vapautetaan...
+		//Ok, kunhan prosessointi ei ole käynnissä
+		if(r == false && tila != KoneenTila.PROSESSING){
+			reserved = r;
 		}
-	//>>> Reserve-painike painetaan pohjaan...
+		//Reserve-painikkeen painaminen pohjaan on aina ok
 		if(r == true){
-		//...kun keitin on tyhjä
-		
-		
-		//...kun 
-		
-			
+			reserved = r;
 		}
 	}
-	
+
 	//Start-painike
 	public void setRunning(boolean r){
 		
@@ -121,18 +104,19 @@ public class Processor extends Thread {
 			if(tila != KoneenTila.EMPTYING && tila != KoneenTila.FILLING && tila != KoneenTila.READY && !isEmpty()){
 				running = r;
 			} else {
-				System.out.println("Start-painiketta ei voi painaa.");
+				System.out.println("Prosessorin " + this + " start-painiketta ei voi painaa.");
 			}
 		}
 		
 		//Start-painike vapautetaan....
 		if(r == false){
-			if(tila == KoneenTila.READY){
+			//Keitin on täynnä tai vapaa ja ei tyhjä
+			if(tila == KoneenTila.READY || tila == KoneenTila.FULL || tila == KoneenTila.FREE){
 				running = false;
 			}
-			
-		}
-	}
+		}//if
+		
+	}//setRunning
 
 	// <<<< VESI JA RAAKA-AINE >>>>
 	
