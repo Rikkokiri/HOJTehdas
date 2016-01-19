@@ -11,13 +11,9 @@ package hojserver.tehdaskoneet;
 public class Pump extends Thread {
 
 	private boolean running;
-	private Processor origin;
-	private Tank target;
 	
 	public Pump(){
 		running = false;
-		origin = null;
-		target = null;
 	}
 	
 	/**
