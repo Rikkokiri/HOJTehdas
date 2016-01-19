@@ -143,10 +143,13 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 				tila[i] = "Filling";
 			}
 			else if(prosessorit[i].getTila() == KoneenTila.PROSESSING){
-				tila[i] = "Processing";
+				tila[i] = "Processing ";
 			}
 			else if(prosessorit[i].getTila() == KoneenTila.READY){
 				tila[i] = "Ready";
+			}
+			else if(prosessorit[i].getTila() == KoneenTila.FREE){
+				tila[i] = "Free";
 			}
 		}
 		return tila;
