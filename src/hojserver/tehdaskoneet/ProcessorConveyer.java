@@ -5,9 +5,9 @@ public class ProcessorConveyer extends Conveyer {
 	private Silo[] silos;
 	private Processor[] processors;
 	private boolean reserved;
-	private boolean kaikkiTaynna;
 	private int siloToBeEmptied;
 	private int processorToBeFilled;
+	
 	
 	public ProcessorConveyer(Silo[] silos, Processor[] processors){
 		super();
@@ -20,9 +20,13 @@ public class ProcessorConveyer extends Conveyer {
 while(true){
 	
 			//TODO Limitin katsominen
-		
+			
+			
+	
 			siloToBeEmptied = -1;			//Temporariset muuttujat tyhjennettäville/
 			processorToBeFilled = -1;		//täytettäville siiloille / prosesseille
+			
+			reserved = false;
 	
 			// Katsotaan mistä siilosta otetaan
 			for (int i = 0; i < 4; i++){
@@ -47,8 +51,6 @@ while(true){
 				}//if	
 			}//for
 			
-			System.out.println("Siilo: " + siloToBeEmptied + " Prosessori: " + processorToBeFilled);
-			
 			
 			// poistetaan siilosta ja lisätään prosessoriin
 			if (siloToBeEmptied != -1 && processorToBeFilled != -1){
@@ -63,24 +65,13 @@ while(true){
 					processors[processorToBeFilled].setTila(KoneenTila.FULL);
 				}
 			}
-			reserved = false;
 			
-			//Jos kaikki prosessorit täynnä
-			//Ei välttämättä tarvita?
-			
-			kaikkiTaynna = true;
-			for (int i = 0; i < 3; i++){
-				if (!processors[i].isFull()){
-					kaikkiTaynna = false;
-				}
-			}
-			if (kaikkiTaynna){
-				this.setRunning(false);
-			}
+
 			if (siloToBeEmptied != -1 && processorToBeFilled != -1){
 				System.out.println("Siilo " + siloToBeEmptied + 1 + ", " + silos[siloToBeEmptied].getDegreeOfFilling());
 				System.out.println("Prosessori " + processorToBeFilled + 1 + ", " + processors[processorToBeFilled].getMaterialAmount());
 			}
+			
 			//Odotus
 			synchronized(this){
 				try{

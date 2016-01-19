@@ -3,7 +3,6 @@ package hojserver.tehdaskoneet;
 public class SiloConveyer extends Conveyer {
 
 	private Silo[] siilot;
-	private boolean kaikkiTaynna;
 	private boolean reserved; //Onko varattu?
 
 	public SiloConveyer(Silo[] s){
@@ -39,18 +38,6 @@ public class SiloConveyer extends Conveyer {
 			}//for
 			reserved = false;
 			
-			//Jos kaikki siilot täynnä
-			//Ei välttämättä tarvita?
-			
-			kaikkiTaynna = true;
-			for (int i = 0; i < 4; i++){
-				if (!siilot[i].isFull()){
-					kaikkiTaynna = false;
-				}
-			}
-			if (kaikkiTaynna){
-				this.setRunning(false);
-			}
 			
 			//Odotus
 			synchronized(this){
