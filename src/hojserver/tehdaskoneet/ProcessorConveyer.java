@@ -22,8 +22,9 @@ while(true){
 			siloToBeEmptied = -1;			//Temporariset muuttujat tyhjennettäville/
 			processorToBeFilled = -1;		//täytettäville contanereille
 	
+			// Katsotaan mistä siilosta otetaan
 			for (int i = 0; i < 4; i++){
-				if (silos[i].isEmpty() && 
+				if (!silos[i].isEmpty() && 
 						( silos[i].getTila() == KoneenTila.FREE || silos[i].getTila() == KoneenTila.EMPTYING
 						|| silos[i].getTila() == KoneenTila.FULL ) && running && silos[i].isReserved() && reserved){
 					siloToBeEmptied = i;
@@ -34,7 +35,7 @@ while(true){
 			
 			reserved = false;
 			
-			// Jos ehdot täynnä, niin aletaan täyttämään ylintä mahdollista prosessoria
+			// Katsotaan mihin prosessoriin lisätään
 			for (int i = 0; i < 3; i++){
 				if (!processors[i].isFull() 
 						&& (processors[i].getTila() == KoneenTila.FREE || processors[i].getTila() == KoneenTila.FILLING)
@@ -43,6 +44,7 @@ while(true){
 					reserved = true;
 				}//if	
 			}//for
+			System.out.println("Siilo: " + siloToBeEmptied + " Prosessori: " + processorToBeFilled);
 			
 			if (siloToBeEmptied != -1 && processorToBeFilled != -1){
 				reserved = true;

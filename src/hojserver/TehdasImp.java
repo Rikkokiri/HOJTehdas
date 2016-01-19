@@ -109,7 +109,7 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 	public int[] sailioidenJuomanMaara() throws RemoteException {
 		int[] sjm = new int[10];
 		for (int i = 0; i < 10; i++){
-			sjm[i] = kypsytyssailiot[i].getNestemäärä();
+			sjm[i] = kypsytyssailiot[i].getAmountOfLiquid();
 		}
 		return sjm;
 	}
