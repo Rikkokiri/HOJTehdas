@@ -12,8 +12,12 @@ public class Tank extends Thread {
 	private int amountOfLiquid;
 	private boolean reserved;
 	
+	private KoneenTila tila;
+	
 	public Tank(){
 		amountOfLiquid = 0;
+		reserved = false;
+		tila = KoneenTila.FREE;
 	}
 	
 	/**
@@ -31,6 +35,20 @@ public class Tank extends Thread {
 	public synchronized void setReserved(boolean r){
 		reserved = r;
 	}
+	
+	//---- tankin tilat ---------
+	//Periaatteessa pitäisi estää tankille epäolennaisiin tiloihin laittaminen //TODO
+	//Tankki ei voi olla esim. tilassa PROSESSING
+	
+	public void setTila(KoneenTila t){
+		tila = t;
+	}
+	
+	public KoneenTila getTila(){
+		return tila;
+	}
+	
+	//---------------------------------------
 	
 	/**
 	 * Method for taking liquid from the tank.
