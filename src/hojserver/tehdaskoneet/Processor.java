@@ -31,6 +31,11 @@ public class Processor extends Thread {
 		waterAmount = 0;
 		materialAmount = 0;
 		
+		//tilat
+		tila = KoneenTila.FREE;
+		reserved = false;
+		running = false;
+		
 	} //konstruktori
 
 
