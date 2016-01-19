@@ -21,6 +21,8 @@ public class Processor extends Thread {
 	private boolean running;
 	private boolean reserved;
 	
+	private KoneenTila tila;
+	
 	private String user; //String vai jokin muu?
 	
 	public Processor(){
@@ -31,6 +33,24 @@ public class Processor extends Thread {
 		
 	} //konstruktori
 
+
+	//>>>> RUN-METODI <<<<<
+	
+	public void run(){
+	
+		while(tila == KoneenTila.PROSESSING){
+			
+		}
+		
+	}
+	
+	
+	// <<<< TILA >>>>
+	
+	public void setTila(KoneenTila tila){
+		this.tila = tila;
+	}
+	
 	// <<<< USER >>>>
 	
 	public void setUser(String k){
@@ -45,7 +65,7 @@ public class Processor extends Thread {
 		reserved = r;
 	}
 	
-	
+
 	// <<<< VESI JA RAAKA-AINE >>>>
 	
 	// --- Getterit ---

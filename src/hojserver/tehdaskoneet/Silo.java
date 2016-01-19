@@ -8,7 +8,7 @@ package hojserver.tehdaskoneet;
 
  */
 
-public class Silo extends Thread {
+public class Silo {
 
 	private final int capacity = 10000; //kiloa
 	private int degreeOfFilling; //0-10000 kiloa				//Not happy with the name, but I'll go with this
@@ -53,25 +53,6 @@ public class Silo extends Thread {
 		
 		//TODO Miten varauksen tekemiseen / vapauttamiseen reagoidaan eri tiloissa
 		
-		
-	}
-	
-	//------------------
-	
-	//>>>> RUN-METODI <<<<
-	public void run(){
-		
-		//TODO
-		
-		while(tila == KoneenTila.EMPTYING){
-			//???
-			
-		}
-		
-		while(tila == KoneenTila.FILLING){
-			//???
-			
-		}
 		
 	}
 	
