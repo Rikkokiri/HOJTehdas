@@ -77,6 +77,15 @@ public class Silo {
 		}
 	}
 	
+	public boolean isEmpty(){
+		if (degreeOfFilling <= 0){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
 	/**
 	 * 
 	 * @param fill
@@ -103,6 +112,15 @@ public class Silo {
 		else{
 			//TODO
 			
+		}
+	}
+	
+	public void removeFromSilo(int sub){
+		if (degreeOfFilling - sub < 0){
+			degreeOfFilling -= sub;
+		}
+		else {
+			//TODO
 		}
 	}
 	
