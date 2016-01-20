@@ -92,10 +92,12 @@ public class Processor extends Thread {
 		//Ok, kunhan prosessointi ei ole käynnissä
 		if(r == false && tila != KoneenTila.PROSESSING){
 			reserved = r;
+			System.out.println("Prosessoidaan, ei voi vapauttaa");
 		}
 		//Reserve-painikkeen painaminen pohjaan on aina ok
 		else if(r == true){
 			reserved = r;
+			System.out.println("Vapautetaan prosessori!" + reserved);
 		}
 	}
 
@@ -122,6 +124,11 @@ public class Processor extends Thread {
 			//Keitin on täynnä tai vapaa ja ei tyhjä
 			if(tila == KoneenTila.READY || tila == KoneenTila.FULL || tila == KoneenTila.FREE){
 				running = false;
+				if(isFull()){
+					setTila(KoneenTila.FULL);
+				} else {
+					setTila(KoneenTila.FREE);
+				}
 			}
 		}//if
 		
