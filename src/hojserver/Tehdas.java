@@ -11,6 +11,8 @@ public interface Tehdas extends Remote {
 	//-------- Kirjautuminen--------
 	public void login(String kayttajaNimi) throws RemoteException; // K�ytt�j� kirjautuu
 	
+	public String prosessorinKayttaja(int prosessori) throws RemoteException;
+	
 	//-------- Ruuvikuljettimet --------
 	public void ruuvihihnanKaynnistys() throws RemoteException; //Eli ekan ruuvikuljettimen start nappi
 	

@@ -60,8 +60,8 @@ package hojserver.tehdaskoneet;
  					}
  				}
  				
- 				timespent += (long)(processingtime/40000);
- 				this.addProgress(2.5);
+ 				timespent += 500;
+ 				this.addProgress(5);
  				System.out.println("Time spent processing: " + timespent + "seconds. Progress " + getProgress() + " %");
  				
  				if(progress == 100){ //Kun on odotettu prosessointiajan verran, juoma valmis

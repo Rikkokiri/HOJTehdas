@@ -48,6 +48,10 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		// TODO Auto-generated method stub
 	}
 	
+	public String prosessorinKayttaja(int prosessori) throws RemoteException{
+		return prosessorit[prosessori].getUser();
+	}
+	
 	//-------- Ruuvikuljettimet --------
 	public void ruuvihihnanKaynnistys() throws RemoteException {
 		ruuvikuljettimet[0].setRunning(true);
