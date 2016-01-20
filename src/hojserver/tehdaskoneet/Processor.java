@@ -45,10 +45,10 @@ package hojserver.tehdaskoneet;
   	public void run(){
   		//Keittimen run-metodissa ei tapahdu muuta kuin juoman keittäminen 20 sekuntia
 
+  		int timespent = 0;
+  		
 		while(true){
 			//System.out.println("Nyt pitäisi päästä run-metodiin" + this.tila); //TODO Remove
-			
-			double timespent = 0;
 			
 			while(running && tila == KoneenTila.PROSESSING){ 		//Tuplaehto turhaan?
  				synchronized (this) {
@@ -60,14 +60,17 @@ package hojserver.tehdaskoneet;
  					}
  				}
  				
+ 				//this.addProgress(2.5);
+ 				addProgress(10); //TODO Change
  				timespent += 500;
- 				this.addProgress(5);
- 				System.out.println("Time spent processing: " + timespent + "seconds. Progress " + getProgress() + " %");
+ 				
+ 				System.out.println("Time spent processing: " + timespent + "milliseconds. Progress " + getProgress() + " %");
  				
  				if(progress == 100){ //Kun on odotettu prosessointiajan verran, juoma valmis
  					running = false;
+ 					calculateProduct(); //
  					this.setTila(KoneenTila.READY);
- 					System.out.println("Juoma valmis keittimessä " + this);
+ 					System.out.println("Juoma valmis keittimessä " + this + ", juomaa " + productAmount + " litraa.");
  				}
  			}//while(running...)
 				synchronized (this) {

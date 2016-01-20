@@ -65,7 +65,7 @@ public class Tank extends Thread {
 	
 	public boolean canBeEmptied(){
 		//Tankkia voidaan alkaa tyhjeentää, jos sitä ei parhaillaan täytetä eikä tyhjennetä ja tankissa on nestettä 
-		if(tila != KoneenTila.EMPTYING && tila != KoneenTila.FILLING && tila != KoneenTila.PROSESSING && reserved && amountOfLiquid != 0){
+		if(tila != KoneenTila.FILLING && reserved && amountOfLiquid != 0){
 			return true;
 		} else {
 			return false;
