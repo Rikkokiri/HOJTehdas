@@ -23,7 +23,7 @@ public class SiloConveyer extends Conveyer {
 					
 					reserved = true;
 					siilot[i].setTila(KoneenTila.FILLING);
-					siilot[i].addToSilo(200);
+					siilot[i].addToSilo(2);
 					
 					if (siilot[i].isFull()){
 						siilot[i].setTila(KoneenTila.FULL);
@@ -42,7 +42,7 @@ public class SiloConveyer extends Conveyer {
 			//Odotus
 			synchronized(this){
 				try{
-					this.wait(1000);
+					this.wait(10);
 				}catch (Exception e){System.out.println(e);}
 			}
 			

@@ -9,7 +9,7 @@ public class ProcessorConveyer extends Conveyer {
 	private int siloToBeEmptied;
 	private int processorToBeFilled;
 	
-	private final int transferAmount = 200;
+	private final int transferAmount = 2;
 	
 	
 	public ProcessorConveyer(Silo[] silos, Processor[] processors){
@@ -110,7 +110,7 @@ public class ProcessorConveyer extends Conveyer {
 			//Odotus
 			synchronized(this){
 				try{
-					this.wait(1000);
+					this.wait(10);
 				}catch (Exception e){System.out.println(e);}
 			}
 			

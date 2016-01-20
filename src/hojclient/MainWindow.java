@@ -1678,7 +1678,7 @@ public class MainWindow extends javax.swing.JFrame {
     	}
     	
     	//Update processor labels
-    	//TODO
+    	
     	
     	
     	//Update tank labels
