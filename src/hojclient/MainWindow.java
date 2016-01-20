@@ -1680,23 +1680,23 @@ public class MainWindow extends javax.swing.JFrame {
     	
 
     	//Update processor status labels 
-    	for(int i = 0; i < processorStatus.length; i++){
-    		processorStatus[i].setText(tehdas.prosessorienTila()[i]);	
+    	for(int i = 0; i < processorLabels.length; i++){
+    		processorLabels[i].setText(tehdas.prosessorienTila()[i]);	
     	}
     	
     	
     	//Update processor amount labels
-    	for(int i = 0; i < processorAmount.length; i++){
-    		processorAmount[i].setText(tehdas.prosessorienEdistyminen()[i]);
+    	for(int i = 0; i < processorStatus.length; i++){
+    		processorStatus[i].setText(tehdas.prosessorienEdistyminen()[i]);
     	}
     	
     	//Update processor user
     	for (int i = 0; i < 3; i++){
     		if (tehdas.nappiProsessoritReserved()[i]){
-    			processorLabels[i].setText(tehdas.prosessorinKayttaja(i));
+    			processorAmount[i].setText(tehdas.prosessorinKayttaja(i));
     		}
     		else{
-    			processorLabels[i].setText("-");
+    			processorAmount[i].setText("-");
     		}
     	}
     	
