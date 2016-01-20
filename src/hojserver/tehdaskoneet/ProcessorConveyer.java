@@ -32,7 +32,7 @@ public class ProcessorConveyer extends Conveyer {
 			reserved = false;
 	
 			// Katsotaan mistä siilosta otetaan
-			for (int i = 0; i < 4; i++){
+			for(int i = 0; i < 4; i++){
 				if (!silos[i].isEmpty() && 
 						( silos[i].getTila() == KoneenTila.FREE || silos[i].getTila() == KoneenTila.EMPTYING
 						|| silos[i].getTila() == KoneenTila.FULL ) && running && silos[i].isReserved() && !reserved){
@@ -51,7 +51,7 @@ public class ProcessorConveyer extends Conveyer {
 						&& running && processors[i].isReserved() && !reserved){										
 					processorToBeFilled = i;
 					reserved = true;
-				}//if	
+				}//if
 			}//for
 			
 			
@@ -101,7 +101,7 @@ public class ProcessorConveyer extends Conveyer {
 					silos[siloToBeEmptied].setTila(KoneenTila.FREE); //?
 			} // if (jos siirretään)
 			
-
+			//Tietojen tulostus
 			if (siloToBeEmptied != -1 && processorToBeFilled != -1){
 				System.out.println("Siilo " + (siloToBeEmptied + 1) + ", " + silos[siloToBeEmptied].getDegreeOfFilling());
 				System.out.println("Prosessori " + (processorToBeFilled + 1) + ", " + processors[processorToBeFilled].getMaterialAmount());
