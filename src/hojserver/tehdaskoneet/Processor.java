@@ -58,7 +58,7 @@ package hojserver.tehdaskoneet;
   		
 		while(true){
 			
-			while(running && tila == KoneenTila.PROSESSING && getProductAmount() == 0){
+			while(running && tila == KoneenTila.PROCESSING && getProductAmount() == 0){
  				synchronized (this) {
  					try {
  						this.wait(250); //puoli sekunti
@@ -132,7 +132,7 @@ package hojserver.tehdaskoneet;
  	public void setReserved(boolean r){
  		//>>> Reserve-painike vapautetaan...
  		//Ok, kunhan prosessointi ei ole käynnissä
- 		if(r == false && tila != KoneenTila.PROSESSING){
+ 		if(r == false && tila != KoneenTila.PROCESSING){
  			reserved = r;
  			System.out.println("Prosessoidaan, ei voi vapauttaa");
  		}
@@ -166,7 +166,7 @@ package hojserver.tehdaskoneet;
  			 */
  			if(tila != KoneenTila.EMPTYING && tila != KoneenTila.FILLING && tila != KoneenTila.READY && !isEmpty() && getProductAmount() == 0){
  				running = r;
- 				setTila(KoneenTila.PROSESSING);
+ 				setTila(KoneenTila.PROCESSING);
  			} else {
  				System.out.println("Prosessorin " + this + " start-painiketta ei voi painaa.");
  				System.out.println("Prosessori tilassa: " + getTila());
@@ -272,7 +272,7 @@ package hojserver.tehdaskoneet;
  	//---------- PROSESSORI TILA YMS. ----------
  	
 	public void setTila(KoneenTila t){
- 		if(t == KoneenTila.FREE || t == KoneenTila.FILLING || t == KoneenTila.PROSESSING){
+ 		if(t == KoneenTila.FREE || t == KoneenTila.FILLING || t == KoneenTila.PROCESSING){
  			progress = 0;
  		}
  		tila = t;
