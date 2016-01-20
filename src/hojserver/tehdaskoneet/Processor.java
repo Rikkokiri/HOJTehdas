@@ -167,7 +167,6 @@ package hojserver.tehdaskoneet;
  			if(tila != KoneenTila.EMPTYING && tila != KoneenTila.FILLING && tila != KoneenTila.READY && !isEmpty() && getProductAmount() == 0){
  				running = r;
  				setTila(KoneenTila.PROSESSING);
- 				System.out.println("Prosessin pitäisi käynnistyä. Prosessing tila " + getTila() + ", varaus: " + isReserved() + ", running: " + isRunning()); //TODO Remove
  			} else {
  				System.out.println("Prosessorin " + this + " start-painiketta ei voi painaa.");
  				System.out.println("Prosessori tilassa: " + getTila());
@@ -189,7 +188,6 @@ package hojserver.tehdaskoneet;
  				}
  			}
  		}//if
- 		System.out.println("Eihän päästä tänne? Tila: " + getTila() + " varaus: " + isReserved() + ", running " + isRunning()); //TODO Remove
  	}//setRunning
  
 
@@ -204,7 +202,6 @@ package hojserver.tehdaskoneet;
  	}
  	
  	public void addMaterial(int maara){
- 		//System.out.println("Processor: Lisätään prosessoriin " + maara);			//TODO remove
  		materialAmount += maara;
  		if(isFull()){
  			setTila(KoneenTila.FULL);
@@ -275,7 +272,7 @@ package hojserver.tehdaskoneet;
  	//---------- PROSESSORI TILA YMS. ----------
  	
 	public void setTila(KoneenTila t){
- 		if(t == KoneenTila.FREE || t == KoneenTila.FILLING || t == KoneenTila.PROSESSING){ //TODO Valmis vielä?
+ 		if(t == KoneenTila.FREE || t == KoneenTila.FILLING || t == KoneenTila.PROSESSING){
  			progress = 0;
  		}
  		tila = t;

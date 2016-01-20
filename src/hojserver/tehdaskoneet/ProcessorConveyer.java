@@ -61,11 +61,6 @@ public class ProcessorConveyer extends Conveyer {
 					}//if
 				}//for
 				
-				if (running){
-					System.out.println(siloToBeEmptied + " : " + processorToBeFilled);
-				}
-				
-				
 				// poistetaan siilosta ja lisätään prosessoriin
 				if (siloToBeEmptied != -1 && processorToBeFilled != -1){
 					

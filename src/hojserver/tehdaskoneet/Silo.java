@@ -58,17 +58,6 @@ public class Silo {
 	 * @param r
 	 */
 	public void setReserved(boolean r){
-		
-		//TODO Miten varauksen tekemiseen / vapauttamiseen reagoidaan eri tiloissa
-		
-		if(tila == KoneenTila.EMPTYING){
-			//TODO
-		}
-		if(tila == KoneenTila.FILLING){
-			//TODO
-			
-		}
-		
 		// Jos varaus poistetaan niin tila muutetaan
 		if (!r){
 			tila = KoneenTila.FREE;
