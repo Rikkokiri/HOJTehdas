@@ -67,12 +67,15 @@ public class TankPump extends Pump {
 							<= 0){
 						tanks[tankToBeFilled].addLiquid(processors[processorToBeEmptied].getProductAmount());
 						processors[processorToBeEmptied].emptyProcessor();
+						tanks[tankToBeFilled].setTila(KoneenTila.FREE);
+						processors[processorToBeEmptied].setTila(KoneenTila.FREE);
 					}
 					
 					// Jos säiliöön ei enä mahdu siirrettävää määrää
 					else if (tanks[tankToBeFilled].getAmountOfLiquid() + transferAmount >= 10000 ){
 						processors[processorToBeEmptied].removeProduct(10000 - tanks[tankToBeFilled].getAmountOfLiquid());
 						tanks[tankToBeFilled].addLiquid(10000 - tanks[tankToBeFilled].getAmountOfLiquid());
+						processors[processorToBeEmptied].setTila(KoneenTila.FREE);
 					}
 					// Normaali tilanne
 					else{
@@ -105,6 +108,17 @@ public class TankPump extends Pump {
 			}
 		} // whiel true
 	} //run
+	
+	public void setRunning(boolean r){
+		if (!r){
+			for (int i = 0; i < 10; i++){
+				if (tanks[i].getTila() == KoneenTila.FILLING){
+					tanks[i].setTila(KoneenTila.FREE);
+				}
+			}
+		}
+		running = r;
+	}
 	
 	//public int findTank(){
 		

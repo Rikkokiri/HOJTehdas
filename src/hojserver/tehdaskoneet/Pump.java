@@ -10,7 +10,7 @@ package hojserver.tehdaskoneet;
 
 public class Pump extends Thread {
 
-	private boolean running;
+	protected boolean running;
 	
 	public Pump(){
 		running = false;
