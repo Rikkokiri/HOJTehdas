@@ -140,10 +140,10 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 				tila[i] = "Emptying";
 			}
 			else if(prosessorit[i].getTila() == KoneenTila.FILLING){
-				tila[i] = "Filling ";
+				tila[i] = "Filling";
 			}
 			else if(prosessorit[i].getTila() == KoneenTila.PROSESSING){
-				tila[i] = "Processing " + prosessorit[i].getProgress() + " %";
+				tila[i] = "Processing";
 			}
 			else if(prosessorit[i].getTila() == KoneenTila.READY){
 				tila[i] = "Ready";
@@ -155,11 +155,21 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		return tila;
 	}
 
-	public double[] prosessorienSiirtojenEdistyminen() throws RemoteException {
-		double[] progress = new double[prosessorit.length];
+	public String[] prosessorienEdistyminen() throws RemoteException {
+		String[] progress = new String[prosessorit.length];
 		
 		for(int i = 0; i < prosessorit.length; i++){
-			progress[i] = prosessorit[i].getFillPercentage();
+			if(prosessorit[i].getTila() == KoneenTila.EMPTYING || prosessorit[i].getTila() == KoneenTila.FILLING){
+				progress[i] = Double.toString(prosessorit[i].getFillPercentage()) + " %";
+				System.out.println("TehdasImp: Täytön/tyhjennyksen edistyminen " + progress[i]);
+			}
+			else if(prosessorit[i].getTila() == KoneenTila.PROSESSING){
+				progress[i] = Double.toString(prosessorit[i].getProgress()) + " %";
+				System.out.println("TehdasImp: Prosessoinnin edistyminen " + progress[i]);
+			}
+			else{
+				progress[i] = null;
+			}
 		}
 		return progress;
 	}

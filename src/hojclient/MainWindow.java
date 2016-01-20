@@ -1684,12 +1684,12 @@ public class MainWindow extends javax.swing.JFrame {
     		processorStatus[i].setText(tehdas.prosessorienTila()[i]);	
     	}
     	
-    	/*
+    	
     	//Update processor amount labels
     	for(int i = 0; i < processorAmount.length; i++){
-    		processorAmount[i].setText(tehdas.prosessorienSiirtojenEdistyminen()[i]);
+    		processorAmount[i].setText(tehdas.prosessorienEdistyminen()[i]);
     	}
-    	*/
+    	
     	
     	//Update tank labels
     	int[] sailioissa = tehdas.sailioidenJuomanMaara();
