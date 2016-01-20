@@ -149,10 +149,28 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 				tila[i] = "Ready";
 			}
 			else if(prosessorit[i].getTila() == KoneenTila.FREE){
-				tila[i] = "Free";
+				tila[i] = "Waiting"; //TODO Change to 'Free' or something else?
 			}
 		}
 		return tila;
+	}
+
+	public double[] prosessienEdistyminen() throws RemoteException {
+		double[] progress = new double[prosessorit.length];
+		
+		for(int i = 0; i < prosessorit.length; i++){
+			progress[i] = prosessorit[i].getProgress();
+		}
+		return progress;
+	}
+
+	public double[] prosessorienSiirtojenEdistyminen() throws RemoteException {
+		double[] progress = new double[prosessorit.length];
+		
+		for(int i = 0; i < prosessorit.length; i++){
+			progress[i] = prosessorit[i].getFillPercentage();
+		}
+		return progress;
 	}
 
 	public int[] sailioidenJuomanMaara() throws RemoteException {
@@ -163,16 +181,6 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		return sjm;
 	}
 	
-	public double[] prosessienEdistyminen() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public double[] prosessorienSiirtojenEdistyminen() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	//< > < > < > Painikkeiden tilat < > < > < >
 	
 	public boolean[] nappiRuuvikuljettimet() throws RemoteException {
