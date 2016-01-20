@@ -54,6 +54,7 @@ public class TankPump extends Pump {
 					}
 				}// for tanks
 				
+				
 				// poistaminen / lisääminen
 				if (tankToBeFilled != -1 && processorToBeEmptied != -1){
 					
