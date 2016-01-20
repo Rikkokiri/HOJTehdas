@@ -28,6 +28,8 @@ public class BottlePump extends Pump {
 					if((tank.getTila() == KoneenTila.FREE || tank.getTila() == KoneenTila.EMPTYING || tank.getTila() == KoneenTila.FULL)
 							&& tank.getAmountOfLiquid() != 0 && tank.isReserved()){
 						
+						System.out.println("Päästäänkö tänne?");
+						
 						tank.setTila(KoneenTila.EMPTYING);
 						
 						//Let's check if we can take what we want

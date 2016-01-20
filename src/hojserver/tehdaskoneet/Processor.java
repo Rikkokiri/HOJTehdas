@@ -185,7 +185,10 @@ package hojserver.tehdaskoneet;
  	}
  	
  	public int calculateProduct(){
- 		return productAmount = 5 * materialAmount;
+ 		productAmount = 5 * materialAmount;
+ 		materialAmount = 0;
+ 		waterAmount = 0;
+ 		return productAmount;
  	}
  	
  	// <<<< Tila jne. >>>>
