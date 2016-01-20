@@ -56,7 +56,7 @@ public class Processor extends Thread {
 				}
 			}
 			
-			progress += 0.5;
+			progress += 2.5;
 			
 			if(progress == 100){ //Kun on odotettu prosessointiajan verran, juoma valmis
 				running = false;
@@ -146,7 +146,8 @@ public class Processor extends Thread {
 	}
 	
 	public void addMaterial(int maara){
-		materialAmount = materialAmount + maara;
+		System.out.println("Processor: Lisätään prosessoriin " + maara);			//TODO 
+		materialAmount += maara;
 	}
 	
 	public void removeProduct(int amount){
@@ -159,21 +160,31 @@ public class Processor extends Thread {
 	
 	// <<<< Tila jne. >>>>
 	
+	
+	//--------- PROGRESS ------------
+	
 	public double getProgress(){
 		return progress;
 	}
 	
+	public void addProgress(double amount){
+		progress += amount;
+	}
+	
+	public void resetProgress(){
+		progress = 0;
+	}
+	
+	//--------------------------------
+	
 	//What percentage of processor is filled
-	public double getFillPercentage(){
-		return materialAmount / materialAmountVolume;
+	public int getFillPercentage(){
+		//System.out.println("Lasketaan täytön/tyhjennyksen edistyminen: " + materialAmount / materialAmountVolume);
+		return (int)(100 * ((double)materialAmount / (double)materialAmountVolume) ); //prosentteina
 	}
 	
 	public int getMaterialAmountVolume(){
 		return materialAmountVolume;
-	}
-	
-	public void process(int maara){ 		//TODO Turha metodi?
-		progress =  progress + maara;
 	}
 	
 	public boolean isReserved(){
