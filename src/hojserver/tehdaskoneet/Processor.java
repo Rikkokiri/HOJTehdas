@@ -26,6 +26,7 @@ package hojserver.tehdaskoneet;
  	
  	//Prosessoria käyttävä conveyer
  	private int conveyer;
+ 	private int pumppu;
  	
  	//Prosessoria käyttävä asiakas
  	private String user; //String vai jokin muu?
@@ -42,6 +43,7 @@ package hojserver.tehdaskoneet;
  		
  		user = null; // ???
  		conveyer = -1;
+ 		pumppu = -1;
  		
  	} //konstruktori
  

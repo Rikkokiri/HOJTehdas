@@ -20,10 +20,13 @@ public class TankPump extends Pump {
 	private final int transferAmount = 5;
 	private final int wait = 10;
 	
-	public TankPump(Processor[] processors, Tank[] tanks){
+	private int identity;
+	
+	public TankPump(Processor[] processors, Tank[] tanks, int id){
 		super();
 		this.processors = processors;
 		this.tanks = tanks;
+		identity = id;
 	}
 	
 	public void run(){

@@ -289,7 +289,7 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		//Pumput, 4 kpl
 		for (int i = 0; i < pumput.length; i++){
 			if(i < 2){
-			pumput[i] = new TankPump(prosessorit, kypsytyssailiot);
+			pumput[i] = new TankPump(prosessorit, kypsytyssailiot, i);
 			} else {
 				pumput[i] = new BottlePump(kypsytyssailiot);
 			}
