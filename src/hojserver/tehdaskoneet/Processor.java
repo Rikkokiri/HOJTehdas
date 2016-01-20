@@ -19,16 +19,19 @@ package hojserver.tehdaskoneet;
  	private int productAmount;
  	private double progress;
  	
- 	private boolean running; //Turha?
+ 	//Prosessorin tilaan liittyvät
+ 	private boolean running;
  	private boolean reserved;
- 	
  	private KoneenTila tila;
  	
+ 	//Prosessoria käyttävä conveyer
+ 	private int conveyer;
+ 	
+ 	//Prosessoria käyttävä asiakas
  	private String user; //String vai jokin muu?
  	
  	public Processor(){
- 		user = null; // ???
- 		//Oletuksena keittimessä ei ole vettä eikä raaka-ainetta
+  		//Oletuksena keittimessä ei ole vettä eikä raaka-ainetta
  		waterAmount = 0;
  		materialAmount = 0;
  		
@@ -37,10 +40,13 @@ package hojserver.tehdaskoneet;
  		reserved = false;
  		running = false;
  		
+ 		user = null; // ???
+ 		conveyer = -1;
+ 		
  	} //konstruktori
  
  
- 	//>>>> RUN-METODI <<<<<
+ 	//----------- RUN-METODI --------------
   	
   	public void run(){
   		//Keittimen run-metodissa ei tapahdu muuta kuin juoman keittäminen 20 sekuntia
@@ -68,7 +74,7 @@ package hojserver.tehdaskoneet;
  				
  				if(progress == 100){ //Kun on odotettu prosessointiajan verran, juoma valmis
  					running = false;
- 					calculateProduct(); //
+ 					makeProduct(); //
  					this.setTila(KoneenTila.READY);
  					System.out.println("Juoma valmis keittimessä " + this + ", juomaa " + productAmount + " litraa.");
  				}
@@ -81,18 +87,8 @@ package hojserver.tehdaskoneet;
  			resetProgress();
  		}//while(true)
   	}//run
-  	
-  	
- 	// <<<< TILA >>>>
- 	
- 	public void setTila(KoneenTila t){
- 		if(t == KoneenTila.FREE || t == KoneenTila.FILLING || t == KoneenTila.PROSESSING){ //TODO Valmis vielä?
- 			progress = 0;
- 		}
- 		tila = t;
- 	}
- 	
- 	// <<<< USER >>>>
+  		
+ 	//------------ USER (CLIENT) ---------------------
  	
  	public void setUser(String k){
  		user = k;
@@ -101,6 +97,20 @@ package hojserver.tehdaskoneet;
  	public String getUser(){
  		return user;
  	}
+ 	
+ 	//------------ CONVEYER -------------------
+ 	
+ 	public void setConveyer(int c){
+ 		if(c == -1 || c == 1 || c == 2 ){
+ 			conveyer = c;
+ 		}
+ 	}
+ 	
+ 	public int getConveyer(){
+ 		return conveyer;
+ 	}
+ 	
+ 	//--------- SET RESERVED (reserve-painike) --------------
  	
  	/**
  	 * setReserved
@@ -117,8 +127,12 @@ package hojserver.tehdaskoneet;
  		else if(r == true){
  			reserved = r;
  			System.out.println("Vapautetaan prosessori!" + reserved);
- 			setTila(KoneenTila.FREE);
  			
+ 			if(getProductAmount() != 0){
+ 				setTila(KoneenTila.READY);
+ 			} else {
+ 				setTila(KoneenTila.FREE);
+ 			}
  			//Asetetaan vielä prosessorin tila kuntoon
  			if(isFull()){
  				setTila(KoneenTila.FULL); //TODO Turha?
@@ -126,7 +140,8 @@ package hojserver.tehdaskoneet;
  		}
  	}
  
- 	//Start-painike
+ 	//---------- SET RUNNING (start-painike) --------------
+ 	
  	public void setRunning(boolean r){
  		
  		//Start-painike painetaan pohjaan...
@@ -161,6 +176,7 @@ package hojserver.tehdaskoneet;
  		System.out.println("Eihän päästä tänne? Tila: " + getTila() + " varaus: " + isReserved() + ", running " + isRunning()); //TODO Remove
  	}//setRunning
  
+ 	//------------------------------------------------------------------------------
  	// <<<< VESI, RAAKA-AINE JA TUOTE >>>>
  	
  	// --- Getterit ---
@@ -180,17 +196,41 @@ package hojserver.tehdaskoneet;
  		}
  	}
  	
+ 	public void emptyProcessor(){
+ 		waterAmount = 0;
+ 		materialAmount = 0;
+ 		productAmount = 0;
+ 	}
+ 	 
+ 	public int getMaterialAmountVolume(){
+ 		return materialAmountVolume;
+ 	}
+ 	
+ 	//--------- PRODUCT -------------
+ 	
+ 	/**
+ 	 * Method the amount of product that can be produced from material and 'makes the product'.
+ 	 */
+ 	public void makeProduct(){
+ 		productAmount = 5 * materialAmount;
+ 	}
+ 	
+ 	/**
+ 	 * Takes asked amount of product from the processor.
+ 	 * @param amount The amount to be taken from the processor.
+ 	 */
  	public void removeProduct(int amount){
  		productAmount = productAmount - amount;
  	}
  	
- 	public int calculateProduct(){
- 		return productAmount = 5 * materialAmount;
+ 	public void setProductAmount(int amount){
+ 		productAmount = amount;
  	}
  	
- 	// <<<< Tila jne. >>>>
- 	
- 	
+ 	public int getProductAmount(){
+ 		return productAmount;
+ 	}
+ 		
  	//--------- PROGRESS ------------
  	
  	public double getProgress(){
@@ -205,9 +245,9 @@ package hojserver.tehdaskoneet;
  		progress = 0;
  	}
  	
- 	//--------------------------------
+ 	//----------- PROSENTIT ------------------
+ 	//
  	
- 	//What percentage of processor is filled
  	public int getFillPercentage(){
  		//System.out.println("Lasketaan täytön/tyhjennyksen edistyminen: " + materialAmount / materialAmountVolume);
  		return (int)(100 * ((double)materialAmount / (double)materialAmountVolume) ); //prosentteina
@@ -217,18 +257,15 @@ package hojserver.tehdaskoneet;
  		return (int) (100 * ((double)productAmount / (double)waterAmountVolume));
  	}
  	
- 	public int getMaterialAmountVolume(){
- 		return materialAmountVolume;
+ 	//---------- PROSESSORI TILA YMS. ----------
+ 	
+	public void setTila(KoneenTila t){
+ 		if(t == KoneenTila.FREE || t == KoneenTila.FILLING || t == KoneenTila.PROSESSING){ //TODO Valmis vielä?
+ 			progress = 0;
+ 		}
+ 		tila = t;
  	}
  	
- 	public boolean isReserved(){
- 		return reserved;
- 	}
- 	
- 	public boolean isRunning(){
- 		return running;
- 	}
- 		
  	public KoneenTila getTila(){
  		return tila;
  	}
@@ -241,28 +278,17 @@ package hojserver.tehdaskoneet;
  			return false;
  		}
  	}
- 	
+ 	 	
  	public boolean isEmpty(){
  		return (materialAmount == 0 && waterAmount == 0 && productAmount == 0);
  	}
  	
- 	public void setProductAmount(int amount){
- 		productAmount = amount;
+ 	public boolean isReserved(){
+ 		return reserved;
  	}
  	
- 	public int getProductAmount(){
- 		return productAmount;
+ 	public boolean isRunning(){
+ 		return running;
  	}
- 	
- 	
- 	/**
- 	 * Metodi, jolla tyhjennetään keitin, kun juoma on valmista.
- 	 */
- 	//JÄRKEVÄ????
- 	public void emptyProcessor(){
- 		waterAmount = 0;
- 		materialAmount = 0;
- 		productAmount = 0;
- 	}
- 	
+ 	 	 	
  }
