@@ -28,11 +28,7 @@ public class SiloConveyer extends Conveyer {
 					if (siilot[i].isFull()){
 						siilot[i].setTila(KoneenTila.FULL);
 					}
-					
-					System.out.println(siilot[i].getDegreeOfFilling() + " " + i);
-					
-					
-					
+																		
 				}//if
 				
 			}//for
