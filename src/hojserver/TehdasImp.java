@@ -2,19 +2,19 @@ package hojserver;
 
 import java.rmi.*;
 import java.rmi.server.*;
-
 import hojserver.tehdaskoneet.*;
 
+
 public class TehdasImp extends UnicastRemoteObject implements Tehdas {
-	
-	//Arrayna vai arraylistin? -Array k�y hyvin
+
 	private Silo[] siilot;
 	private Conveyer[] ruuvikuljettimet;
 	private Pump[] pumput;
 	private Processor[] prosessorit;
-	private Tank[] kypsytyssailiot;   //Ei ��kk�si� mielell��n nimiksi. Ei oikeen tyk�nnyt niist� kun pullasin p�yt�koneelle
+	private Tank[] kypsytyssailiot; 
 	
 	
+	//---------- KONSTRUKTORI -----------------------
 	
 	public TehdasImp() throws RemoteException {
 		super();
@@ -27,21 +27,7 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		
 		alustaKoneet();
 		
-	} // constructor
-		
-	//Just for the firt test. //TODO REMOVE!!
-	public void testimetodi(int repeat) throws RemoteException {
-		for(int i = 0; i < repeat; i++){
-			System.out.println("Testing, testing...");
-		}
-		
-		try {
-			System.out.println(RemoteServer.getClientHost());
-		} catch (ServerNotActiveException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	} //constructor
 	
 	//-------- Kirjautuminen --------
 	public void login(String kayttajaNimi) throws RemoteException {

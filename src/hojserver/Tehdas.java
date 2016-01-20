@@ -5,8 +5,6 @@ import java.rmi.*;
 import hojserver.tehdaskoneet.KoneenTila;
 
 public interface Tehdas extends Remote {
-
-	public void testimetodi(int repeat) throws RemoteException; //Vain testaamista varten
 	
 	//-------- Kirjautuminen--------
 	public void login(String kayttajaNimi) throws RemoteException; // K�ytt�j� kirjautuu
