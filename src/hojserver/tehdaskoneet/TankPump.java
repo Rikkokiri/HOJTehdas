@@ -110,13 +110,6 @@ public class TankPump extends Pump {
 	} //run
 	
 	public void setRunning(boolean r){
-		if (!r){
-			for (int i = 0; i < 10; i++){
-				if (tanks[i].getTila() == KoneenTila.FILLING){
-					tanks[i].setTila(KoneenTila.FREE);
-				}
-			}
-		}
 		running = r;
 	}
 	
