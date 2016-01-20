@@ -68,6 +68,8 @@ public class ProcessorConveyer extends Conveyer {
 						silos[siloToBeEmptied].removeFromSilo(limit);
 						limit = -1;
 						running = false;
+						silos[siloToBeEmptied].setTila(KoneenTila.FREE);
+						processors[processorToBeFilled].setTila(KoneenTila.FREE);
 					}// if (l < t)
 					else{
 						// Jos prosessorissa vähemmän tilaa kuin mitä tranferAmount (Hyi!)
@@ -97,15 +99,19 @@ public class ProcessorConveyer extends Conveyer {
 					if (processors[processorToBeFilled].isFull()){
 						processors[processorToBeFilled].setTila(KoneenTila.FULL);
 					}
-					if (silos[siloToBeEmptied].isEmpty())
+					if (silos[siloToBeEmptied].isEmpty()){
 						silos[siloToBeEmptied].setTila(KoneenTila.FREE); //?
 						processors[processorToBeFilled].setTila(KoneenTila.FREE); //Tarvitaanko?
+					}
 				} // if (jos siirretään)
 				
 				//Tietojen tulostus
 				if (siloToBeEmptied != -1 && processorToBeFilled != -1){
 					System.out.println("Siilo " + (siloToBeEmptied + 1) + ", " + silos[siloToBeEmptied].getDegreeOfFilling());
 					System.out.println("Prosessori " + (processorToBeFilled + 1) + ", " + processors[processorToBeFilled].getMaterialAmount());
+				}
+				if (siloToBeEmptied == -1 && processorToBeFilled != -1){
+					processors[processorToBeFilled].setTila(KoneenTila.FREE);
 				}
 				
 				//Odotus
