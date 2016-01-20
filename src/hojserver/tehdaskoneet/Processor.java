@@ -26,6 +26,7 @@ package hojserver.tehdaskoneet;
  	
  	//Prosessoria käyttävä conveyer
  	private int conveyer;
+ 	private int pump;
  	
  	//Prosessoria käyttävä asiakas
  	private String user; //String vai jokin muu?
@@ -42,6 +43,7 @@ package hojserver.tehdaskoneet;
  		
  		user = null; // ???
  		conveyer = -1;
+ 		pump = -1;
  		
  	} //konstruktori
  
@@ -109,6 +111,18 @@ package hojserver.tehdaskoneet;
  		return conveyer;
  	}
  	
+ 	//-------------- PUMP ---------------------
+ 	
+ 	public void setPump(int p){
+ 		if(p == -1 || p == 1 || p == 2 ){
+ 			pump = p;
+ 		}
+ 	}
+ 	
+ 	public int getPump(){
+ 		return pump;
+ 	}
+ 	
  	//--------- SET RESERVED (reserve-painike) --------------
  	
  	/**
@@ -129,12 +143,12 @@ package hojserver.tehdaskoneet;
  			
  			if(getProductAmount() != 0){
  				setTila(KoneenTila.READY);
+ 			} 
+ 			//Asetetaan vielä prosessorin tila kuntoon
+ 			else if(isFull() && getProductAmount() == 0){
+ 				setTila(KoneenTila.FULL); //TODO Turha?
  			} else {
  				setTila(KoneenTila.FREE);
- 			}
- 			//Asetetaan vielä prosessorin tila kuntoon
- 			if(isFull()){
- 				setTila(KoneenTila.FULL); //TODO Turha?
  			}
  		}
  	}
@@ -165,9 +179,12 @@ package hojserver.tehdaskoneet;
  			//Keitin on täynnä tai vapaa ja ei tyhjä
  			if(tila == KoneenTila.READY || tila == KoneenTila.FULL || tila == KoneenTila.FREE){
  				running = false;
- 				if(isFull()){
+ 				if(isFull() && getProductAmount() == 0){
  					setTila(KoneenTila.FULL);
- 				} else {
+ 				} else if(getProductAmount() != 0){
+ 					
+ 				}
+ 				else {
  					setTila(KoneenTila.FREE);
  				}
  			}
