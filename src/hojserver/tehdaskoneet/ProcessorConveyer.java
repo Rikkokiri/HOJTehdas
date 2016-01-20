@@ -11,7 +11,7 @@ public class ProcessorConveyer extends Conveyer {
 	
 	private int identity;
 	
-	private final int transferAmount = 200;
+	private final int transferAmount = 2;
 	
 	
 	public ProcessorConveyer(Silo[] silos, Processor[] processors, int id){
@@ -53,7 +53,9 @@ public class ProcessorConveyer extends Conveyer {
 				for (int i = 0; i < 3; i++){
 					if (!processors[i].isFull() 
 							&& (processors[i].getTila() == KoneenTila.FREE || processors[i].getTila() == KoneenTila.FILLING)
-							&& running && processors[i].isReserved() && !reserved && processors[i].getProductAmount() == 0){										
+							&& running && processors[i].isReserved() && !reserved && processors[i].getProductAmount() == 0
+							&& (processors[i].getConveyer() == -1 || processors[i].getConveyer() == identity)){										
+						processors[i].setConveyer(identity);
 						processorToBeFilled = i;
 						reserved = true;
 					}//if
@@ -80,6 +82,7 @@ public class ProcessorConveyer extends Conveyer {
 						silos[siloToBeEmptied].setTila(KoneenTila.FREE);
 						silos[siloToBeEmptied].setConveyer(-1);
 						processors[processorToBeFilled].setTila(KoneenTila.FREE);
+						processors[processorToBeFilled].setConveyer(-1);
 					}// if (l < t)
 					else{
 						// Jos prosessorissa vähemmän tilaa kuin mitä tranferAmount (Hyi!)
@@ -108,17 +111,20 @@ public class ProcessorConveyer extends Conveyer {
 						processors[processorToBeFilled].setTila(KoneenTila.FULL);
 						silos[siloToBeEmptied].setTila(KoneenTila.FREE);
 						silos[siloToBeEmptied].setConveyer(-1);
+						processors[processorToBeFilled].setConveyer(-1);
 					}
 					if (silos[siloToBeEmptied].isEmpty()){
 						silos[siloToBeEmptied].setTila(KoneenTila.FREE); //?
 						processors[processorToBeFilled].setTila(KoneenTila.FREE); //Tarvitaanko?
 						silos[siloToBeEmptied].setConveyer(-1);
+						processors[processorToBeFilled].setConveyer(-1);
 					}
 				} // if (jos siirretään)
 				
 				
 				if (siloToBeEmptied == -1 && processorToBeFilled != -1){
 					processors[processorToBeFilled].setTila(KoneenTila.FREE);
+					processors[processorToBeFilled].setConveyer(-1);
 				}
 				if (siloToBeEmptied != -1 && processorToBeFilled == -1 && silos[siloToBeEmptied].getTila() == KoneenTila.EMPTYING){
 					silos[siloToBeEmptied].setTila(KoneenTila.FREE);
@@ -128,7 +134,7 @@ public class ProcessorConveyer extends Conveyer {
 				//Odotus
 				synchronized(this){
 					try{
-						this.wait(1000);
+						this.wait(10);
 					}catch (Exception e){System.out.println(e);}
 				}
 		}//while
