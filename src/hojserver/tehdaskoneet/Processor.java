@@ -147,6 +147,11 @@ public class Processor extends Thread {
 		return progress;
 	}
 	
+	//What percentage of processor is filled
+	public double getFillPercentage(){
+		return materialAmount / materialAmountVolume;
+	}
+	
 	public int getMaterialAmountVolume(){
 		return materialAmountVolume;
 	}
