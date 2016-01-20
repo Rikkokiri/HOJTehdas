@@ -55,8 +55,6 @@ public interface Tehdas extends Remote {
 	
 	public int[] sailioidenJuomanMaara() throws RemoteException;
 	
-	public double[] prosessienEdistyminen() throws RemoteException;
-	
 	public double[] prosessorienSiirtojenEdistyminen() throws RemoteException;
 	
 	//< > < > < > Painikkeiden tilat < > < > < >

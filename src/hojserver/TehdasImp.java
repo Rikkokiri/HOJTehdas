@@ -140,10 +140,10 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 				tila[i] = "Emptying";
 			}
 			else if(prosessorit[i].getTila() == KoneenTila.FILLING){
-				tila[i] = "Filling";
+				tila[i] = "Filling ";
 			}
 			else if(prosessorit[i].getTila() == KoneenTila.PROSESSING){
-				tila[i] = "Processing ";
+				tila[i] = "Processing " + prosessorit[i].getProgress() + " %";
 			}
 			else if(prosessorit[i].getTila() == KoneenTila.READY){
 				tila[i] = "Ready";
@@ -153,15 +153,6 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 			}
 		}
 		return tila;
-	}
-
-	public double[] prosessienEdistyminen() throws RemoteException {
-		double[] progress = new double[prosessorit.length];
-		
-		for(int i = 0; i < prosessorit.length; i++){
-			progress[i] = prosessorit[i].getProgress();
-		}
-		return progress;
 	}
 
 	public double[] prosessorienSiirtojenEdistyminen() throws RemoteException {
