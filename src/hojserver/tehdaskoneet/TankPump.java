@@ -18,7 +18,7 @@ public class TankPump extends Pump {
 	private int tankToBeFilled;
 	
 	private final int transferAmount = 5;
-	private final int wait = 100;
+	private final int wait = 10;
 	
 	public TankPump(Processor[] processors, Tank[] tanks){
 		super();
