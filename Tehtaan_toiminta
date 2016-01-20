@@ -9,6 +9,11 @@ Kysymyksiä
 - Mistä tiedetään mistä tankista pullotukseen vievän pumpun kuuluu ottaa?
 
 
+<<< Processor conveyer >>>
+
+- Kun processor conveyerin start-painike vapautetaan, asetetaan prosessorit FREE-tilaan
+
+
 <<< Keitin >>>
 
 Start-painikkeen vapauttaminen:
