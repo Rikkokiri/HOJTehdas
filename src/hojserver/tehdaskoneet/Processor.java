@@ -44,27 +44,27 @@ public class Processor extends Thread {
 	
 	public void run(){
 		//Keittimen run-metodissa ei tapahdu muuta kuin juoman keittäminen 20 sekuntia
-		
-		while(running && tila == KoneenTila.PROSESSING){ 		//Tuplaehto turhaan?
-		
-			synchronized (this) {
-				try {
-					this.wait(processingtime/40000); //puoli sekunti					
-				} catch (InterruptedException e) {
-					System.out.println("Juoman keittäminen keskeytyi keittimessä " + this);
-					e.printStackTrace();
+		while(true){
+			while(running && tila == KoneenTila.PROSESSING){ 		//Tuplaehto turhaan?
+			
+				synchronized (this) {
+					try {
+						this.wait(processingtime/40000); //puoli sekunti					
+					} catch (InterruptedException e) {
+						System.out.println("Juoman keittäminen keskeytyi keittimessä " + this);
+						e.printStackTrace();
+					}
 				}
-			}
-			
-			progress += 2.5;
-			
-			if(progress == 100){ //Kun on odotettu prosessointiajan verran, juoma valmis
-				running = false;
-				this.setTila(KoneenTila.READY);
-				System.out.println("Juoma valmis keittimessä " + this);
-			}
-		}//while
-		
+				
+				this.addProgress(2.5);
+				
+				if(progress == 100){ //Kun on odotettu prosessointiajan verran, juoma valmis
+					running = false;
+					this.setTila(KoneenTila.READY);
+					System.out.println("Juoma valmis keittimessä " + this);
+				}
+			}//while(running...)
+		}//while(true)
 	}//run
 	
 	
