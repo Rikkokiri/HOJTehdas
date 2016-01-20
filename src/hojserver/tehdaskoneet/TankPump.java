@@ -84,6 +84,15 @@ public class TankPump extends Pump {
 					if (processors[processorToBeEmptied].isEmpty()){
 						processors[processorToBeEmptied].setTila(KoneenTila.FREE);
 					}
+					if (tanks[tankToBeFilled].isFull()){
+						tanks[tankToBeFilled].setTila(KoneenTila.FULL);
+					}
+					//odotus
+					synchronized(this){
+						try{
+							this.wait(wait);
+						}catch (Exception e){System.out.println(e);}
+					}
 					
 				}// if täyttö / lisäys
 				
