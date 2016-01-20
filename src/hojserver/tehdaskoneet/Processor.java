@@ -16,6 +16,7 @@ public class Processor extends Thread {
 	
 	private int waterAmount;
 	private int materialAmount;
+	private int productAmount;
 	private double progress;
 	
 	private boolean running; //Turha?
@@ -93,7 +94,7 @@ public class Processor extends Thread {
 			reserved = r;
 		}
 		//Reserve-painikkeen painaminen pohjaan on aina ok
-		if(r == true){
+		else if(r == true){
 			reserved = r;
 		}
 	}
@@ -126,7 +127,7 @@ public class Processor extends Thread {
 		
 	}//setRunning
 
-	// <<<< VESI JA RAAKA-AINE >>>>
+	// <<<< VESI, RAAKA-AINE JA TUOTE >>>>
 	
 	// --- Getterit ---
 	public int getWaterAmount(){
@@ -139,6 +140,10 @@ public class Processor extends Thread {
 	
 	public void addMaterial(int maara){
 		materialAmount = materialAmount + maara;
+	}
+	
+	public int calculateProduct(){
+		return productAmount = 5 * materialAmount;
 	}
 	
 	// <<<< Tila jne. >>>>
@@ -182,16 +187,17 @@ public class Processor extends Thread {
 	}
 	
 	public boolean isEmpty(){
-		return (materialAmount == 0 && waterAmount == 0);
+		return (materialAmount == 0 && waterAmount == 0 && productAmount == 0);
 	}
 	
 	/**
 	 * Metodi, jolla tyhjennetään keitin, kun juoma on valmista.
 	 */
 	//JÄRKEVÄ????
-	public void emptyingProcessor(){
+	public void emptyProcessor(){
 		waterAmount = 0;
 		materialAmount = 0;
+		productAmount = 0;
 	}
 	
 }
