@@ -47,6 +47,8 @@ package hojserver.tehdaskoneet;
 
 		while(true){
 			
+			//System.out.println("Nyt pitäisi päästä run-metodiin"); //TODO Remove
+			
 			double timespent = 0;
 			
  			while(running && tila == KoneenTila.PROSESSING){ 		//Tuplaehto turhaan?
@@ -131,6 +133,7 @@ package hojserver.tehdaskoneet;
  			if(tila != KoneenTila.EMPTYING && tila != KoneenTila.FILLING && tila != KoneenTila.READY && !isEmpty()){
  				running = r;
  				setTila(KoneenTila.PROSESSING);
+ 				System.out.println("Prosessin pitäisi käynnistyä. Prosessing tila " + getTila() + ", varaus: " + isReserved() + ", running: " + isRunning()); //TODO Remove
  			} else {
  				System.out.println("Prosessorin " + this + " start-painiketta ei voi painaa.");
  				System.out.println("Prosessori tilassa: " + getTila());
@@ -138,7 +141,7 @@ package hojserver.tehdaskoneet;
  		}
  		
  		//Start-painike vapautetaan....
- 		if(r == false){
+ 		else if(r == false){
  			//Keitin on täynnä tai vapaa ja ei tyhjä
  			if(tila == KoneenTila.READY || tila == KoneenTila.FULL || tila == KoneenTila.FREE){
  				running = false;
@@ -149,7 +152,7 @@ package hojserver.tehdaskoneet;
  				}
  			}
  		}//if
- 		
+ 		System.out.println("Eihän päästä tänne? Tila: " + getTila() + " varaus: " + isReserved() + ", running " + isRunning()); //TODO Remove
  	}//setRunning
  
  	// <<<< VESI, RAAKA-AINE JA TUOTE >>>>
