@@ -28,6 +28,11 @@ public class Tank extends Thread {
 		return amountOfLiquid;
 	}
 	
+
+	//---- Tankin tila ---------
+	
+	//Varaus
+	
 	public synchronized boolean isReserved(){
 		return reserved;
 	}
@@ -36,7 +41,6 @@ public class Tank extends Thread {
 		reserved = r;
 	}
 	
-	//---- tankin tilat ---------
 	//Periaatteessa pitäisi estää tankille epäolennaisiin tiloihin laittaminen //TODO
 	//Tankki ei voi olla esim. tilassa PROSESSING
 	
@@ -52,7 +56,7 @@ public class Tank extends Thread {
 	
 	public boolean canBeEmptied(){
 		//Tankkia voidaan alkaa tyhjeentää, jos sitä ei parhaillaan täytetä eikä tyhjennetä ja tankissa on nestettä 
-		if(tila != KoneenTila.EMPTYING && tila != KoneenTila.FILLING && reserved && amountOfLiquid != 0){
+		if(tila != KoneenTila.EMPTYING && tila != KoneenTila.FILLING && tila != KoneenTila.PROSESSING && reserved && amountOfLiquid != 0){
 			return true;
 		} else {
 			return false;
@@ -69,6 +73,7 @@ public class Tank extends Thread {
 	}
 	
 	//---------------------------------------
+	//		Nesteen siirtely
 	
 	/**
 	 * Method for taking liquid from the tank.

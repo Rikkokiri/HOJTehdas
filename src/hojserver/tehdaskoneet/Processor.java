@@ -16,7 +16,7 @@ public class Processor extends Thread {
 	
 	private int waterAmount;
 	private int materialAmount;
-	private int progress;
+	private double progress;
 	
 	private boolean running; //Turha?
 	private boolean reserved;
@@ -45,18 +45,22 @@ public class Processor extends Thread {
 		//Keittimen run-metodissa ei tapahdu muuta kuin juoman keittäminen 20 sekuntia
 		
 		while(running && tila == KoneenTila.PROSESSING){ 		//Tuplaehto turhaan?
+		
 			synchronized (this) {
 				try {
-					this.wait(processingtime);
-					//Kun on odotettu prosessointiajan verran, juoma valmis
-					running = false;
-					//Valmis
-					this.setTila(KoneenTila.READY);
-					
+					this.wait(processingtime/40000); //puoli sekunti					
 				} catch (InterruptedException e) {
 					System.out.println("Juoman keittäminen keskeytyi keittimessä " + this);
 					e.printStackTrace();
 				}
+			}
+			
+			progress += 0.5;
+			
+			if(progress == 100){ //Kun on odotettu prosessointiajan verran, juoma valmis
+				running = false;
+				this.setTila(KoneenTila.READY);
+				System.out.println("Juoma valmis keittimessä " + this);
 			}
 		}//while
 		
@@ -65,8 +69,11 @@ public class Processor extends Thread {
 	
 	// <<<< TILA >>>>
 	
-	public void setTila(KoneenTila tila){
-		this.tila = tila;
+	public void setTila(KoneenTila t){
+		if(t == KoneenTila.FREE || t == KoneenTila.FILLING || t == KoneenTila.PROSESSING){ //TODO Valmis vielä?
+			progress = 0;
+		}
+		tila = t;
 	}
 	
 	// <<<< USER >>>>
@@ -103,7 +110,7 @@ public class Processor extends Thread {
 			 */
 			if(tila != KoneenTila.EMPTYING && tila != KoneenTila.FILLING && tila != KoneenTila.READY && !isEmpty()){
 				running = r;
-				tila = KoneenTila.PROSESSING;
+				setTila(KoneenTila.PROSESSING);
 			} else {
 				System.out.println("Prosessorin " + this + " start-painiketta ei voi painaa.");
 			}
@@ -136,7 +143,7 @@ public class Processor extends Thread {
 	
 	// <<<< Tila jne. >>>>
 	
-	public int getProgress(){
+	public double getProgress(){
 		return progress;
 	}
 	
@@ -144,7 +151,7 @@ public class Processor extends Thread {
 		return materialAmountVolume;
 	}
 	
-	public void process(int maara){
+	public void process(int maara){ 		//TODO Turha metodi?
 		progress =  progress + maara;
 	}
 	
@@ -181,7 +188,5 @@ public class Processor extends Thread {
 		waterAmount = 0;
 		materialAmount = 0;
 	}
-	
-	
 	
 }
