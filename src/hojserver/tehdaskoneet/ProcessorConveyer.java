@@ -48,7 +48,7 @@ public class ProcessorConveyer extends Conveyer {
 				for (int i = 0; i < 3; i++){
 					if (!processors[i].isFull() 
 							&& (processors[i].getTila() == KoneenTila.FREE || processors[i].getTila() == KoneenTila.FILLING)
-							&& running && processors[i].isReserved() && !reserved){										
+							&& running && processors[i].isReserved() && !reserved && processors[i].getProductAmount() == 0){										
 						processorToBeFilled = i;
 						reserved = true;
 					}//if
