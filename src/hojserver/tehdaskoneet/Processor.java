@@ -150,7 +150,7 @@ package hojserver.tehdaskoneet;
  			- keittimessä on jotain mitä prosessoida
  			- keitin ei ole tilassa READY (eli saanut juomaa valmiiksi)
  			 */
- 			if(tila != KoneenTila.EMPTYING && tila != KoneenTila.FILLING && tila != KoneenTila.READY && !isEmpty()){
+ 			if(tila != KoneenTila.EMPTYING && tila != KoneenTila.FILLING && tila != KoneenTila.READY && !isEmpty() && getProductAmount() == 0){
  				running = r;
  				setTila(KoneenTila.PROSESSING);
  				System.out.println("Prosessin pitäisi käynnistyä. Prosessing tila " + getTila() + ", varaus: " + isReserved() + ", running: " + isRunning()); //TODO Remove
