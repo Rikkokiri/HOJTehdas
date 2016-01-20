@@ -190,6 +190,10 @@ public class Processor extends Thread {
 		return (materialAmount == 0 && waterAmount == 0 && productAmount == 0);
 	}
 	
+	public void setProductAmount(int amount){
+		productAmount = amount;
+	}
+	
 	/**
 	 * Metodi, jolla tyhjennetään keitin, kun juoma on valmista.
 	 */

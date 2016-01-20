@@ -118,4 +118,20 @@ public class ProcessorConveyer extends Conveyer {
 		
 	}
 	
+	public void setRunning(boolean r){
+		//Jos siiloa tyhjennetään ja ProcessorConveyer pysäytetään, niin kyseisen siilon tilaksi asetetaan FREE
+		for (int i = 0; i < 4; i++){
+			if (silos[i].getTila() == KoneenTila.EMPTYING){
+				silos[i].setTila(KoneenTila.FREE);
+			}
+		}
+		
+		for (int i = 0; i < 3; i++){
+			if (processors[i].getTila() == KoneenTila.FILLING){
+				processors[i].setTila(KoneenTila.FREE);
+			}
+		}
+		
+		running = r;
+	}
 }

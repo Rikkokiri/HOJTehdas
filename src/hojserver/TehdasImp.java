@@ -260,6 +260,9 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 			prosessorit[i] = new Processor();
 			prosessorit[i].start();
 		}
+		//Alustetaan 3. juomakeitin testaamiseksi
+		prosessorit[2].setProductAmount(10000);
+		prosessorit[2].setTila(KoneenTila.READY);
 		
 		//Ruuvikuljettimet, 3 kpl
 		for(int i = 0; i < ruuvikuljettimet.length; i++){
@@ -279,7 +282,8 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 			} else {
 				pumput[i] = new BottlePump(kypsytyssailiot);
 				pumput[i].start();
-			}
+			}			
+			
 		}
 		
 		//Kypsytyssäiliöt, 10 kpl
