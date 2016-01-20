@@ -12,7 +12,7 @@ package hojserver.tehdaskoneet;
  	//Voi - ja varmaan kannattaa - vaihtaa myöhemmin.
  	private final int waterAmountVolume = 10000; //litraa
  	private final int materialAmountVolume = 2000; //kiloa
- 	private final int processingtime = 20000; //millisekuntia
+ 	private final double processingtime = 20000; //millisekuntia
  	
  	private int waterAmount;
  	private int materialAmount;
@@ -46,18 +46,23 @@ package hojserver.tehdaskoneet;
   		//Keittimen run-metodissa ei tapahdu muuta kuin juoman keittäminen 20 sekuntia
 
 		while(true){
+			
+			double timespent = 0;
+			
  			while(running && tila == KoneenTila.PROSESSING){ 		//Tuplaehto turhaan?
   			
  				synchronized (this) {
  					try {
- 						this.wait(processingtime/40000); //puoli sekunti					
+ 						this.wait((long) (processingtime/40000)); //puoli sekunti					
  					} catch (InterruptedException e) {
  						System.out.println("Juoman keittäminen keskeytyi keittimessä " + this);
  						e.printStackTrace();
  					}
  				}
  				
+ 				timespent += (long)(processingtime/40000);
  				this.addProgress(2.5);
+ 				System.out.println("Time spent processing: " + timespent + "seconds. Progress " + getProgress() + " %");
  				
  				if(progress == 100){ //Kun on odotettu prosessointiajan verran, juoma valmis
  					running = false;
@@ -65,6 +70,7 @@ package hojserver.tehdaskoneet;
  					System.out.println("Juoma valmis keittimessä " + this);
  				}
  			}//while(running...)
+ 			resetProgress();
  		}//while(true)
   	}//run
   	
@@ -88,6 +94,10 @@ package hojserver.tehdaskoneet;
  		return user;
  	}
  	
+ 	/**
+ 	 * setReserved
+ 	 * @param r
+ 	 */
  	public void setReserved(boolean r){
  		//>>> Reserve-painike vapautetaan...
  		//Ok, kunhan prosessointi ei ole käynnissä
@@ -99,6 +109,12 @@ package hojserver.tehdaskoneet;
  		else if(r == true){
  			reserved = r;
  			System.out.println("Vapautetaan prosessori!" + reserved);
+ 			setTila(KoneenTila.FREE);
+ 			
+ 			//Asetetaan vielä prosessorin tila kuntoon
+ 			if(isFull()){
+ 				setTila(KoneenTila.FULL); //TODO Turha?
+ 			}
  		}
  	}
  
@@ -117,6 +133,7 @@ package hojserver.tehdaskoneet;
  				setTila(KoneenTila.PROSESSING);
  			} else {
  				System.out.println("Prosessorin " + this + " start-painiketta ei voi painaa.");
+ 				System.out.println("Prosessori tilassa: " + getTila());
  			}
  		}
  		
@@ -147,8 +164,11 @@ package hojserver.tehdaskoneet;
  	}
  	
  	public void addMaterial(int maara){
- 		System.out.println("Processor: Lisätään prosessoriin " + maara);			//TODO 
+ 		//System.out.println("Processor: Lisätään prosessoriin " + maara);			//TODO remove
  		materialAmount += maara;
+ 		if(isFull()){
+ 			setTila(KoneenTila.FULL);
+ 		}
  	}
  	
  	public void removeProduct(int amount){
