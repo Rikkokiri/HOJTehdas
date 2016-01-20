@@ -124,8 +124,5 @@ public class TankPump extends Pump {
 		running = r;
 	}
 	
-	//public int findTank(){
-		
-	//}
 	
 }

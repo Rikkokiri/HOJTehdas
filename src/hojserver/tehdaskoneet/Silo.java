@@ -112,18 +112,11 @@ public class Silo {
 		if(degreeOfFilling + addition <= capacity){
 			degreeOfFilling += addition;
 		}
-		else{
-			//TODO
-			
-		}
 	}
 	
 	public void removeFromSilo(int sub){
 		if (degreeOfFilling - sub >= 0){
 			degreeOfFilling = degreeOfFilling - sub;
-		}
-		else {
-			//TODO
 		}
 	}
 	

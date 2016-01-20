@@ -43,9 +43,6 @@ public class Tank extends Thread {
 		reserved = r;
 	}
 	
-	//Periaatteessa pitäisi estää tankille epäolennaisiin tiloihin laittaminen //TODO
-	//Tankki ei voi olla esim. tilassa PROSESSING
-	
 	public void setTila(KoneenTila t){
 		tila = t;
 	}
@@ -104,9 +101,6 @@ public class Tank extends Thread {
 	public synchronized void takeLiquid(int amount){
 		if(amount <= amountOfLiquid){
 			amountOfLiquid -= amount;
-		} else {
-			//Yritetään ottaa tankista enemmän nestettä kuin siellä on.
-			//TODO
 		}
 	}
 	
@@ -117,9 +111,6 @@ public class Tank extends Thread {
 	public synchronized void addLiquid(int amount){
 		if(amount <=  tilavuus - amountOfLiquid){
 			amountOfLiquid += amount;
-		} else {
-			//Yritetään laittaa tankkiin enemmän nestettä kuin sinne mahtuu.
-			//TODO
 		}
 	}
 	
