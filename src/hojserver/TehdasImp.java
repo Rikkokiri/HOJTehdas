@@ -262,8 +262,8 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 			prosessorit[i].start();
 		}
 		//Alustetaan 3. juomakeitin testaamiseksi
-		prosessorit[2].setProductAmount(10000);
-		prosessorit[2].setTila(KoneenTila.READY);
+		//prosessorit[2].setProductAmount(10000);		//TODO Remove
+		//prosessorit[2].setTila(KoneenTila.READY);
 		
 		//Ruuvikuljettimet, 3 kpl
 		for(int i = 0; i < ruuvikuljettimet.length; i++){
