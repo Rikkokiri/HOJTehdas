@@ -18,7 +18,7 @@ public class TankPump extends Pump {
 	private int tankToBeFilled;
 	
 	private final int transferAmount = 5;
-	private final int wait = 10;
+	private final int wait = 100;
 	
 	public TankPump(Processor[] processors, Tank[] tanks){
 		super();
@@ -88,18 +88,20 @@ public class TankPump extends Pump {
 						tanks[tankToBeFilled].setTila(KoneenTila.FULL);
 					}
 					
-					System.out.println("Prosessori :" + processorToBeEmptied + " Säiliö: " + tankToBeFilled);
-					
-					//odotus
-					synchronized(this){
-						try{
-							this.wait(wait);
-						}catch (Exception e){System.out.println(e);}
-					}
-					
 				}// if täyttö / lisäys
 				
+				//odotus
+				synchronized(this){
+					try{
+						this.wait(wait);
+					}catch (Exception e){System.out.println(e);}
+				}
 			} //while is running
+			synchronized(this){
+				try{
+					this.wait(wait);
+				}catch (Exception e){System.out.println(e);}
+			}
 		} // whiel true
 	} //run
 	

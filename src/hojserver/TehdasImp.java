@@ -282,9 +282,8 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 			pumput[i] = new TankPump(prosessorit, kypsytyssailiot);
 			} else {
 				pumput[i] = new BottlePump(kypsytyssailiot);
-				pumput[i].start();
-			}			
-			
+			}
+			pumput[i].start();
 		}
 		
 		//Kypsytyssäiliöt, 10 kpl
