@@ -36,6 +36,11 @@ public class BottlePump extends Pump {
 					} //while - filling
 				}//for(tanks)
 			} //while(isRunning}
+			synchronized(this){
+				try {
+					this.wait(wait);
+				} catch (InterruptedException e) { e.printStackTrace(); }
+			} //synchronized
 		}//while true
 	} //run
 	
