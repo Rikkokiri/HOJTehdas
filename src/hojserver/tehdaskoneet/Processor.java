@@ -210,6 +210,10 @@ package hojserver.tehdaskoneet;
  		return (int)(100 * ((double)materialAmount / (double)materialAmountVolume) ); //prosentteina
  	}
  	
+ 	public int getProductPercentage(){
+ 		return (int) (100 * ((double)productAmount / (double)waterAmountVolume));
+ 	}
+ 	
  	public int getMaterialAmountVolume(){
  		return materialAmountVolume;
  	}
