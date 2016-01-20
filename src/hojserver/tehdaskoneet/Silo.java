@@ -14,12 +14,14 @@ public class Silo {
 	private int degreeOfFilling; //0-10000 kiloa				//Not happy with the name, but I'll go with this
 	private boolean reserved;
 	private KoneenTila tila;
+	private int conveyer;
 	
 	//Constructor
 	public Silo(){
 		//Oletusarvoisesti siilo on tyhjä
 		degreeOfFilling = 0;
 		tila = KoneenTila.FREE;
+		conveyer = -1;
 	}
 	
 	//---- GETTERS AND SETTERS ----
@@ -38,6 +40,13 @@ public class Silo {
 	
 	public void  setTila(KoneenTila t){
 		tila = t;
+	}
+	public int getConveyer(){
+		return conveyer;
+	}
+	
+	public void setConveyer(int conv){
+		conveyer = conv;
 	}
 	
 	public boolean isReserved(){

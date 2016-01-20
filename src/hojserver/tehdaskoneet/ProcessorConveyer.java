@@ -9,13 +9,16 @@ public class ProcessorConveyer extends Conveyer {
 	private int siloToBeEmptied;
 	private int processorToBeFilled;
 	
-	private final int transferAmount = 2;
+	private int identity;
+	
+	private final int transferAmount = 200;
 	
 	
-	public ProcessorConveyer(Silo[] silos, Processor[] processors){
+	public ProcessorConveyer(Silo[] silos, Processor[] processors, int id){
 		super();
 		this.silos = silos;
 		this.processors = processors;
+		this.identity = id;
 	}
 	
 	public void run(){
@@ -35,9 +38,11 @@ public class ProcessorConveyer extends Conveyer {
 				for(int i = 0; i < 4; i++){
 					if (!silos[i].isEmpty() && 
 							( silos[i].getTila() == KoneenTila.FREE || silos[i].getTila() == KoneenTila.EMPTYING
-							|| silos[i].getTila() == KoneenTila.FULL ) && running && silos[i].isReserved() && !reserved){
+							|| silos[i].getTila() == KoneenTila.FULL ) && running && silos[i].isReserved() && !reserved
+							&& (silos[i].getConveyer() == -1 || silos[i].getConveyer() == identity)){
 						siloToBeEmptied = i;
 						reserved = true;
+						silos[i].setConveyer(identity);
 						
 					} // if
 				} // for
@@ -54,6 +59,10 @@ public class ProcessorConveyer extends Conveyer {
 					}//if
 				}//for
 				
+				if (running){
+					System.out.println(siloToBeEmptied + " : " + processorToBeFilled);
+				}
+				
 				
 				// poistetaan siilosta ja lisätään prosessoriin
 				if (siloToBeEmptied != -1 && processorToBeFilled != -1){
@@ -69,6 +78,7 @@ public class ProcessorConveyer extends Conveyer {
 						limit = -1;
 						running = false;
 						silos[siloToBeEmptied].setTila(KoneenTila.FREE);
+						silos[siloToBeEmptied].setConveyer(-1);
 						processors[processorToBeFilled].setTila(KoneenTila.FREE);
 					}// if (l < t)
 					else{
@@ -78,12 +88,10 @@ public class ProcessorConveyer extends Conveyer {
 									- processors[processorToBeFilled].getMaterialAmount());
 							processors[processorToBeFilled].addMaterial(processors[processorToBeFilled].getMaterialAmountVolume() 
 									- processors[processorToBeFilled].getMaterialAmount());
-							System.out.println("wth1");
 						// Jos taas siilossa vähemmän jäljellä kuin tranferAmount
 						}else if (silos[siloToBeEmptied].getDegreeOfFilling() < transferAmount){
 								processors[processorToBeFilled].addMaterial(silos[siloToBeEmptied].getDegreeOfFilling());			
 								silos[siloToBeEmptied].emptySilo();
-								System.out.println("wth2");
 							}
 						// Ja ihan normi käytäntö
 						else {
@@ -98,26 +106,29 @@ public class ProcessorConveyer extends Conveyer {
 					
 					if (processors[processorToBeFilled].isFull()){
 						processors[processorToBeFilled].setTila(KoneenTila.FULL);
+						silos[siloToBeEmptied].setTila(KoneenTila.FREE);
+						silos[siloToBeEmptied].setConveyer(-1);
 					}
 					if (silos[siloToBeEmptied].isEmpty()){
 						silos[siloToBeEmptied].setTila(KoneenTila.FREE); //?
 						processors[processorToBeFilled].setTila(KoneenTila.FREE); //Tarvitaanko?
+						silos[siloToBeEmptied].setConveyer(-1);
 					}
 				} // if (jos siirretään)
 				
-				//Tietojen tulostus
-				if (siloToBeEmptied != -1 && processorToBeFilled != -1){
-					System.out.println("Siilo " + (siloToBeEmptied + 1) + ", " + silos[siloToBeEmptied].getDegreeOfFilling());
-					System.out.println("Prosessori " + (processorToBeFilled + 1) + ", " + processors[processorToBeFilled].getMaterialAmount());
-				}
+				
 				if (siloToBeEmptied == -1 && processorToBeFilled != -1){
 					processors[processorToBeFilled].setTila(KoneenTila.FREE);
+				}
+				if (siloToBeEmptied != -1 && processorToBeFilled == -1 && silos[siloToBeEmptied].getTila() == KoneenTila.EMPTYING){
+					silos[siloToBeEmptied].setTila(KoneenTila.FREE);
+					silos[siloToBeEmptied].setConveyer(-1);
 				}
 				
 				//Odotus
 				synchronized(this){
 					try{
-						this.wait(10);
+						this.wait(1000);
 					}catch (Exception e){System.out.println(e);}
 				}
 		}//while

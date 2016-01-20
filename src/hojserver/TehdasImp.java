@@ -281,7 +281,7 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 				ruuvikuljettimet[i] = new SiloConveyer(siilot);
 				ruuvikuljettimet[i].start(); //Start thread
 			} else {
-				ruuvikuljettimet[i] = new ProcessorConveyer(siilot, prosessorit);
+				ruuvikuljettimet[i] = new ProcessorConveyer(siilot, prosessorit, i);
 				ruuvikuljettimet[i].start(); //Start thread
 			}
 		}
