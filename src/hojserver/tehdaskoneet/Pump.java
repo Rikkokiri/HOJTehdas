@@ -25,8 +25,6 @@ public class Pump extends Thread {
 	
 	public void stopPump(){
 		running = false;
-		//origin = null;
-		//target = null;
 	}
 	
 	/**

@@ -29,7 +29,7 @@ package hojserver.tehdaskoneet;
  	private int pump;
  	
  	//Prosessoria käyttävä asiakas
- 	private String user; //String vai jokin muu?
+ 	private String user;
  	
  	public Processor(){
   		//Oletuksena keittimessä ei ole vettä eikä raaka-ainetta
