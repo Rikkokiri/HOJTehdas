@@ -11,7 +11,7 @@ package hojserver.tehdaskoneet;
 public class BottlePump extends Pump {
 
 	private Tank[] tanks;
-	private int take;
+	private final int take = 50;
 	 
 	public BottlePump(Tank[] tanks){
 		super();
@@ -24,8 +24,8 @@ public class BottlePump extends Pump {
 			while(isRunning()){
 				//Let's check which tank can be emptied first
 				for(Tank tank : tanks){
-					
-					if(tank.getTila() == KoneenTila.FREE || tank.getTila() == KoneenTila.EMPTYING || tank.getTila() == KoneenTila.FULL
+				
+					if((tank.getTila() == KoneenTila.FREE || tank.getTila() == KoneenTila.EMPTYING || tank.getTila() == KoneenTila.FULL)
 							&& tank.getAmountOfLiquid() != 0 && tank.isReserved()){
 						
 						tank.setTila(KoneenTila.EMPTYING);
@@ -36,6 +36,8 @@ public class BottlePump extends Pump {
 						} else {
 							//Taking all that's left
 							tank.takeLiquid(tank.getAmountOfLiquid());
+							tank.setTila(KoneenTila.FREE);
+							tank.setReserved(false);
 						}
 						synchronized(this){
 							try {
@@ -45,7 +47,7 @@ public class BottlePump extends Pump {
 					}
 				} //for
 				
-			}
+			} //while(isRunning)
 			
 			//Let's wait a little so while(true)-loop doesn't spin like crazy.
 			synchronized(this){
