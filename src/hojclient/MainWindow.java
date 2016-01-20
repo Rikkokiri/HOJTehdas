@@ -1320,7 +1320,7 @@ public class MainWindow extends javax.swing.JFrame {
 	    	}// if res
 			else{
 				try{
-					tehdas.prosessorinVaraus(0, kayttajaNimi);
+					tehdas.prosessorinVarausVapautus(0);
 				} catch (RemoteException e) {System.out.println(e);}
 			}// else
     	}// if log
@@ -1352,7 +1352,7 @@ public class MainWindow extends javax.swing.JFrame {
 	    	}// if res
 			else{
 				try{
-					tehdas.prosessorinVaraus(1, kayttajaNimi);
+					tehdas.prosessorinVarausVapautus(1);
 				} catch (RemoteException e) {System.out.println(e);}
 			}// else
     	}// if log
@@ -1384,7 +1384,7 @@ public class MainWindow extends javax.swing.JFrame {
 	    	}// if res
 			else{
 				try{
-					tehdas.prosessorinVaraus(2, kayttajaNimi);
+					tehdas.prosessorinVarausVapautus(2);
 				} catch (RemoteException e) {System.out.println(e);}
 			}// else
     	}// if log
