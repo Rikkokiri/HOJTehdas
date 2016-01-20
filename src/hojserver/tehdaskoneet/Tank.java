@@ -13,11 +13,13 @@ public class Tank extends Thread {
 	private boolean reserved;
 	
 	private KoneenTila tila;
+	private int pump;
 	
 	public Tank(){
 		amountOfLiquid = 0;
 		reserved = false;
 		tila = KoneenTila.FREE;
+		pump = -1;
 	}
 	
 	/**
@@ -79,6 +81,17 @@ public class Tank extends Thread {
 		} else {
 			return false;
 		}
+	}
+	
+	// ------------------------------------
+	//		      PUMP
+	
+	public int getPump(){
+		return pump;
+	}
+	
+	public void setPump(int p){
+		pump = p;
 	}
 	
 	//---------------------------------------

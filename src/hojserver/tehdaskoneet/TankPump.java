@@ -40,9 +40,11 @@ public class TankPump extends Pump {
 				//Prosessorien tsekkaus
 				for(int i = 0; i < 3; i++){
 					if((processors[i].getTila() == KoneenTila.READY || processors[i].getTila() == KoneenTila.EMPTYING) &&
-					!processors[i].isEmpty() && processors[i].isReserved() && !reserved){
+					!processors[i].isEmpty() && processors[i].isReserved() && !reserved
+						&& (processors[i].getPump() == -1 || processors[i].getPump() == identity)){
 						reserved = true; // Varataan pumppu jollekkin prosessorille
 						processorToBeEmptied = i;
+						processors[i].setPump(identity);
 					}
 				} //for processors
 				
@@ -51,9 +53,11 @@ public class TankPump extends Pump {
 				// säiliöiden tsekkaus
 				for (int i = 0; i < 10; i++){
 					if ((tanks[i].getTila() == KoneenTila.FREE || tanks[i].getTila() == KoneenTila.FILLING) &&
-							!tanks[i].isFull() && !reserved && tanks[i].isReserved()){
+							!tanks[i].isFull() && !reserved && tanks[i].isReserved() 
+							&& (tanks[i].getPump() == -1 || tanks[i].getPump() == identity )){
 						reserved = true;
 						tankToBeFilled = i;
+						tanks[i].setPump(identity);
 					}
 				}// for tanks
 				
@@ -72,6 +76,8 @@ public class TankPump extends Pump {
 						processors[processorToBeEmptied].emptyProcessor();
 						tanks[tankToBeFilled].setTila(KoneenTila.FREE);
 						processors[processorToBeEmptied].setTila(KoneenTila.FREE);
+						processors[processorToBeEmptied].setPump(-1);
+						tanks[tankToBeFilled].setPump(-1);
 					}
 					
 					// Jos säiliöön ei enä mahdu siirrettävää määrää
@@ -79,6 +85,7 @@ public class TankPump extends Pump {
 						processors[processorToBeEmptied].removeProduct(10000 - tanks[tankToBeFilled].getAmountOfLiquid());
 						tanks[tankToBeFilled].addLiquid(10000 - tanks[tankToBeFilled].getAmountOfLiquid());
 						processors[processorToBeEmptied].setTila(KoneenTila.FREE);
+						processors[processorToBeEmptied].setPump(-1);
 					}
 					// Normaali tilanne
 					else{
@@ -90,6 +97,7 @@ public class TankPump extends Pump {
 					
 					if (processors[processorToBeEmptied].isEmpty()){
 						processors[processorToBeEmptied].setTila(KoneenTila.FREE);
+						processors[processorToBeEmptied].setPump(-1);
 					}
 					if (tanks[tankToBeFilled].isFull()){
 						tanks[tankToBeFilled].setTila(KoneenTila.FULL);
