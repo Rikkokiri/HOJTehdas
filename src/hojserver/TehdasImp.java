@@ -159,16 +159,16 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		String[] progress = new String[prosessorit.length];
 		
 		for(int i = 0; i < prosessorit.length; i++){
-			if(prosessorit[i].getTila() == KoneenTila.EMPTYING || prosessorit[i].getTila() == KoneenTila.FILLING){
-				progress[i] = Double.toString(prosessorit[i].getFillPercentage()) + " %";
-				System.out.println("TehdasImp: Täytön/tyhjennyksen edistyminen " + progress[i]);
+			if(prosessorit[i].getTila() != KoneenTila.PROSESSING || prosessorit[i].getTila() != KoneenTila.READY){
+				progress[i] = Integer.toString(prosessorit[i].getFillPercentage()) + " %";
+				//System.out.println("TehdasImp: Täytön/tyhjennyksen edistyminen " + progress[i]);
 			}
 			else if(prosessorit[i].getTila() == KoneenTila.PROSESSING){
 				progress[i] = Double.toString(prosessorit[i].getProgress()) + " %";
-				System.out.println("TehdasImp: Prosessoinnin edistyminen " + progress[i]);
+				//System.out.println("TehdasImp: Prosessoinnin edistyminen " + progress[i]);
 			}
 			else{
-				progress[i] = null;
+				progress[i] = null; //Tarpeellinen? //TODO Remove?
 			}
 		}
 		return progress;
