@@ -49,32 +49,31 @@ package hojserver.tehdaskoneet;
  	//----------- RUN-METODI --------------
   	
   	public void run(){
-  		//Keittimen run-metodissa ei tapahdu muuta kuin juoman keittäminen 20 sekuntia
+  		//Keittimen run-metodissa ei tapahdu muuta kuin juoman keittäminen 20 sekuntia.
+  		//TODO Tällä hetkellä juoman keittäminen on asetettu kestämään vain >>> 5 sekuntia <<<.
 
-  		int timespent = 0;
+  		int timespent = 0; //For console printing //TODO Can be removed
   		
 		while(true){
-			//System.out.println("Nyt pitäisi päästä run-metodiin" + this.tila); //TODO Remove
 			
-			while(running && tila == KoneenTila.PROSESSING){ 		//Tuplaehto turhaan?
+			while(running && tila == KoneenTila.PROSESSING && getProductAmount() == 0){
  				synchronized (this) {
  					try {
- 						this.wait(500); //puoli sekunti
+ 						this.wait(250); //puoli sekunti
  					} catch (InterruptedException e) {
  						System.out.println("Juoman keittäminen keskeytyi keittimessä " + this);
  						e.printStackTrace();
  					}
  				}
- 				
- 				//this.addProgress(2.5);
- 				addProgress(10); //TODO Change
+
+ 				addProgress(5); //TODO Change?
  				timespent += 500;
  				
- 				System.out.println("Time spent processing: " + timespent + "milliseconds. Progress " + getProgress() + " %");
+ 				System.out.println("Time spent processing: " + timespent + " milliseconds. Progress " + getProgress() + " %");
  				
- 				if(progress == 100){ //Kun on odotettu prosessointiajan verran, juoma valmis
+ 				if(progress == 100){ //Progress reaches 100 %, product ready
  					running = false;
- 					makeProduct(); //
+ 					makeProduct();
  					this.setTila(KoneenTila.READY);
  					System.out.println("Juoma valmis keittimessä " + this + ", juomaa " + productAmount + " litraa.");
  				}
@@ -140,7 +139,7 @@ package hojserver.tehdaskoneet;
  		}
  	}
  
- 	//---------- SET RUNNING (start-painike) --------------
+ 	//------------ SET RUNNING (start-painike) --------------------
  	
  	public void setRunning(boolean r){
  		
@@ -176,12 +175,11 @@ package hojserver.tehdaskoneet;
  		System.out.println("Eihän päästä tänne? Tila: " + getTila() + " varaus: " + isReserved() + ", running " + isRunning()); //TODO Remove
  	}//setRunning
  
- 	//------------------------------------------------------------------------------
- 	// <<<< VESI, RAAKA-AINE JA TUOTE >>>>
- 	
- 	// --- Getterit ---
- 	public int getWaterAmount(){
- 		return waterAmount;
+
+ 	// ------------- MATERIAL AND WATER ----------------------
+
+ 	public int getWaterAmount(){	//This method isn't actually used
+ 		return waterAmount;			//as the amount of water doesn't matter in the assigment.
  	}
  	
  	public int getMaterialAmount(){
@@ -206,7 +204,7 @@ package hojserver.tehdaskoneet;
  		return materialAmountVolume;
  	}
  	
- 	//--------- PRODUCT -------------
+ 	//----------- PRODUCT ---------------------
  	
  	/**
  	 * Method the amount of product that can be produced from material and 'makes the product'.
@@ -231,7 +229,7 @@ package hojserver.tehdaskoneet;
  		return productAmount;
  	}
  		
- 	//--------- PROGRESS ------------
+ 	//------------ PROGRESS -------------------
  	
  	public double getProgress(){
  		return progress;
