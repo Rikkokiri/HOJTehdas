@@ -25,13 +25,14 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		prosessorit = new Processor[3];
 		kypsytyssailiot	  = new Tank[10]; //10 kypsytyssäiliötä
 		
+		//Kutsutaan koneet luovaa ja koneiden threadit käynnistävää metodia.
 		alustaKoneet();
 		
 	} //constructor
 	
 	//-------- Kirjautuminen --------
 	public void login(String kayttajaNimi) throws RemoteException {
-		// TODO Auto-generated method stub
+		System.out.println("Käyttäjä " + kayttajaNimi + " kirjautui sisään.");
 	}
 	
 	public String prosessorinKayttaja(int prosessori) throws RemoteException{
@@ -40,75 +41,89 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 	
 	//-------- Ruuvikuljettimet --------
 	public void ruuvihihnanKaynnistys() throws RemoteException {
+		System.out.println("Tehdas: Käynnistetään siiloja täyttävä ruuvikuljetin");
 		ruuvikuljettimet[0].setRunning(true);
 	}
 	
 	public void ruuvihihnanKaynnistysVapautus() throws RemoteException {
+		System.out.println("Tehdas: Sammutetaan siiloja täyttävä ruuvikuletin.");
 		ruuvikuljettimet[0].setRunning(false);
 	}
 	
 	//-------- Siilot --------
 	public void siilonVaraus(int siilonNro) throws RemoteException {
+		System.out.println("Tehdas: Varataan siilo nro. " + (siilonNro+1));
 		siilot[siilonNro].setReserved(true);
 	}
 	
 	public void siilonVarausVapautus(int siilonNro) throws RemoteException {
+		System.out.println("Tehdas: Vapautetaan siilo nro. " + (siilonNro+1));
 		siilot[siilonNro].setReserved(false);
 	}
 	
 	//-------- Prosessorit eli keittimet --------
 	public void prosessorinLataus(int kuljettimenNro, int maara) throws RemoteException {
+		System.out.println("Tehdas: Ruuvikuljetin " + (kuljettimenNro+1) + " alkaa siirtää " + maara + " materiaalia prosessoriin");
 		ruuvikuljettimet[kuljettimenNro].setRunning(true);
 		ruuvikuljettimet[kuljettimenNro].setLimit(maara);
 	}
 
-	public void prosessorinLatausVapautus(int kuljettimeNro) throws RemoteException {
-		ruuvikuljettimet[kuljettimeNro].setRunning(false);
+	public void prosessorinLatausVapautus(int kuljettimenNro) throws RemoteException {
+		System.out.println("Tehdas: Sammutetaan ruuvikuljetin nro. " + (kuljettimenNro+1));
+		ruuvikuljettimet[kuljettimenNro].setRunning(false);
 	}
 
-	public void prosessorinVaraus(int prosessorinNro, String kayttaja)
-			throws RemoteException {
+	public void prosessorinVaraus(int prosessorinNro, String kayttaja) throws RemoteException {
+		System.out.println("Tehdas: Käyttäjä " + kayttaja + " varaa prosessorin nro. " + (prosessorinNro+1));
 		prosessorit[prosessorinNro].setUser(kayttaja);
 		prosessorit[prosessorinNro].setReserved(true);
 	}
 	
 	public void prosessorinVarausVapautus(int prosessorinNro) throws RemoteException {
+		System.out.println("Tehdas: Vapautetaan prosessori nro. " + (prosessorinNro+1));
 		prosessorit[prosessorinNro].setReserved(false);
 	}
 
-	public void prosessorinKaynnistys(int prosessorinNro)
-			throws RemoteException {
+	public void prosessorinKaynnistys(int prosessorinNro) throws RemoteException {
+		System.out.println("Tehdas: Käynnistetään prosessori " + (prosessorinNro+1));
 		prosessorit[prosessorinNro].setRunning(true);		
 	}
 	
 	public void prosessorinKaynnistysVapautus(int prosessorinNro) throws RemoteException {
+		System.out.println("Tehdas: Sammutetaan prosessori " + (prosessorinNro+1));
 		prosessorit[prosessorinNro].setRunning(false);
 	}
 
 	//-------- Tankkeja eli kypsytyssäiliöt ja niitä käsittelevät pumput --------
 	public void sailoidenTaytto(int pumpunNro) throws RemoteException {
 		pumput[pumpunNro].runPump();
+		System.out.println("Tehdas: Käynnistetään pumppu nro. " + (pumpunNro+1) + " prosessoreista -> kypsytyssäiliöihin.");
 	}
 
 	public void sailoidenTayttoVapautus(int pumpunNro) throws RemoteException {
 		pumput[pumpunNro].stopPump();
+		System.out.println("Tehdas: Sammutetaan kypsytyssäiliöiden pumppu nro. " + (pumpunNro+1));
 	}
 	
 	public void sailionVaraus(int sailionNro) throws RemoteException {
 		kypsytyssailiot[sailionNro].setReserved(true);		
+		System.out.println("Tehdas: Varataan kypsytyssäiliö nro. " + (sailionNro+1));
 	}
 	
 	public void sailionVarausVapautus(int sailionNro) throws RemoteException {
 		kypsytyssailiot[sailionNro].setReserved(false);
+		System.out.print("Tehdas: Vapautetaan kypsytyssäiliö nro. " + (sailionNro+1));
 	}
 	
 	//-------- Pumppaaminen pullotukseen --------
 	public void pullojenTaytto(int pumpunNro) throws RemoteException {
 		pumput[pumpunNro].runPump();
+		System.out.println("Tehdas: Käynnistetään pullotuspumppu nro. " + (pumpunNro+1));
 	}
 	
 	public void pullojenTayttoVapautus(int pumpunNro) throws RemoteException {
 		pumput[pumpunNro].stopPump();
+		System.out.println("Tehdas: Sammutetaan pullotuspumppu nro. " + (pumpunNro+1));
 	}
 
 	//.-.-.-.-.-. Tietojen kerääminen käyttöliittymän päivittämistä varten .-.-.-.-.-.
@@ -132,14 +147,14 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 			else if(prosessorit[i].getTila() == KoneenTila.FILLING){
 				tila[i] = "Filling";
 			}
-			else if(prosessorit[i].getTila() == KoneenTila.PROSESSING){
+			else if(prosessorit[i].getTila() == KoneenTila.PROCESSING){
 				tila[i] = "Processing";
 			}
 			else if(prosessorit[i].getTila() == KoneenTila.READY){
 				tila[i] = "Ready";
 			}
 			else if(prosessorit[i].getTila() == KoneenTila.FREE){
-				tila[i] = "Waiting"; //TODO Change to 'Free' or something else?
+				tila[i] = "Waiting";
 			}
 			else if (prosessorit[i].getTila() == KoneenTila.FULL){
 				tila[i] = "Full";
@@ -148,6 +163,12 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		return tila;
 	}
 
+	/**
+	 * Metodi kerää tiedot prosessorien tiloista prosentteina. Prosessorin tilasta riippuen käyttöliittymälle kerrotaan joko
+	 * a) valmiin tuotteen prosentti (kapasiteetista)
+	 * b) kuinka suuri osuus raaka-ainekapasiteetista on täytetty
+	 * c) juoman keittämisen edistyminen prosentteina
+	 */
 	public String[] prosessorienEdistyminen() throws RemoteException {
 		String[] progress = new String[prosessorit.length];
 		
@@ -155,21 +176,24 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 			if (prosessorit[i].getTila() == KoneenTila.EMPTYING || prosessorit[i].getTila() == KoneenTila.READY){
 				progress[i] = Integer.toString(prosessorit[i].getProductPercentage()) + " %";
 			}
-			else if(prosessorit[i].getTila() != KoneenTila.PROSESSING || prosessorit[i].getTila() == KoneenTila.FULL || prosessorit[i].getTila() == KoneenTila.FREE){
+			else if(prosessorit[i].getTila() != KoneenTila.PROCESSING || prosessorit[i].getTila() == KoneenTila.FULL || prosessorit[i].getTila() == KoneenTila.FREE){
 				progress[i] = Integer.toString(prosessorit[i].getFillPercentage()) + " %";
 				//System.out.println("TehdasImp: Täytön/tyhjennyksen edistyminen " + progress[i]);
 			}
-			else if(prosessorit[i].getTila() == KoneenTila.PROSESSING){
+			else if(prosessorit[i].getTila() == KoneenTila.PROCESSING){
 				progress[i] = Double.toString(prosessorit[i].getProgress()) + " %";
 				//System.out.println("TehdasImp: Prosessoinnin edistyminen " + progress[i]);
 			}
 			else{
-				progress[i] = null; //Tarpeellinen? //TODO Remove?
+				progress[i] = null;
 			}
 		}
 		return progress;
 	}
 
+	/**
+	 * Palauttaa tiedot, paljonko kussakin kypsytyssäiliössä (Tank-luokka) on juomaa.
+	 */
 	public int[] sailioidenJuomanMaara() throws RemoteException {
 		int[] sjm = new int[10];
 		for (int i = 0; i < 10; i++){
@@ -228,25 +252,11 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		return napit;
 	}
 		
-	//----------------------------------------------------------
-	// : METODIT KONEIDEN TILOJEN MUUTTAMISEEN
-	
-
-	
-	
-	
-	//----------------------------------------------------------
-	
 	/**
-	 * Metodi, jolla luodaan kaikki tehtaan koneet.
+	 * Alustaa kaikki tehtaan koneet ja sitä mukaa kuin luo koneet, käynnistää niiden Threadit.
 	 */
 	public void alustaKoneet(){
-		/* 
-		 * Olisi varmaan voinut toteuttaa kompaktimmin, mutta oh well...
-		 * - Noh, alustaminenhan on kertaluonteinen operaatio, joten sen kompaktiudella ei oikeastaan ole
-		 * juurikaan v�li�. Ja minusta t�m� on kyll� ihan kompakti.
-		 */
-		
+
 		//Siilot, 4 kpl
 		for(int i = 0; i < siilot.length; i++){
 			siilot[i] = new Silo();
@@ -257,10 +267,7 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 			prosessorit[i] = new Processor();
 			prosessorit[i].start();
 		}
-		//Alustetaan 3. juomakeitin testaamiseksi
-		//prosessorit[2].setProductAmount(10000);		//TODO Remove
-		//prosessorit[2].setTila(KoneenTila.READY);
-		
+
 		//Ruuvikuljettimet, 3 kpl
 		for(int i = 0; i < ruuvikuljettimet.length; i++){
 			if(i == 0){
@@ -288,5 +295,5 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 			kypsytyssailiot[i].start();
 		}
 	}//alustaKoneet
-
-}
+	
+} //TehdasImp
