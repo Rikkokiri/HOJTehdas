@@ -87,6 +87,9 @@ public class TankPump extends Pump {
 					if (tanks[tankToBeFilled].isFull()){
 						tanks[tankToBeFilled].setTila(KoneenTila.FULL);
 					}
+					
+					System.out.println("Prosessori :" + processorToBeEmptied + " Säiliö: " + tankToBeFilled);
+					
 					//odotus
 					synchronized(this){
 						try{
