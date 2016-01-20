@@ -56,7 +56,7 @@ public class Processor extends Thread {
 					}
 				}
 				
-				this.addProgress(2.5);
+				progress += 2.5;
 				
 				if(progress == 100){ //Kun on odotettu prosessointiajan verran, juoma valmis
 					running = false;
