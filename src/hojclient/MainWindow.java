@@ -1678,6 +1678,7 @@ public class MainWindow extends javax.swing.JFrame {
     		}
     	}
     	
+
     	//Update processor status labels 
     	for(int i = 0; i < processorStatus.length; i++){
     		processorStatus[i].setText(tehdas.prosessorienTila()[i]);	
