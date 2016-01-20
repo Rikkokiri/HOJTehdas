@@ -11,38 +11,83 @@ package hojserver.tehdaskoneet;
 public class BottlePump extends Pump {
 
 	private Tank[] tanks;
-	private final int wait = 100;
-	private final double speed = 0.5; //litraa/millisekunti
+	private int take;
 	 
 	public BottlePump(Tank[] tanks){
 		super();
 		this.tanks = tanks;
 	}
 	
+	public void run(){
+		while(true){
+			
+			while(isRunning()){
+				//Let's check which tank can be emptied first
+				for(Tank tank : tanks){
+					
+					if(tank.getTila() == KoneenTila.FREE || tank.getTila() == KoneenTila.EMPTYING || tank.getTila() == KoneenTila.FULL
+							&& tank.getAmountOfLiquid() != 0 && tank.isReserved()){
+						
+						tank.setTila(KoneenTila.EMPTYING);
+						
+						//Let's check if we can take what we want
+						if(tank.getAmountOfLiquid() >= take){
+							tank.takeLiquid(take);
+						} else {
+							//Taking all that's left
+							tank.takeLiquid(tank.getAmountOfLiquid());
+						}
+						synchronized(this){
+							try {
+								this.wait(100);
+							} catch (InterruptedException e) { e.printStackTrace(); }
+						} //synchronized
+					}
+				} //for
+				
+			}
+			
+			//Let's wait a little so while(true)-loop doesn't spin like crazy.
+			synchronized(this){
+				try {
+					this.wait(500);
+				} catch (InterruptedException e) {	e.printStackTrace(); }
+			}
+		} //while(true)
+	}
+	
+	/*
 	//>>>> RUN-metodi <<<<
 	public void run(){
 		while(true){
+			
 			while(isRunning()){		
 				for(Tank tank : tanks){
+					
 					while(tank.canBeEmptied()){
+						
 						tank.setTila(KoneenTila.EMPTYING);
-						tank.takeLiquid((int)(wait*speed));
+						tank.takeLiquid((int)(50));
+						
+						System.out.println("Taking out liquid from " + tank);
 						
 						synchronized(this){
 							try {
-								this.wait(wait);
+								this.wait(100);
 							} catch (InterruptedException e) { e.printStackTrace(); }
 						} //synchronized
 					} //while - filling
 				}//for(tanks)
 			} //while(isRunning}
+			
 			synchronized(this){
 				try {
-					this.wait(wait);
+					this.wait(250);
 				} catch (InterruptedException e) { e.printStackTrace(); }
 			} //synchronized
 		}//while true
 	} //run
+	*/
 	
 	/**
 	 * Moves the amount 'amount' from tank to bottling
@@ -79,23 +124,5 @@ public class BottlePump extends Pump {
 			//Tankissa ei ole pyydettyä määrää nestettä.
 			//TODO
 		}
-
 	}
-	
-
-
-	public synchronized void moveBeverage(int tanknumber){
-		
-		/*
-		boolean emptyingStarted = false;
-		while(!emptyingStarted){
-			for(Tank tankki : tanks){
-				if(tankki.canBeEmptied()){
-					
-				}}}*/
-
-	}
-
-	
-	
 }
