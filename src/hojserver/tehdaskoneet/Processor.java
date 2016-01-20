@@ -182,7 +182,7 @@ package hojserver.tehdaskoneet;
  				if(isFull() && getProductAmount() == 0){
  					setTila(KoneenTila.FULL);
  				} else if(getProductAmount() != 0){
- 					
+ 					setTila(KoneenTila.READY);
  				}
  				else {
  					setTila(KoneenTila.FREE);
