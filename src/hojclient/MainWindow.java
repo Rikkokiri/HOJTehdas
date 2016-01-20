@@ -1690,6 +1690,16 @@ public class MainWindow extends javax.swing.JFrame {
     		processorAmount[i].setText(tehdas.prosessorienEdistyminen()[i]);
     	}
     	
+    	//Update processor user
+    	for (int i = 0; i < 3; i++){
+    		if (tehdas.nappiProsessoritReserved()[i]){
+    			processorLabels[i].setText(tehdas.prosessorinKayttaja(i));
+    		}
+    		else{
+    			processorLabels[i].setText("-");
+    		}
+    	}
+    	
     	
     	//Update tank labels
     	int[] sailioissa = tehdas.sailioidenJuomanMaara();
