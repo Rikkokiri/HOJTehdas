@@ -27,9 +27,9 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		
 		alustaKoneet();
 		
-	}
+	} // constructor
 		
-	//Just for the firt test.
+	//Just for the firt test. //TODO REMOVE!!
 	public void testimetodi(int repeat) throws RemoteException {
 		for(int i = 0; i < repeat; i++){
 			System.out.println("Testing, testing...");
@@ -41,25 +41,39 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
-	
+	//-------- Kirjautuminen --------
 	public void login(String kayttajaNimi) throws RemoteException {
 		// TODO Auto-generated method stub
-		
 	}
-
+	
+	//-------- Ruuvikuljettimet --------
 	public void ruuvihihnanKaynnistys() throws RemoteException {
 		ruuvikuljettimet[0].setRunning(true);
 	}
 	
+	public void ruuvihihnanKaynnistysVapautus() throws RemoteException {
+		ruuvikuljettimet[0].setRunning(false);
+	}
+	
+	//-------- Siilot --------
 	public void siilonVaraus(int siilonNro) throws RemoteException {
 		siilot[siilonNro].setReserved(true);
 	}
+	
+	public void siilonVarausVapautus(int siilonNro) throws RemoteException {
+		siilot[siilonNro].setReserved(false);
+	}
+	
+	//-------- Prosessorit eli keittimet --------
 	public void prosessorinLataus(int kuljettimenNro, int maara) throws RemoteException {
 		ruuvikuljettimet[kuljettimenNro].setRunning(true);
 		ruuvikuljettimet[kuljettimenNro].setLimit(maara);
+	}
+
+	public void prosessorinLatausVapautus(int kuljettimeNro) throws RemoteException {
+		ruuvikuljettimet[kuljettimeNro].setRunning(false);
 	}
 
 	public void prosessorinVaraus(int prosessorinNro, String kayttaja)
@@ -67,45 +81,98 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		prosessorit[prosessorinNro].setUser(kayttaja);
 		prosessorit[prosessorinNro].setReserved(true);
 	}
+	
+	public void prosessorinVarausVapautus(int prosessorinNro) throws RemoteException {
+		prosessorit[prosessorinNro].setReserved(false);
+	}
 
 	public void prosessorinKaynnistys(int prosessorinNro)
 			throws RemoteException {
 		prosessorit[prosessorinNro].setRunning(true);		
 	}
+	
+	public void prosessorinKaynnistysVapautus(int prosessorinNro) throws RemoteException {
+		prosessorit[prosessorinNro].setRunning(false);
+	}
 
+	//-------- Tankkeja eli kypsytyssäiliöt ja niitä käsittelevät pumput --------
 	public void sailoidenTaytto(int pumpunNro) throws RemoteException {
 		pumput[pumpunNro].runPump();
 	}
 
-
+	public void sailoidenTayttoVapautus(int pumpunNro) throws RemoteException {
+		pumput[pumpunNro].stopPump();
+	}
+	
 	public void sailionVaraus(int sailionNro) throws RemoteException {
 		kypsytyssailiot[sailionNro].setReserved(true);		
 	}
-
+	
+	public void sailionVarausVapautus(int sailionNro) throws RemoteException {
+		kypsytyssailiot[sailionNro].setReserved(false);
+	}
+	
+	//-------- Pumppaaminen pullotukseen --------
 	public void pullojenTaytto(int pumpunNro) throws RemoteException {
 		pumput[pumpunNro].runPump();
 	}
+	
+	public void pullojenTayttoVapautus(int pumpunNro) throws RemoteException {
+		pumput[pumpunNro].stopPump();
+	}
 
+	//.-.-.-.-.-. Tietojen kerääminen käyttöliittymän päivittämistä varten .-.-.-.-.-.
 	
 	public int[] siilojenAineMaara() throws RemoteException {
 		int[] sam = new int[4];
-		sam[0] = siilot[0].getDegreeOfFilling();
-		sam[1] = siilot[1].getDegreeOfFilling();
-		sam[2] = siilot[2].getDegreeOfFilling();
-		sam[3] = siilot[3].getDegreeOfFilling();
+		
+		for(int i = 0; i < siilot.length; i++){
+			sam[i] = siilot[i].getDegreeOfFilling();
+		}
 		return sam;
 	}
 
 	// prosentteina
-	public int[] prosessorienTila() throws RemoteException {
-		int[] tila = new int[3];
-		tila[0] = (prosessorit[0].getProgress() / 20000) * 100;
-		tila[1] = (prosessorit[1].getProgress() / 20000) * 100;
-		tila[2] = (prosessorit[2].getProgress() / 20000) * 100;
+	public String[] prosessorienTila() throws RemoteException {
+		String[] tila = new String[prosessorit.length];
+		for(int i = 0; i < prosessorit.length; i++){
+			if(prosessorit[i].getTila() == KoneenTila.EMPTYING){
+				tila[i] = "Emptying";
+			}
+			else if(prosessorit[i].getTila() == KoneenTila.FILLING){
+				tila[i] = "Filling";
+			}
+			else if(prosessorit[i].getTila() == KoneenTila.PROSESSING){
+				tila[i] = "Processing ";
+			}
+			else if(prosessorit[i].getTila() == KoneenTila.READY){
+				tila[i] = "Ready";
+			}
+			else if(prosessorit[i].getTila() == KoneenTila.FREE){
+				tila[i] = "Waiting"; //TODO Change to 'Free' or something else?
+			}
+		}
 		return tila;
 	}
 
-	
+	public double[] prosessienEdistyminen() throws RemoteException {
+		double[] progress = new double[prosessorit.length];
+		
+		for(int i = 0; i < prosessorit.length; i++){
+			progress[i] = prosessorit[i].getProgress();
+		}
+		return progress;
+	}
+
+	public double[] prosessorienSiirtojenEdistyminen() throws RemoteException {
+		double[] progress = new double[prosessorit.length];
+		
+		for(int i = 0; i < prosessorit.length; i++){
+			progress[i] = prosessorit[i].getFillPercentage();
+		}
+		return progress;
+	}
+
 	public int[] sailioidenJuomanMaara() throws RemoteException {
 		int[] sjm = new int[10];
 		for (int i = 0; i < 10; i++){
@@ -113,7 +180,9 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		}
 		return sjm;
 	}
-
+	
+	//< > < > < > Painikkeiden tilat < > < > < >
+	
 	public boolean[] nappiRuuvikuljettimet() throws RemoteException {
 		boolean[] napit = new boolean[3];
 		for (int i = 0; i < 3; i++){
@@ -161,39 +230,7 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		}
 		return napit;
 	}
-
-	public void ruuvihihnanKaynnistysVapautus() throws RemoteException {
-		ruuvikuljettimet[0].setRunning(false);
-	}
-
-	public void siilonVarausVapautus(int siilonNro) throws RemoteException {
-		siilot[siilonNro].setReserved(false);
-	}
-
-	public void prosessorinLatausVapautus(int kuljettimeNro) throws RemoteException {
-		ruuvikuljettimet[kuljettimeNro].setRunning(false);
-	}
-
-	public void prosessorinVarausVapautus(int prosessorinNro) throws RemoteException {
-		prosessorit[prosessorinNro].setReserved(false);
-	}
-
-	public void prosessorinKaynnistysVapautus(int prosessorinNro) throws RemoteException {
-		prosessorit[prosessorinNro].setRunning(false);
-	}
-
-	public void sailoidenTayttoVapautus(int pumpunNro) throws RemoteException {
-		pumput[pumpunNro].stopPump();
-	}
-
-	public void sailionVarausVapautus(int sailionNro) throws RemoteException {
-		kypsytyssailiot[sailionNro].setReserved(false);
-	}
-
-	public void pullojenTayttoVapautus(int pumpunNro) throws RemoteException {
-		pumput[pumpunNro].stopPump();
-	}
-
+		
 	//----------------------------------------------------------
 	// : METODIT KONEIDEN TILOJEN MUUTTAMISEEN
 	
@@ -251,4 +288,5 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 			kypsytyssailiot[i].start();
 		}
 	}//alustaKoneet
+
 }

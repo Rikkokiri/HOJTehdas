@@ -6,7 +6,7 @@ package hojserver.tehdaskoneet;
 - Säiliöitä ei saa ylitäyttää
 - Tyhjästä säiliöstä ei voi pumpata pullotukseen
 - Pullotukseen oletetaan mahtuvan aina niin paljon kuin säiliössä on juomaa
- */
+*/
 
 public class TankPump extends Pump {
 	

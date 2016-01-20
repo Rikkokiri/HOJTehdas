@@ -11,7 +11,9 @@ package hojserver.tehdaskoneet;
 public class BottlePump extends Pump {
 
 	private Tank[] tanks;
-	
+	private final int wait = 100;
+	private final double speed = 0.5; //litraa/millisekunti
+	 
 	public BottlePump(Tank[] tanks){
 		super();
 		this.tanks = tanks;
@@ -23,11 +25,18 @@ public class BottlePump extends Pump {
 		while(isRunning()){
 			
 			for(Tank tank : tanks){
-				if(tank.canBeEmptied()){
-					//Tyhjennä tankki	
-				}
-			}//for
-		} //while 
+				while(tank.canBeEmptied()){
+					tank.setTila(KoneenTila.EMPTYING);
+					tank.takeLiquid((int)(wait*speed));
+					
+					synchronized(this){
+						try {
+							this.wait(wait);
+						} catch (InterruptedException e) { e.printStackTrace(); }
+					} //synchronized
+				} //while - filling
+			}//for(tanks)
+		} //while(isRunning)
 	} //run
 	
 	/**

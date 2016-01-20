@@ -20,3 +20,21 @@ Start-painikkeen vapauttaminen:
 - Saa vapauttaa, kun
 	- prosessointi valmis
 	- prosessointia ei ole aloitettu
+
+
+<<< Prosessori >>>
+
+Reserve
+- Kun reserve painike vapautetaan kesken täytön tai tyhjentämisen täyttö/tyhjentäminen keskeytetään
+
+Tilateksti:
+
+- Prosentin juoksemaan
+	- Täyttö
+	- Keitto
+	- Tyhjennys
+
+- 
+
+
+TO DO:
