@@ -163,7 +163,10 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		String[] progress = new String[prosessorit.length];
 		
 		for(int i = 0; i < prosessorit.length; i++){
-			if(prosessorit[i].getTila() != KoneenTila.PROSESSING || prosessorit[i].getTila() != KoneenTila.READY){
+			if (prosessorit[i].getTila() == KoneenTila.EMPTYING && prosessorit[i].getTila() == KoneenTila.READY){
+				progress[i] = Integer.toString(prosessorit[i].getProductPercentage()) + " %";
+			}
+			else if(prosessorit[i].getTila() != KoneenTila.PROSESSING && prosessorit[i].getTila() != KoneenTila.FULL){
 				progress[i] = Integer.toString(prosessorit[i].getFillPercentage()) + " %";
 				//System.out.println("TehdasImp: Täytön/tyhjennyksen edistyminen " + progress[i]);
 			}
