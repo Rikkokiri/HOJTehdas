@@ -46,16 +46,14 @@ package hojserver.tehdaskoneet;
   		//Keittimen run-metodissa ei tapahdu muuta kuin juoman keittäminen 20 sekuntia
 
 		while(true){
-			
-			//System.out.println("Nyt pitäisi päästä run-metodiin"); //TODO Remove
+			//System.out.println("Nyt pitäisi päästä run-metodiin" + this.tila); //TODO Remove
 			
 			double timespent = 0;
 			
- 			while(running && tila == KoneenTila.PROSESSING){ 		//Tuplaehto turhaan?
-  			
+			while(running && tila == KoneenTila.PROSESSING){ 		//Tuplaehto turhaan?
  				synchronized (this) {
  					try {
- 						this.wait((long) (processingtime/40000)); //puoli sekunti					
+ 						this.wait(500); //puoli sekunti
  					} catch (InterruptedException e) {
  						System.out.println("Juoman keittäminen keskeytyi keittimessä " + this);
  						e.printStackTrace();
@@ -72,6 +70,11 @@ package hojserver.tehdaskoneet;
  					System.out.println("Juoma valmis keittimessä " + this);
  				}
  			}//while(running...)
+				synchronized (this) {
+ 					try {
+ 						this.wait(100); //puoli sekunti
+ 					} catch (InterruptedException e) {}
+ 					}
  			resetProgress();
  		}//while(true)
   	}//run
