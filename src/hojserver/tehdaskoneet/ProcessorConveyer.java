@@ -99,6 +99,7 @@ public class ProcessorConveyer extends Conveyer {
 				}
 				if (silos[siloToBeEmptied].isEmpty())
 					silos[siloToBeEmptied].setTila(KoneenTila.FREE); //?
+				
 			} // if (jos siirretään)
 			
 			//Tietojen tulostus
