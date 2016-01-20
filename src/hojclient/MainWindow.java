@@ -16,6 +16,7 @@ import javax.swing.JToggleButton;
 import com.sun.xml.internal.ws.util.StringUtils;
 
 import hojserver.Tehdas;
+import hojserver.tehdaskoneet.KoneenTila;
 
 /**
  *
@@ -1670,16 +1671,24 @@ public class MainWindow extends javax.swing.JFrame {
     	
     	for (int i = 0; i < 4; i++){
     		if (tehdas.nappiPumput()[i]){
-    		pumpStatus[i].setText("Running");
+    			pumpStatus[i].setText("Running");
     		}
     		else{
         		pumpStatus[i].setText("Waiting");
     		}
     	}
     	
-    	//Update processor labels
-    	//TODO
+    	//Update processor status labels 
+    	for(int i = 0; i < processorStatus.length; i++){
+    		processorStatus[i].setText(tehdas.prosessorienTila()[i]);	
+    	}
     	
+    	/*
+    	//Update processor amount labels
+    	for(int i = 0; i < processorAmount.length; i++){
+    		processorAmount[i].setText(tehdas.prosessorienSiirtojenEdistyminen()[i]);
+    	}
+    	*/
     	
     	//Update tank labels
     	int[] sailioissa = tehdas.sailioidenJuomanMaara();
