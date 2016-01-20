@@ -103,8 +103,8 @@ public class ProcessorConveyer extends Conveyer {
 			
 
 			if (siloToBeEmptied != -1 && processorToBeFilled != -1){
-				System.out.println("Siilo " + siloToBeEmptied + 1 + ", " + silos[siloToBeEmptied].getDegreeOfFilling());
-				System.out.println("Prosessori " + processorToBeFilled + 1 + ", " + processors[processorToBeFilled].getMaterialAmount());
+				System.out.println("Siilo " + (siloToBeEmptied + 1) + ", " + silos[siloToBeEmptied].getDegreeOfFilling());
+				System.out.println("Prosessori " + (processorToBeFilled + 1) + ", " + processors[processorToBeFilled].getMaterialAmount());
 			}
 			
 			//Odotus

@@ -149,6 +149,10 @@ public class Processor extends Thread {
 		materialAmount = materialAmount + maara;
 	}
 	
+	public void removeProduct(int amount){
+		productAmount = productAmount - amount;
+	}
+	
 	public int calculateProduct(){
 		return productAmount = 5 * materialAmount;
 	}
@@ -200,6 +204,11 @@ public class Processor extends Thread {
 	public void setProductAmount(int amount){
 		productAmount = amount;
 	}
+	
+	public int getProductAmount(){
+		return productAmount;
+	}
+	
 	
 	/**
 	 * Metodi, jolla tyhjennetään keitin, kun juoma on valmista.

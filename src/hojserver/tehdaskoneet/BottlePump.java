@@ -21,22 +21,22 @@ public class BottlePump extends Pump {
 	
 	//>>>> RUN-metodi <<<<
 	public void run(){
-		
-		while(isRunning()){
-			
-			for(Tank tank : tanks){
-				while(tank.canBeEmptied()){
-					tank.setTila(KoneenTila.EMPTYING);
-					tank.takeLiquid((int)(wait*speed));
-					
-					synchronized(this){
-						try {
-							this.wait(wait);
-						} catch (InterruptedException e) { e.printStackTrace(); }
-					} //synchronized
-				} //while - filling
-			}//for(tanks)
-		} //while(isRunning)
+		while(true){
+			while(isRunning()){		
+				for(Tank tank : tanks){
+					while(tank.canBeEmptied()){
+						tank.setTila(KoneenTila.EMPTYING);
+						tank.takeLiquid((int)(wait*speed));
+						
+						synchronized(this){
+							try {
+								this.wait(wait);
+							} catch (InterruptedException e) { e.printStackTrace(); }
+						} //synchronized
+					} //while - filling
+				}//for(tanks)
+			} //while(isRunning}
+		}//while true
 	} //run
 	
 	/**

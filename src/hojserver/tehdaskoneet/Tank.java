@@ -52,6 +52,15 @@ public class Tank extends Thread {
 		return tila;
 	}
 	
+	public boolean isFull(){
+		if (amountOfLiquid >= tilavuus){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
 	//--- Can tank be emptied or filled? ---------
 	
 	public boolean canBeEmptied(){
