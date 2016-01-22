@@ -2,6 +2,12 @@ package hojclient;
 
 import java.rmi.RemoteException;
 
+
+
+/**
+ * Luokka, joka päivittää MainWindowin GUI:t 10ms:n välein
+ *
+ */
 public class BackgroundUpdater extends Thread{
 	
 	MainWindow m;
