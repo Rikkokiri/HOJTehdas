@@ -8,6 +8,10 @@ package hojserver.tehdaskoneet;
 - Pullotukseen oletetaan mahtuvan aina niin paljon kuin säiliössä on juomaa
 */
 
+/*
+ * Luokka pumpuille, jotka tyhjentää prosessoreita ja täyttävätkysytyssäiliöitä
+ */
+
 public class TankPump extends Pump {
 	
 	private Processor[] processors;
@@ -22,12 +26,18 @@ public class TankPump extends Pump {
 	
 	private int identity;
 	
+	
+	// ---------- KONSTRUKTORIT ---------- //
+	
 	public TankPump(Processor[] processors, Tank[] tanks, int id){
 		super();
 		this.processors = processors;
 		this.tanks = tanks;
 		identity = id;
 	}
+	
+	
+	// ---------- RUN ----------//
 	
 	public void run(){
 		while(true){
@@ -37,7 +47,7 @@ public class TankPump extends Pump {
 				processorToBeEmptied = -1;
 				tankToBeFilled = -1;
 				
-				//Prosessorien tsekkaus
+				// Katsotaan mitä prosessoria aletaan tyhjentämään
 				for(int i = 0; i < 3; i++){
 					if((processors[i].getTila() == KoneenTila.READY || processors[i].getTila() == KoneenTila.EMPTYING) &&
 					!processors[i].isEmpty() && processors[i].isReserved() && !reserved
@@ -50,7 +60,7 @@ public class TankPump extends Pump {
 				
 				reserved = false;
 				
-				// säiliöiden tsekkaus
+				// Katsotaan mitä säiliötä täytetään
 				for (int i = 0; i < 10; i++){
 					if ((tanks[i].getTila() == KoneenTila.FREE || tanks[i].getTila() == KoneenTila.FILLING) &&
 							!tanks[i].isFull() && !reserved && tanks[i].isReserved() 
@@ -119,6 +129,8 @@ public class TankPump extends Pump {
 			}
 		} // whiel true
 	} //run
+	
+	// ---------- GETTERIT / SETTERIT ---------- //
 	
 	public void setRunning(boolean r){
 		running = r;

@@ -1144,10 +1144,10 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    // TODO Vapautuskutsut kun napit suljetaan
+    // ---------- KUUNTELIJAT ---------- //
 
     private void startSiloLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startSiloLoadActionPerformed
-        // TODO Mitä tehdään, kun siilojen täytön ruuvikuljetin käynnistetään?
+        // Mitä tehdään, kun siilojen täytön ruuvikuljetin käynnistetään?
     	if (signIn.isSelected()){
     		if (conveyerStartButtons[0].isSelected()){
     			try{
@@ -1163,23 +1163,23 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_startSiloLoadActionPerformed
 
     private void signInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInActionPerformed
-        // TODO Mitä tehdään kun käyttäjä kirjautuu
+        // Mitä tehdään kun käyttäjä kirjautuu
     	
     	// Onko jo painettu?
     	if (signIn.isSelected()){
-    		
-    	String RMIosoite ="tehdas";
-    	
+    		String RMIosoite ="tehdas";	
     	try {
     		Registry registry = LocateRegistry.getRegistry(osoite, 2020);
-
-    		tehdas = (Tehdas) registry.lookup(RMIosoite);
-    		
+    		tehdas = (Tehdas) registry.lookup(RMIosoite); 		
     	} catch (Exception e){System.out.println(e);}
     	
-    	// Otetaan kirjoitettu k�ytt�j�nimi talteen
+    	// Otetaan kirjoitettu käyttäjänimi talteen
     	kayttajaNimi = userName.getText();
-    	
+    	try{
+    		tehdas.login(kayttajaNimi);
+    	}catch (RemoteException e){
+    		System.out.println(e);
+    	}
     	new BackgroundUpdater(this).start();
     	
     	} // if

@@ -8,13 +8,23 @@ package hojserver.tehdaskoneet;
 - Pullotukseen oletetaan mahtuvan aina niin paljon kuin säiliössä on juomaa
  */
 
+/*
+ * Yläluokka pumpuille
+ */
+
 public class Pump extends Thread {
 
-	protected boolean running;
+	protected boolean running; //Kertoo, onko pumppu päällä vai ei
+	
+	
+	// ---------- KONSTRUKTORI ---------- //
 	
 	public Pump(){
 		running = false;
 	}
+	
+	
+	// ---------- GETTRIT / SETTERIT ---------- //
 	
 	/**
 	 * Method that starts running the pump.

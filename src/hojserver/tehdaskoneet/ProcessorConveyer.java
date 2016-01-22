@@ -1,25 +1,34 @@
 package hojserver.tehdaskoneet;
-
+/*
+ * Siilosta prosessorille raaka-ainetta kuljettavan ruuvikuljettimen luokka
+ */
 public class ProcessorConveyer extends Conveyer {
 	
 	private Silo[] silos;
 	private Processor[] processors;
 	
-	private boolean reserved;
+	private boolean reserved; // Onko Kuljetin jo jonkin käytössä
 	private int siloToBeEmptied;
 	private int processorToBeFilled;
+	private int limit; // Siirrettävä raaka-aineen määrä, jonka käyttäjä antanut (-1 jos ei käyttäjä antanut mitään)
 	
-	private int identity;
+	private final int identity; //Tunniste, jolla tunnistetaan mikä kuljetin kyseesä
 	
-	private final int transferAmount = 2;
+	private final int transferAmount = 2; // Yhdessä syklissä siirrettävä määrä
+	private final int waitTime = 10; // yhden syklin kesto millisekunneissa
 	
+	
+	// -------- KONSTRUKTORI --------
 	
 	public ProcessorConveyer(Silo[] silos, Processor[] processors, int id){
 		super();
 		this.silos = silos;
 		this.processors = processors;
 		this.identity = id;
+		limit = -1;
 	}
+	
+	// -------- RUN --------
 	
 	public void run(){
 		
@@ -61,7 +70,7 @@ public class ProcessorConveyer extends Conveyer {
 					}//if
 				}//for
 				
-				// poistetaan siilosta ja lisätään prosessoriin
+				// poistetaan siilosta ja lisätään prosessoriin (jos voidaan)
 				if (siloToBeEmptied != -1 && processorToBeFilled != -1){
 					
 					// Tilojen muutokset
@@ -80,7 +89,7 @@ public class ProcessorConveyer extends Conveyer {
 						processors[processorToBeFilled].setConveyer(-1);
 					}// if (l < t)
 					else{
-						// Jos prosessorissa vähemmän tilaa kuin mitä tranferAmount (Hyi!)
+						// Jos prosessorissa vähemmän tilaa kuin mitä tranferAmount
 						if(processors[processorToBeFilled].getMaterialAmountVolume() - processors[processorToBeFilled].getMaterialAmount() < transferAmount){
 							silos[siloToBeEmptied].removeFromSilo(processors[processorToBeFilled].getMaterialAmountVolume() 
 									- processors[processorToBeFilled].getMaterialAmount());
@@ -100,8 +109,9 @@ public class ProcessorConveyer extends Conveyer {
 					// Jos limit käytössä niin vähennetään sitä
 					if (limit != -1)
 						limit = limit - transferAmount;
-					}// else
+					}// else (limit käytössä?)
 					
+					// Tilamuutokset, jos prosessori tuli täytee / siilo tyhjeni
 					if (processors[processorToBeFilled].isFull()){
 						processors[processorToBeFilled].setTila(KoneenTila.FULL);
 						silos[siloToBeEmptied].setTila(KoneenTila.FREE);
@@ -129,12 +139,14 @@ public class ProcessorConveyer extends Conveyer {
 				//Odotus
 				synchronized(this){
 					try{
-						this.wait(10);
+						this.wait(waitTime);
 					}catch (Exception e){System.out.println(e);}
 				}
 		}//while
 		
-	}
+	}// run
+	
+	// -------- GETTERIT / SETTERIT -------- //
 	
 	public void setRunning(boolean r){
 		//Jos siiloa tyhjennetään ja ProcessorConveyer pysäytetään, niin kyseisen siilon tilaksi asetetaan FREE
@@ -143,7 +155,7 @@ public class ProcessorConveyer extends Conveyer {
 				silos[i].setTila(KoneenTila.FREE);
 			}
 		}
-		
+		// Vastaavasti sama jos prosessoria täytetään ja ProcesorConveyer pysäytetään, niin asetetaan tilaksi FREE
 		for (int i = 0; i < 3; i++){
 			if (processors[i].getTila() == KoneenTila.FILLING){
 				processors[i].setTila(KoneenTila.FREE);
@@ -151,6 +163,10 @@ public class ProcessorConveyer extends Conveyer {
 		}
 		
 		running = r;
+	}// setRunning
+	
+	public void setLimit(int l){
+		limit = l;
 	}
 }
 

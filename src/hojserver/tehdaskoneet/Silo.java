@@ -8,23 +8,29 @@ package hojserver.tehdaskoneet;
 
  */
 
+/*
+ * Luokka siiloille
+ */
+
 public class Silo {
 
 	private final int capacity = 10000; //kiloa
-	private int degreeOfFilling; //0-10000 kiloa				//Not happy with the name, but I'll go with this
+	private int degreeOfFilling; //0-10000 kiloa
+	
 	private boolean reserved;
 	private KoneenTila tila;
 	private int conveyer;
 	
-	//Constructor
+	
+	// ---------- KONSTRUKTORI ---------- //
+	
 	public Silo(){
-		//Oletusarvoisesti siilo on tyhjä
 		degreeOfFilling = 0;
 		tila = KoneenTila.FREE;
 		conveyer = -1;
 	}
 	
-	//---- GETTERS AND SETTERS ----
+	// ---------- GETTERS AND SETTERS ---------- //
 	
 	public int getCapacity(){
 		return capacity;
@@ -53,10 +59,6 @@ public class Silo {
 		return reserved;
 	}
 	
-	/**
-	 * Metodilla muutetaan siilon varauksen tilaa. Asetetaan siis vapaaksi/varatuksi.
-	 * @param r
-	 */
 	public void setReserved(boolean r){
 		// Jos varaus poistetaan niin tila muutetaan
 		if (!r){
@@ -67,7 +69,6 @@ public class Silo {
 
 	}
 	
-	//------------------
 	/**
 	 * Method tells whether the silo is full or not
 	 * @return boolean true if silo is full, false if silo is not full
@@ -93,9 +94,6 @@ public class Silo {
 	 * 
 	 * @param fill
 	 */
-	/*
-	 * TURHA METODI?
-	 */
 	public void resetDegreeOfFilling(int fill){ 
 		if(fill <= capacity){
 			degreeOfFilling = fill;
@@ -103,6 +101,9 @@ public class Silo {
 			degreeOfFilling = capacity;
 		}
 	}
+	
+	
+	// ---------- LISÄYS / POISTO ---------- //
 	
 	/**
 	 * Method that adds material to silo.
@@ -135,8 +136,6 @@ public class Silo {
 		if(take <= degreeOfFilling){
 			degreeOfFilling -= take;
 		} else {
-			//Testaamista varten?
-			System.out.println("Tried to take " + take + " kilos but only " + degreeOfFilling + " kilos in silo. Taking " + degreeOfFilling + " kilos.");
 			degreeOfFilling = 0;
 		}
 	}

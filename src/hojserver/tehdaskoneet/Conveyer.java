@@ -8,29 +8,35 @@ package hojserver.tehdaskoneet;
 - Siilo tai keitin ei saa ylitäyttyä
  */
 
+/*
+ * Ruuvikuljettimien yläluokka
+ */
+
 public class Conveyer extends Thread {
 
 	protected boolean running;
-	protected int limit;
+	protected final int waitTime = 10;
+	protected final int transferAmount = 2;
+	
+	
+	 // -------- KONSTRUKTORI -------- //
 	
 	public Conveyer(){
-		limit = -1;
-	} //konstruktori
+	}
+	
+	
+	// -------- GETTERIT / SETTERIT -------- //
 	
 	public void setRunning(boolean r){
 		running = r;
 	}
-	
-	public void setLimit(int l){
-		limit = l;
-	}
-	
-	/**
-	 * Metodi, joka yksinkertaisesti kertoo, onko ruuvikuljetin parhaillaan käynnissä.
-	 * @return
-	 */
+
 	public boolean isRunning(){
 		return running;
+	}
+
+	public void setLimit(int l){
+		
 	}
 
 }
