@@ -1,9 +1,8 @@
 package hojserver.tehdaskoneet;
 
 /*
-- juoman nimi
-- tilavuus 10000 litraa
-- vain yksi pumppu voi täyttää tai tyhjentää säiliötä kerrallaan
+- Tilavuus 10000 litraa
+- Vain yksi pumppu voi täyttää tai tyhjentää säiliötä kerrallaan.
  */
 
 public class Tank extends Thread {
@@ -15,6 +14,7 @@ public class Tank extends Thread {
 	private KoneenTila tila;
 	private int pump;
 	
+	//------------ KONSTRUKTORI -------------
 	public Tank(){
 		amountOfLiquid = 0;
 		reserved = false;
@@ -22,26 +22,7 @@ public class Tank extends Thread {
 		pump = -1;
 	}
 	
-	/**
-	 * Returns the amount of liquid in the tank.
-	 * @return
-	 */
-	public synchronized int getAmountOfLiquid(){
-		return amountOfLiquid;
-	}
-	
-
-	//---- Tankin tila ---------
-	
-	//Varaus
-	
-	public synchronized boolean isReserved(){
-		return reserved;
-	}
-	
-	public synchronized void setReserved(boolean r){
-		reserved = r;
-	}
+	//------------- TILA ------------------
 	
 	public void setTila(KoneenTila t){
 		tila = t;
@@ -49,6 +30,14 @@ public class Tank extends Thread {
 	
 	public KoneenTila getTila(){
 		return tila;
+	}
+	
+	public synchronized boolean isReserved(){
+		return reserved;
+	}
+	
+	public synchronized void setReserved(boolean r){
+		reserved = r;
 	}
 	
 	public boolean isFull(){
@@ -59,30 +48,9 @@ public class Tank extends Thread {
 			return false;
 		}
 	}
-	
-	//--- Can tank be emptied or filled? ---------
-	
-	public boolean canBeEmptied(){
-		//Tankkia voidaan alkaa tyhjeentää, jos sitä ei parhaillaan täytetä eikä tyhjennetä ja tankissa on nestettä 
-		if(tila != KoneenTila.FILLING && reserved && amountOfLiquid != 0){
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public boolean canBeFilled(){
-	//Tankkia voidaan alkaa tyhjeentää, jos sitä ei parhaillaan täytetä eikä se ole täynnä
-		if(tila != KoneenTila.EMPTYING && tila != KoneenTila.FILLING && reserved && amountOfLiquid != tilavuus){
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	// ------------------------------------
-	//		      PUMP
-	
+
+	//-------------- PUMP ----------------------
+
 	public int getPump(){
 		return pump;
 	}
@@ -91,8 +59,15 @@ public class Tank extends Thread {
 		pump = p;
 	}
 	
-	//---------------------------------------
-	//		Nesteen siirtely
+	//---------------- LIQUID -----------------------
+	
+	/**
+	 * Returns the amount of liquid in the tank.
+	 * @return
+	 */
+	public synchronized int getAmountOfLiquid(){
+		return amountOfLiquid;
+	}
 	
 	/**
 	 * Method for taking liquid from the tank.
