@@ -7,6 +7,9 @@ package hojserver.tehdaskoneet;
 - Pullotukseen oletetaan mahtuvan aina niin paljon kuin säiliössä on juomaa
  */
 
+// TODO PulloPumpussa jotai vikaa?
+// Ei suostu välillä ottamaan säiliöistä tavaraa
+
 public class BottlePump extends Pump {
 
 	private Tank[] tanks;

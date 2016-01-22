@@ -29,6 +29,8 @@ public class MainWindow extends javax.swing.JFrame {
 	private String osoite;
 	private String kayttajaNimi;
 	Tehdas tehdas;
+	Registry registry;
+	protected boolean online;
 
 	private JLabel[] siloLabels;
 	private JLabel[] processorLabels;
@@ -995,7 +997,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         procLoadLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         procLoadLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hojclient/icons/conveyor.jpg"))); // NOI18N
-        procLoadLabel1.setText("2Processor loading");
+        procLoadLabel1.setText("Processor loading");
         procLoadLabel1.setFocusable(false);
         procLoadLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         procLoadLabel1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
@@ -1172,7 +1174,7 @@ public class MainWindow extends javax.swing.JFrame {
     	if (signIn.isSelected()){
     		String RMIosoite ="tehdas";	
     	try {
-    		Registry registry = LocateRegistry.getRegistry(osoite, 2020);
+    		registry = LocateRegistry.getRegistry(osoite, 2020);
     		tehdas = (Tehdas) registry.lookup(RMIosoite); 		
     	} catch (Exception e){System.out.println(e);}
     	
@@ -1183,13 +1185,17 @@ public class MainWindow extends javax.swing.JFrame {
     	}catch (RemoteException e){
     		System.out.println(e);
     	}
+    	online = true;
     	new BackgroundUpdater(this).start();
     	
     	} // if
     	
-    	// Jos signin nappi on alhaalla niin ...
+    	// Jos login nappi on alhaalla niin Uloskirjaus
     	else{
-    		//TODO Uloskirjaus
+    		
+    		registry = null;		//Keskeytetään yhteys ja ...
+    		online = false;			//...Pysäytetään BackgroundUpdater thread
+    		
     	}
     	
     	
@@ -1221,7 +1227,7 @@ public class MainWindow extends javax.swing.JFrame {
     		}
     		else{
     			try{
-    			tehdas.prosessorinLatausVapautus(2);
+    			tehdas.prosessorinLatausVapautus(1);
     			} catch (RemoteException e) {System.out.println(e);}
     		}// if start
     	}// if log
