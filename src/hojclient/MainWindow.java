@@ -8,15 +8,17 @@ package hojclient;
 import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.rmi.server.*;
+//import java.rmi.server.*;
 
 import javax.swing.JLabel;
 import javax.swing.JToggleButton;
 
-import com.sun.xml.internal.ws.util.StringUtils;
+//import com.sun.xml.internal.ws.util.StringUtils;
 
 import hojserver.Tehdas;
-import hojserver.tehdaskoneet.KoneenTila;
+//import hojserver.tehdaskoneet.KoneenTila;
+
+// Kommentoin pois importit, joita ilmeisesti ei tarvita
 
 /**
  *
@@ -1144,6 +1146,7 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    
     // ---------- KUUNTELIJAT ---------- //
 
     private void startSiloLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startSiloLoadActionPerformed
@@ -1165,7 +1168,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void signInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInActionPerformed
         // Mitä tehdään kun käyttäjä kirjautuu
     	
-    	// Onko jo painettu?
+    	// Onko jo login painettu?
     	if (signIn.isSelected()){
     		String RMIosoite ="tehdas";	
     	try {
@@ -1186,53 +1189,64 @@ public class MainWindow extends javax.swing.JFrame {
     	
     	// Jos signin nappi on alhaalla niin ...
     	else{
-    		
+    		//TODO Uloskirjaus
     	}
     	
     	
     }//GEN-LAST:event_signInActionPerformed
 
     private void startProcLoad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProcLoad1ActionPerformed
-        // TODO Mitä tehdään kun keittimen täytön ruuvikuljetin 1 käynnistetään
+        //  Mitä tehdään kun keittimen täytön ruuvikuljetin 1 käynnistetään
     	if (signIn.isSelected()){
     		if (conveyerStartButtons[1].isSelected()){
-    			String maara = procLoadAmount1.getText();
+    			
     			int maaraInt;
-    		
-    			try {
-    				maaraInt = Integer.parseInt(maara);
-    			} catch (NumberFormatException e) {
+    			String maara = procLoadAmount1.getText();
+    			
+    			// Annettiinko mitään arvoa?
+    			if (maara.contentEquals("")){
     				maaraInt = -1;
-    				System.out.println("Load processor: Not valid value!");
     			}
-    		
+    			else{
+		    		try {
+		    			maaraInt = Integer.parseInt(maara);
+		   			} catch (NumberFormatException e) {
+		    			maaraInt = -1;
+		    			System.out.println("Load processor: Not valid value!");
+		    		}
+    			}
     			try{
     				tehdas.prosessorinLataus(1, maaraInt);
     			}catch (RemoteException e) {System.out.println(e);}
     		}
     		else{
     			try{
-    			tehdas.prosessorinLatausVapautus(1);
+    			tehdas.prosessorinLatausVapautus(2);
     			} catch (RemoteException e) {System.out.println(e);}
     		}// if start
     	}// if log
-    	
-    }//GEN-LAST:event_startProcLoad1ActionPerformed
+    }//GEN-LAST:event_startProcLoad2ActionPerformed
 
     private void startProcLoad2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProcLoad2ActionPerformed
-        // TODO Mitä tehdään kun keittimen täytön ruuvikuljetin 2 käynnistetään
+        //  Mitä tehdään kun keittimen täytön ruuvikuljetin 2 käynnistetään
     	if (signIn.isSelected()){
     		if (conveyerStartButtons[2].isSelected()){
-    			String maara = procLoadAmount1.getText();
+    			
     			int maaraInt;
-    		
-    			try {
-    				maaraInt = Integer.parseInt(maara);
-    			} catch (NumberFormatException e) {
+    			String maara = procLoadAmount2.getText();
+    			
+    			// Annettiinko mitään arvoa?
+    			if (maara.contentEquals("")){
     				maaraInt = -1;
-    				System.out.println("Load processor: Not valid value!");
     			}
-    		
+    			else{
+		    		try {
+		    			maaraInt = Integer.parseInt(maara);
+		   			} catch (NumberFormatException e) {
+		    			maaraInt = -1;
+		    			System.out.println("Load processor: Not valid value!");
+		    		}
+    			}
     			try{
     				tehdas.prosessorinLataus(2, maaraInt);
     			}catch (RemoteException e) {System.out.println(e);}
@@ -1246,7 +1260,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_startProcLoad2ActionPerformed
 
     private void reserveSilo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveSilo1ActionPerformed
-        // TODO Mitä tehdään kun siilo1 varataan?
+        //  Mitä tehdään kun siilo1 varataan?
     	if (signIn.isSelected()){
     		if (reserveSiloButtons[0].isSelected()){
     			try{
@@ -1262,7 +1276,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_reserveSilo1ActionPerformed
 
     private void reserveSilo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveSilo2ActionPerformed
-        // TODO Mitä tehdään kun siilo2 varataan?
+        //  Mitä tehdään kun siilo2 varataan?
     	if (signIn.isSelected()){
     		if (reserveSiloButtons[1].isSelected()){
     			try{
@@ -1278,7 +1292,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_reserveSilo2ActionPerformed
 
     private void reserveSilo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveSilo3ActionPerformed
-        // TODO Mitä tehdään kun siilo3 varataan?
+        //  Mitä tehdään kun siilo3 varataan?
     	if (signIn.isSelected()){
     		if (reserveSiloButtons[2].isSelected()){
     			try{
@@ -1294,7 +1308,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_reserveSilo3ActionPerformed
 
     private void reserveSilo4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveSilo4ActionPerformed
-        // TODO Mitä tehdään kun siilo4 varataan?
+        //  Mitä tehdään kun siilo4 varataan?
     	if (signIn.isSelected()){
     		if (reserveSiloButtons[3].isSelected()){
     			try{
@@ -1310,7 +1324,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_reserveSilo4ActionPerformed
 
     private void reserveProc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveProc1ActionPerformed
-        // TODO Mitä tehdään kun keitin1 varataan?
+        //  Mitä tehdään kun keitin1 varataan?
     	if (signIn.isSelected()){
     		if (reserveProcessorButtons[0].isSelected()){
 	    		try{
@@ -1326,7 +1340,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_reserveProc1ActionPerformed
 
     private void startProc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProc1ActionPerformed
-        // TODO Mitä tehdään kun keitin1 käynnistetään?
+        //  Mitä tehdään kun keitin1 käynnistetään?
     	if (signIn.isSelected()){
     		if (startProcessorButtons[0].isSelected()){
 	    		try{
@@ -1342,7 +1356,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_startProc1ActionPerformed
 
     private void reserveProc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveProc2ActionPerformed
-        // TODO Mitä tehdään kun keitin2 varataan?
+        //  Mitä tehdään kun keitin2 varataan?
     	if (signIn.isSelected()){
     		if (reserveProcessorButtons[1].isSelected()){
 	    		try{
@@ -1358,7 +1372,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_reserveProc2ActionPerformed
 
     private void startProc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProc2ActionPerformed
-        // TODO Mitä tehdään kun keitin2 käynnistetään?
+        //  Mitä tehdään kun keitin2 käynnistetään?
     	if (signIn.isSelected()){
     		if (startProcessorButtons[1].isSelected()){
 	    		try{
@@ -1374,7 +1388,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_startProc2ActionPerformed
 
     private void reserveProc3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveProc3ActionPerformed
-        // TODO Mitä tehdään kun keitin3 varataan?
+        //  Mitä tehdään kun keitin3 varataan?
     	if (signIn.isSelected()){
     		if (reserveProcessorButtons[2].isSelected()){
 	    		try{
@@ -1390,7 +1404,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_reserveProc3ActionPerformed
 
     private void startProc3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startProc3ActionPerformed
-        // TODO Mitä tehdään kun keitin3 käynnistetään?
+        //  Mitä tehdään kun keitin3 käynnistetään?
     	if (signIn.isSelected()){
     		if (startProcessorButtons[2].isSelected()){
 	    		try{
@@ -1406,7 +1420,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_startProc3ActionPerformed
 
     private void startPump1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startPump1ActionPerformed
-        // TODO Mitä tehdään kun pumppu1 käynnistetään?
+        //  Mitä tehdään kun pumppu1 käynnistetään?
     	if (signIn.isSelected()){
     		if (startPumpButtons[0].isSelected()){
     			try{
@@ -1422,7 +1436,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_startPump1ActionPerformed
 
     private void startPump2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startPump2ActionPerformed
-        // TODO Mitä tehdään kun pumppu2 käynnistetään?
+        //  Mitä tehdään kun pumppu2 käynnistetään?
     	if (signIn.isSelected()){
     		if (startPumpButtons[1].isSelected()){
     			try{
@@ -1438,7 +1452,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_startPump2ActionPerformed
 
     private void startBpump1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startBpump1ActionPerformed
-        // TODO Mitä tehdään kun pumppu1 pullotukseen käynnistetään?
+        //  Mitä tehdään kun pumppu1 pullotukseen käynnistetään?
     	if (signIn.isSelected()){
 	    	if(startPumpButtons[2].isSelected()){
 	    		try{
@@ -1454,7 +1468,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_startBpump1ActionPerformed
 
     private void startBpump2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startBpump2ActionPerformed
-        // TODO Mitä tehdään kun pumppu2 pullotukseen käynnistetään?
+        //  Mitä tehdään kun pumppu2 pullotukseen käynnistetään?
     	if (signIn.isSelected()){
 	    	if(startPumpButtons[3].isSelected()){
 	    		try{
@@ -1470,7 +1484,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_startBpump2ActionPerformed
 
     private void reserveTank1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank1ActionPerformed
-        // TODO Mitä tehdään kun säiliö1 varataan?
+        //  Mitä tehdään kun säiliö1 varataan?
 	    	if (signIn.isSelected()){
 	    		if (reserveTankButtons[0].isSelected()){
 	    			try{
@@ -1486,7 +1500,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_reserveTank1ActionPerformed
 
     private void reserveTank2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank2ActionPerformed
-        // TODO Mitä tehdään kun säiliö2 varataan?
+        //  Mitä tehdään kun säiliö2 varataan?
     	if (signIn.isSelected()){
     		if (reserveTankButtons[1].isSelected()){
     			try{
@@ -1502,7 +1516,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_reserveTank2ActionPerformed
 
     private void reserveTank3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank3ActionPerformed
-        // TODO Mitä tehdään kun säiliö3 varataan?
+        //  Mitä tehdään kun säiliö3 varataan?
     	if (signIn.isSelected()){
     		if (reserveTankButtons[2].isSelected()){
     			try{
@@ -1518,7 +1532,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_reserveTank3ActionPerformed
 
     private void reserveTank4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank4ActionPerformed
-        // TODO Mitä tehdään kun säiliö4 varataan?
+        //  Mitä tehdään kun säiliö4 varataan?
     	if (signIn.isSelected()){
     		if (reserveTankButtons[3].isSelected()){
     			try{
@@ -1534,7 +1548,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_reserveTank4ActionPerformed
 
     private void reserveTank5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank5ActionPerformed
-        // TODO Mitä tehdään kun säiliö5 varataan?
+        //  Mitä tehdään kun säiliö5 varataan?
     	if (signIn.isSelected()){
     		if (reserveTankButtons[4].isSelected()){
     			try{
@@ -1550,7 +1564,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_reserveTank5ActionPerformed
 
     private void reserveTank6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank6ActionPerformed
-        // TODO Mitä tehdään kun säiliö6 varataan?
+        //  Mitä tehdään kun säiliö6 varataan?
     	if (signIn.isSelected()){
     		if (reserveTankButtons[5].isSelected()){
     			try{
@@ -1566,7 +1580,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_reserveTank6ActionPerformed
 
     private void reserveTank7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank7ActionPerformed
-        // TODO Mitä tehdään kun säiliö7 varataan?
+        //  Mitä tehdään kun säiliö7 varataan?
     	if (signIn.isSelected()){
     		if (reserveTankButtons[6].isSelected()){
     			try{
@@ -1582,7 +1596,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_reserveTank7ActionPerformed
 
     private void reserveTank8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank8ActionPerformed
-        // TODO Mitä tehdään kun säiliö8 varataan?
+        //  Mitä tehdään kun säiliö8 varataan?
     	if (signIn.isSelected()){
     		if (reserveTankButtons[7].isSelected()){
     			try{
@@ -1598,7 +1612,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_reserveTank8ActionPerformed
 
     private void reserveTank9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank9ActionPerformed
-        // TODO Mitä tehdään kun säiliö9 varataan?
+        //  Mitä tehdään kun säiliö9 varataan?
     	if (signIn.isSelected()){
     		if (reserveTankButtons[8].isSelected()){
     			try{
@@ -1614,7 +1628,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_reserveTank9ActionPerformed
 
     private void reserveTank10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserveTank10ActionPerformed
-        // TODO Mitä tehdään kun säiliö10 varataan?
+        //  Mitä tehdään kun säiliö10 varataan?
     	if (signIn.isSelected()){
     		if (reserveTankButtons[9].isSelected()){
     			try{
@@ -1630,18 +1644,21 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_reserveTank10ActionPerformed
 
     private void procLoadAmount2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procLoadAmount2ActionPerformed
-        // TODO Prosessoreiden täytön määrä
-    	if (signIn.isSelected()){
-    		
-    	}
+        //  Prosessoreiden täytön määrä
+    	
+    	// Jos prosessoreiden täytön määrän kentässä painetaan enteriä
+    	// Tätä ei siis tarvita. Hoidettu muualla
     }//GEN-LAST:event_procLoadAmount2ActionPerformed
 
     private void procLoadAmount1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procLoadAmount1ActionPerformed
-        // TODO Prosessoreiden täytön määrä
-    	if (signIn.isSelected()){
-    		
-    	}
+        //  Prosessoreiden täytön määrä
+    	
+    	// Jos prosessoreiden täytön määrän kentässä painetaan enteriä
+    	// Tätä ei siis tarvita. Hoidettu muualla
     }//GEN-LAST:event_procLoadAmount1ActionPerformed
+    
+    
+    // ---------- UPDATE ---------- //
     
     /**
      * Method for updating information on the client.
@@ -1668,6 +1685,7 @@ public class MainWindow extends javax.swing.JFrame {
     		}
     	}
     	
+    	//Update pump labels
     	for (int i = 0; i < 4; i++){
     		if (tehdas.nappiPumput()[i]){
     			pumpStatus[i].setText("Running");
@@ -1763,9 +1781,6 @@ public class MainWindow extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
     		
-    	if (args.length < 1){
-    		System.exit(0);
-    	}
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -1787,8 +1802,18 @@ public class MainWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+            	
+            	// Argumenttina osoite. Jos ei annettumitään nii oletus osoite on localhost
+            	String os;
+            	if (args.length < 1){
+            		os = "localhost";
+            	}
+            	else {
+            		os = args[0];
+            	}
+            	
             	//MainWindow-luokan kontruktorille annetaan parametrina osoite
-                new MainWindow(args[0]).setVisible(true);
+                new MainWindow(os).setVisible(true);
             }
         });
     }

@@ -63,7 +63,12 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 	
 	//-------- Prosessorit eli keittimet --------
 	public void prosessorinLataus(int kuljettimenNro, int maara) throws RemoteException {
-		System.out.println("Tehdas: Ruuvikuljetin " + (kuljettimenNro+1) + " alkaa siirtää " + maara + " materiaalia prosessoriin");
+		if (maara != -1){
+			System.out.println("Tehdas: Ruuvikuljetin " + (kuljettimenNro+1) + " alkaa siirtää " + maara + "kg materiaalia prosessoriin");
+		}
+		else{
+			System.out.println("Tehdas: Ruuvikuljetin " + (kuljettimenNro+1) + " alkaa siirtää materiaalia prosessoriin");
+		}
 		ruuvikuljettimet[kuljettimenNro].setRunning(true);
 		ruuvikuljettimet[kuljettimenNro].setLimit(maara);
 	}
