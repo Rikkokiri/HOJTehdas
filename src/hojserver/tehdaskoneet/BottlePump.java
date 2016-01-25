@@ -16,14 +16,14 @@ public class BottlePump extends Pump {
 	private final int take = 50; //Kerralla tankista otettava määrä (litraa)
 	private final int identity;
 	
-	private Tank tankToBeEmptied;
+	private int tankToBeEmptied;
 	 
 	//------------ KONSTRUKTORI --------------
 	public BottlePump(Tank[] tanks, int id){
 		super();
 		this.tanks = tanks;
 		this.identity = id;
-		tankToBeEmptied = null;
+		tankToBeEmptied = -1;
 	}
 	
 	//------------------- ID ----------------------
@@ -34,8 +34,12 @@ public class BottlePump extends Pump {
 	
 	//----------- TANK TO BE EMPTIED ----------------
 	
-	public Tank getTankToBeEmptied(){
+	public int getTankToBeEmptied(){
 		return tankToBeEmptied;
+	}
+	
+	public void setTankToBeEmptied(int i){
+		tankToBeEmptied = i;
 	}
 	
 	//----------- STOP PUMP ----------------
@@ -43,9 +47,9 @@ public class BottlePump extends Pump {
 	@Override
 	public void stopPump(){
 		running = false;
-		if(tankToBeEmptied != null){
-			tankToBeEmptied.setTila(KoneenTila.FREE);
-			tankToBeEmptied = null;
+		if(tankToBeEmptied != -1){
+			tanks[tankToBeEmptied].setTila(KoneenTila.FREE);
+			setTankToBeEmptied(-1);
 		}	
 	}
 	
@@ -56,34 +60,34 @@ public class BottlePump extends Pump {
 			while(isRunning()){ 	//Kun pullotuspumppu on asetettu käyntiin....
 				
 				//Iteroidaan säiliöiden läpi ja katsomaan, mikä niistä on tyhjennettävissä
-				for(Tank tank : tanks){
+				for(int i = 0; i < tanks.length; i++){
 					/* Säiliötä voi alkaa tyhjentää, jos
 					 * - sen tila on vapaa/tyhjennyksessä/täysi
 					 * - säiliössä on nestettä
 					 * - säiliön reserve-painike on pohjassa
 					 * - tankkia ei käytä mikään muu pumppu
 					 */
-					while((tank.getTila() == KoneenTila.FREE || tank.getTila() == KoneenTila.EMPTYING || tank.getTila() == KoneenTila.FULL)
-							&& tank.getAmountOfLiquid() != 0 && tank.isReserved() && (tank.getBottlePump() == identity || tank.getBottlePump() == -1)){
+					while((tanks[i].getTila() == KoneenTila.FREE || tanks[i].getTila() == KoneenTila.EMPTYING || tanks[i].getTila() == KoneenTila.FULL)
+							&& tanks[i].getAmountOfLiquid() != 0 && tanks[i].isReserved() && (tanks[i].getBottlePump() == identity || tanks[i].getBottlePump() == -1)){
 		
 							//Tank to be emptied chosen
-							tankToBeEmptied = tank;
+							tankToBeEmptied = i;
 						
 							//Asetetaan kypsytyssäiliö tyhjennystilaan
-							tank.setTila(KoneenTila.EMPTYING);
-							tank.setBottlePump(identity);
+							tanks[i].setTila(KoneenTila.EMPTYING);
+							tanks[i].setBottlePump(identity);
 							
 							//Let's check if we can take what we want
-							if(tank.getAmountOfLiquid() > take){
-								tank.takeLiquid(take);
+							if(tanks[i].getAmountOfLiquid() > take){
+								tanks[i].takeLiquid(take);
 							} else {
 								//Jos pyydettyä määrää ei nää ole, otetaan kaikki mitä on jäljellä
-								tank.takeLiquid(tank.getAmountOfLiquid());
+								tanks[i].takeLiquid(tanks[i].getAmountOfLiquid());
 								//Vapautetaan tankki
-								tank.setTila(KoneenTila.FREE);
-								tank.setReserved(false);
-								tank.setBottlePump(-1);
-								tankToBeEmptied = null;
+								tanks[i].setTila(KoneenTila.FREE);
+								tanks[i].setReserved(false);
+								tanks[i].setBottlePump(-1);
+								setTankToBeEmptied(-1);
 							}
 							synchronized(this){
 								try {
