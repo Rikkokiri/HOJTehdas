@@ -104,9 +104,7 @@ package hojserver.tehdaskoneet;
  	//------------ CONVEYER -------------------
  	
  	public void setConveyer(int c){
- 		if(c == -1 || c == 1 || c == 2 ){
- 			conveyer = c;
- 		}
+ 		conveyer = c;
  	}
  	
  	public int getConveyer(){
@@ -116,9 +114,7 @@ package hojserver.tehdaskoneet;
  	//-------------- PUMP ---------------------
  	
  	public void setPump(int p){
- 		if(p == -1 || p == 1 || p == 2 ){
- 			pump = p;
- 		}
+ 		pump = p;
  	}
  	
  	public int getPump(){

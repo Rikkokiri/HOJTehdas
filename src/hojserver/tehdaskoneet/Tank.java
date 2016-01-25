@@ -13,6 +13,7 @@ public class Tank extends Thread {
 	
 	private KoneenTila tila;
 	private int pump;
+	private int bottlepump;
 	
 	//------------ KONSTRUKTORI -------------
 	public Tank(){
@@ -20,6 +21,7 @@ public class Tank extends Thread {
 		reserved = false;
 		tila = KoneenTila.FREE;
 		pump = -1;
+		bottlepump = -1;
 	}
 	
 	//------------- TILA ------------------

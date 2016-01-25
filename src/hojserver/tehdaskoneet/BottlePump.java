@@ -14,11 +14,13 @@ public class BottlePump extends Pump {
 
 	private Tank[] tanks;
 	private final int take = 50; //Kerralla tankista otettava määrä (litraa)
+	private final int id;
 	 
 	//------------ KONSTRUKTORI --------------
-	public BottlePump(Tank[] tanks){
+	public BottlePump(Tank[] tanks, int id){
 		super();
 		this.tanks = tanks;
+		this.id = id;
 	}
 	
 	//-------------- RUN-METODI ---------------------
