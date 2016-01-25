@@ -39,6 +39,9 @@ public class Tank extends Thread {
 	}
 	
 	public synchronized void setReserved(boolean r){
+		if(r == false){
+			setBottlePump(-1);
+		}
 		reserved = r;
 	}
 	

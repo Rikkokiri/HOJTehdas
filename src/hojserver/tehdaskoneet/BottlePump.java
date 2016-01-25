@@ -56,8 +56,8 @@ public class BottlePump extends Pump {
 							} else {
 								//Jos pyydettyä määrää ei nää ole, otetaan kaikki mitä on jäljellä
 								tank.takeLiquid(tank.getAmountOfLiquid());
-								tank.setTila(KoneenTila.FREE);
 								//Vapautetaan tankki
+								tank.setTila(KoneenTila.FREE);
 								tank.setReserved(false);
 								tank.setBottlePump(-1);
 							}
