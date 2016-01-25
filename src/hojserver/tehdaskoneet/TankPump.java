@@ -136,5 +136,11 @@ public class TankPump extends Pump {
 		running = r;
 	}
 	
+	public void stopPump(){
+		if (tankToBeFilled != -1 && tanks[tankToBeFilled].getTila() == KoneenTila.FILLING){
+			tanks[tankToBeFilled].setTila(KoneenTila.FREE);
+		}
+	}
+	
 	
 }
