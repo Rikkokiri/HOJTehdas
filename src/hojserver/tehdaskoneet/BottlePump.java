@@ -14,13 +14,19 @@ public class BottlePump extends Pump {
 
 	private Tank[] tanks;
 	private final int take = 50; //Kerralla tankista otettava määrä (litraa)
-	private final int id;
+	private final int identity;
 	 
 	//------------ KONSTRUKTORI --------------
 	public BottlePump(Tank[] tanks, int id){
 		super();
 		this.tanks = tanks;
-		this.id = id;
+		this.identity = id;
+	}
+	
+	//------------------- ID ----------------------
+	
+	public int getIdentity(){
+		return identity;
 	}
 	
 	//-------------- RUN-METODI ---------------------
@@ -35,28 +41,32 @@ public class BottlePump extends Pump {
 					 * - sen tila on vapaa/tyhjennyksessä/täysi
 					 * - säiliössä on nestettä
 					 * - säiliön reserve-painike on pohjassa
+					 * - tankkia ei käytä mikään muu pumppu
 					 */
-					if((tank.getTila() == KoneenTila.FREE || tank.getTila() == KoneenTila.EMPTYING || tank.getTila() == KoneenTila.FULL)
-							&& tank.getAmountOfLiquid() != 0 && tank.isReserved()){
-					
-						//Asetetaan kypsytyssäiliö tyhjennystilaan
-						tank.setTila(KoneenTila.EMPTYING);
-						
-						//Let's check if we can take what we want
-						if(tank.getAmountOfLiquid() >= take){
-							tank.takeLiquid(take);
-						} else {
-							//Jos pyydettyä määrää ei nää ole, otetaan kaikki mitä on jäljellä
-							tank.takeLiquid(tank.getAmountOfLiquid());
-							tank.setTila(KoneenTila.FREE);
-							tank.setReserved(false);
-						}
-						synchronized(this){
-							try {
-								this.wait(100);
-							} catch (InterruptedException e) { e.printStackTrace(); }
-						} //synchronized
-					}
+					while((tank.getTila() == KoneenTila.FREE || tank.getTila() == KoneenTila.EMPTYING || tank.getTila() == KoneenTila.FULL)
+							&& tank.getAmountOfLiquid() != 0 && tank.isReserved() && (tank.getBottlePump() == identity || tank.getBottlePump() == -1)){
+		
+							//Asetetaan kypsytyssäiliö tyhjennystilaan
+							tank.setTila(KoneenTila.EMPTYING);
+							tank.setBottlePump(identity);
+							
+							//Let's check if we can take what we want
+							if(tank.getAmountOfLiquid() >= take){
+								tank.takeLiquid(take);
+							} else {
+								//Jos pyydettyä määrää ei nää ole, otetaan kaikki mitä on jäljellä
+								tank.takeLiquid(tank.getAmountOfLiquid());
+								tank.setTila(KoneenTila.FREE);
+								//Vapautetaan tankki
+								tank.setReserved(false);
+								tank.setBottlePump(-1);
+							}
+							synchronized(this){
+								try {
+									this.wait(100);
+								} catch (InterruptedException e) { e.printStackTrace(); }
+							} //synchronized
+						} //while(ehtokasa)
 				} //for
 			} //while(isRunning)
 			

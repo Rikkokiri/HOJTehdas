@@ -61,6 +61,16 @@ public class Tank extends Thread {
 		pump = p;
 	}
 	
+	//-------------- BOTTLE PUMP ----------------------	
+	
+	public int getBottlePump(){
+		return bottlepump;
+	}
+	
+	public void setBottlePump(int p){
+		bottlepump = p;
+	}
+	
 	//---------------- LIQUID -----------------------
 	
 	/**
