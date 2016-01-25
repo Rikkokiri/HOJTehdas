@@ -294,6 +294,9 @@ package hojserver.tehdaskoneet;
  		return tila;
  	}
  	
+ 	/**
+ 	 * Returns true if materialAmount == materialAmountVolume. Else false.
+ 	 */
  	public boolean isFull(){
  		if (materialAmount >= materialAmountVolume){
  			return true;
@@ -303,14 +306,23 @@ package hojserver.tehdaskoneet;
  		}
  	}
  	 	
+ 	/**
+ 	 * Returns true if there is no material, water or product in the processor.
+ 	 */
  	public boolean isEmpty(){
  		return (materialAmount == 0 && waterAmount == 0 && productAmount == 0);
  	}
  	
+ 	/**
+ 	 * Returns true if processor is reserved and false if it's not.
+ 	 */
  	public boolean isReserved(){
  		return reserved;
  	}
  	
+ 	/**
+ 	 * Returns true if processor is running.
+ 	 */
  	public boolean isRunning(){
  		return running;
  	}
