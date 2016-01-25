@@ -27,6 +27,10 @@ public class Tank extends Thread {
 	//------------- TILA ------------------
 	
 	public void setTila(KoneenTila t){
+		if(t == KoneenTila.FREE){
+			setPump(-1);
+			setBottlePump(-1);
+		}
 		tila = t;
 	}
 	

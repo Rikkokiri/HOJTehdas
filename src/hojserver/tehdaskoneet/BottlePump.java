@@ -15,18 +15,36 @@ public class BottlePump extends Pump {
 	private Tank[] tanks;
 	private final int take = 50; //Kerralla tankista otettava määrä (litraa)
 	private final int identity;
+	
+	private Tank tankToBeEmptied;
 	 
 	//------------ KONSTRUKTORI --------------
 	public BottlePump(Tank[] tanks, int id){
 		super();
 		this.tanks = tanks;
 		this.identity = id;
+		tankToBeEmptied = null;
 	}
 	
 	//------------------- ID ----------------------
 	
 	public int getIdentity(){
 		return identity;
+	}
+	
+	//----------- TANK TO BE EMPTIED ----------------
+	
+	public Tank getTankToBeEmptied(){
+		return tankToBeEmptied;
+	}
+	
+	//----------- STOP PUMP ----------------
+	
+	@Override
+	public void stopPump(){
+		running = false;
+		tankToBeEmptied.setTila(KoneenTila.FREE);
+		tankToBeEmptied = null;
 	}
 	
 	//-------------- RUN-METODI ---------------------
@@ -46,6 +64,9 @@ public class BottlePump extends Pump {
 					while((tank.getTila() == KoneenTila.FREE || tank.getTila() == KoneenTila.EMPTYING || tank.getTila() == KoneenTila.FULL)
 							&& tank.getAmountOfLiquid() != 0 && tank.isReserved() && (tank.getBottlePump() == identity || tank.getBottlePump() == -1)){
 		
+							//Tank to be emptied chosen
+							tankToBeEmptied = tank;
+						
 							//Asetetaan kypsytyssäiliö tyhjennystilaan
 							tank.setTila(KoneenTila.EMPTYING);
 							tank.setBottlePump(identity);
@@ -60,6 +81,7 @@ public class BottlePump extends Pump {
 								tank.setTila(KoneenTila.FREE);
 								tank.setReserved(false);
 								tank.setBottlePump(-1);
+								tankToBeEmptied = null;
 							}
 							synchronized(this){
 								try {
