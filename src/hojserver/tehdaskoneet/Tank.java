@@ -28,6 +28,8 @@ public class Tank extends Thread {
 	
 	public void setTila(KoneenTila t){
 		tila = t;
+		//For testing
+		System.out.println(getTila()); //TODO POISTA!
 	}
 	
 	public KoneenTila getTila(){

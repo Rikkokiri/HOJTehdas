@@ -51,7 +51,7 @@ public class BottlePump extends Pump {
 							tank.setBottlePump(identity);
 							
 							//Let's check if we can take what we want
-							if(tank.getAmountOfLiquid() >= take){
+							if(tank.getAmountOfLiquid() > take){
 								tank.takeLiquid(take);
 							} else {
 								//Jos pyydettyä määrää ei nää ole, otetaan kaikki mitä on jäljellä
