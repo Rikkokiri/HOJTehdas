@@ -41,6 +41,11 @@ public class Tank extends Thread {
 	public synchronized void setReserved(boolean r){
 		if(r == false){
 			setBottlePump(-1);
+			if(isFull()){
+				setTila(KoneenTila.FULL);
+			} else {
+				setTila(KoneenTila.FREE);
+			}
 		}
 		reserved = r;
 	}
