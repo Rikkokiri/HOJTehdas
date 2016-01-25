@@ -43,8 +43,10 @@ public class BottlePump extends Pump {
 	@Override
 	public void stopPump(){
 		running = false;
-		tankToBeEmptied.setTila(KoneenTila.FREE);
-		tankToBeEmptied = null;
+		if(tankToBeEmptied != null){
+			tankToBeEmptied.setTila(KoneenTila.FREE);
+			tankToBeEmptied = null;
+		}	
 	}
 	
 	//-------------- RUN-METODI ---------------------
