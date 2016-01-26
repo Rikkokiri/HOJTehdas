@@ -118,7 +118,7 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 			prosessorit[prosessorinNro].setUserId(userId);
 			System.out.println("Tehdas: Käyttäjä " + userIdKeys.get(userId) + ", " + userId + " varaa prosessorin nro. " + (prosessorinNro+1));
 		} else {
-			System.out.println("Käyttäjä: " + userIdKeys.get(userId) + " yritti varata prosessorin.");
+			System.out.println("Käyttäjä: " + userIdKeys.get(userId) + " yritti varata prosessorin " + (prosessorinNro+1) + ".");
 			System.out.println("Tehdas: Ei voida varata prosessoria. Prosessori on käyttäjän " + userIdKeys.get(prosessorit[prosessorinNro].getUserId()) + ", " + prosessorit[prosessorinNro].getUserId() + " hallussa.");
 		}
 	}
@@ -129,7 +129,7 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 			prosessorit[prosessorinNro].setReserved(false);
 			System.out.println("Tehdas: Vapautetaan prosessori nro. " + (prosessorinNro+1)); //TODO
 		} else {
-			System.out.println("Käyttäjä: " + userIdKeys.get(userId) + ", " + userId + " yritti vapauttaa prosessorin.");
+			System.out.println("Käyttäjä: " + userIdKeys.get(userId) + ", " + userId + " yritti vapauttaa prosessorin " + (prosessorinNro+1) + ".");
 			System.out.println("Tehdas: Ei voida vapauttaa. Prosessori on käyttäjän " + userIdKeys.get(prosessorit[prosessorinNro].getUserId()) + ", " + userId + " hallussa.");
 		}
 	}
@@ -137,10 +137,9 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 	// PROSESSORIN KÄYNNISTYS
 	public void prosessorinKaynnistys(int prosessorinNro, UUID userId) throws RemoteException {
 		if(prosessorit[prosessorinNro].getUserId().equals(userId)){
-			prosessorit[prosessorinNro].setRunning(true);	
-			System.out.println("Tehdas: Käynnistetään prosessori " + (prosessorinNro+1));
+			prosessorit[prosessorinNro].setRunning(true);
 		} else {
-			System.out.println("Käyttäjä: " + userIdKeys.get(userId) + ", " + userId + " yritti käynnistää prosessorin.");
+			System.out.println("Käyttäjä: " + userIdKeys.get(userId) + ", " + userId + " yritti käynnistää prosessorin " + (prosessorinNro+1) + ".");
 			System.out.println("Tehdas: Ei voida käynnistää. Prosessori on käyttäjän " + userIdKeys.get(userId) + ", " + userId + " hallussa.");
 		}
 	}
@@ -185,7 +184,6 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 		System.out.println("Tehdas: Käynnistetään pullotuspumppu nro. " + (pumpunNro+1));
 	}
 	
-	// BOTTLE PUMP SAMMUTUS
 	public void pullojenTayttoVapautus(int pumpunNro) throws RemoteException {
 		pumput[pumpunNro].stopPump();
 		System.out.println("Tehdas: Sammutetaan pullotuspumppu nro. " + (pumpunNro+1));

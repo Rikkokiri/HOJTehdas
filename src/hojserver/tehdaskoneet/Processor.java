@@ -181,6 +181,7 @@ import java.util.UUID;
  			if(reserved && tila != KoneenTila.EMPTYING && tila != KoneenTila.FILLING && tila != KoneenTila.READY && !isEmpty() && getProductAmount() == 0){
  				running = r;
  				setTila(KoneenTila.PROCESSING);
+ 				System.out.println("Processor: Käynnistetään prosessori.");
  			} else {
  				System.out.println("Prosessorin " + this + " start-painiketta ei voi painaa.");
  				System.out.println("Prosessori tilassa: " + getTila());
