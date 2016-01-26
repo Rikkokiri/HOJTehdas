@@ -1678,7 +1678,7 @@ public class MainWindow extends javax.swing.JFrame {
     	int[] siiloissa = tehdas.siilojenAineMaara();
     	
     	for(int i = 0; i < siiloissa.length; i++){
-    		siloLabels[i].setText(Integer.toString(siiloissa[i]));
+    		siloLabels[i].setText(Integer.toString(siiloissa[i]) + " kg");
     	}
     	
     	//Update coveyer status labels
@@ -1728,7 +1728,7 @@ public class MainWindow extends javax.swing.JFrame {
     	int[] sailioissa = tehdas.sailioidenJuomanMaara();
     	
     	for(int i = 0; i < sailioissa.length; i++){
-    		tankLabels[i].setText(Integer.toString(sailioissa[i]));
+    		tankLabels[i].setText(Integer.toString(sailioissa[i]) + " l");
     	}
     	
     	//>>> UPDATE BUTTONS <<<
