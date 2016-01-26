@@ -67,7 +67,7 @@ public class BottlePump extends Pump {
 					 * - säiliön reserve-painike on pohjassa
 					 * - tankkia ei käytä mikään muu pumppu
 					 */
-					while((tanks[i].getTila() == KoneenTila.FREE || tanks[i].getTila() == KoneenTila.EMPTYING || tanks[i].getTila() == KoneenTila.FULL)
+					while(isRunning() && (tanks[i].getTila() == KoneenTila.FREE || tanks[i].getTila() == KoneenTila.EMPTYING || tanks[i].getTila() == KoneenTila.FULL)
 							&& tanks[i].getAmountOfLiquid() != 0 && tanks[i].isReserved() && (tanks[i].getBottlePump() == identity || tanks[i].getBottlePump() == -1)){
 		
 							//Tank to be emptied chosen
