@@ -1171,9 +1171,13 @@ public class MainWindow extends javax.swing.JFrame {
     	// Onko jo login painettu?
     	if (signIn.isSelected()){
     		if (userName.getText().contentEquals("") || userName.getText() == null){
-    			System.out.println("Anna käyttäjänimi");
+    			System.out.println("Anna käyttäjänimi!");
     			signIn.setSelected(false);
     		}// if nimi kirjoitettu
+    		else if (userName.getText().length() >= 20){
+    			System.out.println("Käyttäjänimen tulee olla alle 20 merkkiä!");
+    			signIn.setSelected(false);
+    		}
     		else{
 		    	String RMIosoite ="tehdas";	
 		    	try {
