@@ -14,33 +14,50 @@ public class SiloConveyer extends Conveyer {
 		super();
 		siilot = s;
 		reserved = false;
+		siloToBeFilled = -1;
 	}
 	
 	// ---------- RUN ---------- //
 	
 	public void run(){
+		
+		int oldS; //Temporari muuttuuja, jota käytetääne edellisen kierroksen siilon muistamiseen
+		
 		while(true){
 			while(running){
+				
+				oldS = siloToBeFilled;
 				siloToBeFilled = -1;
 				
-				// Jos ehdot täyttyvät, niin aletaan täyttämään ylintä mahdollista siiloa
-				for (int i = 0; i < 4; i++){
-					if (!siilot[i].isFull() 
-							&& (siilot[i].getTila() == KoneenTila.FREE || siilot[i].getTila() == KoneenTila.FILLING) && siilot[i].isReserved()
-							&& running && siilot[i].isReserved() && !reserved){
-						
-						reserved = true;
-						siloToBeFilled = i;
-						siilot[i].setTila(KoneenTila.FILLING);
-						siilot[i].addToSilo(transferAmount);
-						
-						if (siilot[i].isFull()){
-							siilot[i].setTila(KoneenTila.FULL);
-						}
-																			
-					}//if
+				// Tarkistetaan ensin mitä siiloa mahdollisesti jo täytetään (jottei tapahtuisi turhia vaihtoja)
+				if (oldS != -1 && !siilot[oldS].isFull() 
+						&& (siilot[oldS].getTila() == KoneenTila.FREE || siilot[oldS].getTila() == KoneenTila.FILLING) && siilot[oldS].isReserved()
+						&& running && siilot[oldS].isReserved()){
+					//
+					siloToBeFilled = oldS;
+				}
+				else{
 					
-				}//for
+					//Etsitään täytettävä siilo
+					for (int i = 0; i < 4; i++){
+						if (!siilot[i].isFull() 
+								&& (siilot[i].getTila() == KoneenTila.FREE || siilot[i].getTila() == KoneenTila.FILLING) && siilot[i].isReserved()
+								&& running && siilot[i].isReserved()){
+							//
+							siloToBeFilled = i;			
+							break;
+						}//if
+					}//for
+				}//else
+				
+				if (siloToBeFilled != -1){
+					siilot[siloToBeFilled].setTila(KoneenTila.FILLING);
+					siilot[siloToBeFilled].addToSilo(transferAmount);
+					
+					if (siilot[siloToBeFilled].isFull()){
+						siilot[siloToBeFilled].setTila(KoneenTila.FULL);
+					} // if full				
+				}
 				
 				// Muutetaan siilojen tilat takaisin FREE:ksi, jos niitä ei enää täytetä
 				for (int i = 0; i < 4; i++){
@@ -48,9 +65,6 @@ public class SiloConveyer extends Conveyer {
 						siilot[i].setTila(KoneenTila.FREE);
 					}
 				}
-				
-				reserved = false;
-				
 				
 				//Odotus
 				synchronized(this){

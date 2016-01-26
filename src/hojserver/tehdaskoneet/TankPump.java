@@ -34,43 +34,71 @@ public class TankPump extends Pump {
 		this.processors = processors;
 		this.tanks = tanks;
 		identity = id;
+		tankToBeFilled = -1;
+		processorToBeEmptied = -1;
 	}
 	
+	
+	// ---------- FIND METODIT ---------- //
+	
+	// Etsitään tyhjennetävä prosessori
+	private void findProcessor(){
+		for(int i = 0; i < 3; i++){
+			if((processors[i].getTila() == KoneenTila.READY || processors[i].getTila() == KoneenTila.EMPTYING) &&
+			!processors[i].isEmpty() && processors[i].isReserved()
+				&& (processors[i].getPump() == -1 || processors[i].getPump() == identity)){
+				processorToBeEmptied = i;
+				processors[i].setPump(identity);
+				break;
+			}//if
+		} //for processors
+	}// findProcessor
+	
+	private void findTank(){
+		for (int i = 0; i < 10; i++){
+			if ((tanks[i].getTila() == KoneenTila.FREE || tanks[i].getTila() == KoneenTila.FILLING) &&
+					!tanks[i].isFull() && tanks[i].isReserved() 
+					&& (tanks[i].getPump() == -1 || tanks[i].getPump() == identity )){
+				tankToBeFilled = i;
+				tanks[i].setPump(identity);
+				break;
+			}//if
+		}// for tanks
+	}//findTank
 	
 	// ---------- RUN ----------//
 	
 	public void run(){
+		
+		int oldP;
+		int oldT;
+		
 		while(true){
 			while(isRunning()){
 				
-				reserved = false;
+				oldP = processorToBeEmptied;
+				oldT = tankToBeFilled;
+				
 				processorToBeEmptied = -1;
 				tankToBeFilled = -1;
 				
-				// Katsotaan mitä prosessoria aletaan tyhjentämään
-				for(int i = 0; i < 3; i++){
-					if((processors[i].getTila() == KoneenTila.READY || processors[i].getTila() == KoneenTila.EMPTYING) &&
-					!processors[i].isEmpty() && processors[i].isReserved() && !reserved
-						&& (processors[i].getPump() == -1 || processors[i].getPump() == identity)){
-						reserved = true; // Varataan pumppu jollekkin prosessorille
-						processorToBeEmptied = i;
-						processors[i].setPump(identity);
-					}
-				} //for processors
+				if (oldP != -1 && processors[oldP].getPump() == identity && (processors[oldP].getTila() == KoneenTila.READY 
+						|| processors[oldP].getTila() == KoneenTila.EMPTYING) && !processors[oldP].isEmpty() && processors[oldP].isReserved()){
+					//
+					processorToBeEmptied = oldP;
+				}
+				else{
+				findProcessor();
+				}
 				
-				reserved = false;
-				
-				// Katsotaan mitä säiliötä täytetään
-				for (int i = 0; i < 10; i++){
-					if ((tanks[i].getTila() == KoneenTila.FREE || tanks[i].getTila() == KoneenTila.FILLING) &&
-							!tanks[i].isFull() && !reserved && tanks[i].isReserved() 
-							&& (tanks[i].getPump() == -1 || tanks[i].getPump() == identity )){
-						reserved = true;
-						tankToBeFilled = i;
-						tanks[i].setPump(identity);
-					}
-				}// for tanks
-				
+				if (oldT != -1 && tanks[oldT].getPump() == identity && (tanks[oldT].getTila() == KoneenTila.FREE 
+						|| tanks[oldT].getTila() == KoneenTila.FILLING) && !tanks[oldT].isFull() && tanks[oldT].isReserved()){
+					//
+					tankToBeFilled = oldT;
+				}
+				else{
+					findTank();
+				}
 				
 				// poistaminen / lisääminen
 				if (tankToBeFilled != -1 && processorToBeEmptied != -1){
