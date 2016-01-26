@@ -162,7 +162,7 @@ package hojserver.tehdaskoneet;
  			2. keittimessä on jotain mitä prosessoida (ei tyhjä)
  			3. keittimessä ei ole valmista juomaa
  			 */
- 			if(tila != KoneenTila.EMPTYING && tila != KoneenTila.FILLING && tila != KoneenTila.READY && !isEmpty() && getProductAmount() == 0){
+ 			if(reserved && tila != KoneenTila.EMPTYING && tila != KoneenTila.FILLING && tila != KoneenTila.READY && !isEmpty() && getProductAmount() == 0){
  				running = r;
  				setTila(KoneenTila.PROCESSING);
  			} else {
