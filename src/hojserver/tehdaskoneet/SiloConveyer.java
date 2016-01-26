@@ -29,6 +29,7 @@ public class SiloConveyer extends Conveyer {
 				oldS = siloToBeFilled;
 				siloToBeFilled = -1;
 				
+				// Tarkistetaan ensin mitä siiloa mahdollisesti jo täytetään (jottei tapahtuisi turhia vaihtoja)
 				if (oldS != -1 && !siilot[oldS].isFull() 
 						&& (siilot[oldS].getTila() == KoneenTila.FREE || siilot[oldS].getTila() == KoneenTila.FILLING) && siilot[oldS].isReserved()
 						&& running && siilot[oldS].isReserved()){
