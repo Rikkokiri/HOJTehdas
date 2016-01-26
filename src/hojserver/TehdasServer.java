@@ -4,9 +4,14 @@ import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.*;
+import java.util.ArrayList;
+import java.util.UUID;
+
 
 public class TehdasServer {
 
+	private ArrayList<UUID> userIdKeys;
+	
 	public static void main(String args[]){
 		
 		try{

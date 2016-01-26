@@ -1,6 +1,7 @@
 package hojserver;
 
 import java.rmi.*;
+import java.util.UUID;
 
 import hojserver.tehdaskoneet.KoneenTila;
 
@@ -8,9 +9,11 @@ public interface Tehdas extends Remote {
 	
 	//-------- Kirjautuminen--------
 	
-	public void login(String kayttajaNimi) throws RemoteException; // Käyttäjä kirjautuu
+	public UUID login(String kayttajaNimi) throws RemoteException; // Käyttäjä kirjautuu
 	
 	public String prosessorinKayttaja(int prosessori) throws RemoteException;
+	
+	public void logout(UUID idKey) throws RemoteException; //Käyttäjä kirjautuu ulos
 	
 	//-------- Ruuvikuljettimet --------
 	
@@ -30,11 +33,11 @@ public interface Tehdas extends Remote {
 	
 	public void prosessorinLatausVapautus(int kuljettimeNro) throws RemoteException;
 	
-	public void prosessorinVaraus(int prosessorinNro, String kayttaja)throws RemoteException;
+	public void prosessorinVaraus(int prosessorinNro, UUID userId)throws RemoteException;
 	
-	public void prosessorinVarausVapautus(int prosessorinNro)throws RemoteException;
+	public void prosessorinVarausVapautus(int prosessorinNro, UUID userId)throws RemoteException;
 	
-	public void prosessorinKaynnistys(int prosessorinNro) throws RemoteException;
+	public void prosessorinKaynnistys(int prosessorinNro, UUID userId) throws RemoteException;
 	
 	public void prosessorinKaynnistysVapautus(int prosessorinNro) throws RemoteException;
 	

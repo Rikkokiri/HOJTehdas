@@ -1,6 +1,8 @@
 package hojserver.tehdaskoneet;
- 
- /*
+
+import java.util.UUID;
+
+/*
  - Tilavuus 10000 litraa vettä ja 2000 kiloa raaka-ainetta
  - Prosessoi juomaa 20 sekuntia
   */
@@ -28,6 +30,7 @@ package hojserver.tehdaskoneet;
  	
  	//Prosessoria käyttävä asiakas
  	private String user;
+ 	private UUID userId;
  	
  	public Processor(){
   		//Oletuksena keittimessä ei ole vettä eikä raaka-ainetta
@@ -41,6 +44,7 @@ package hojserver.tehdaskoneet;
  		
  		//Oletuksena prosessorilla ei ole vielä käyttäjää
  		user = null;
+ 		userId = null;
  		//Eikä yksikään ruuvikuljetin tai pumppu myöskään vielä käytä sitä
  		conveyer = -1;
  		pump = -1;
@@ -93,12 +97,23 @@ package hojserver.tehdaskoneet;
   		
  	//------------ USER (CLIENT) ---------------------
  	
+  		// 	Käyttäjän nimi 
  	public void setUser(String k){
  		user = k;
  	}
  	
  	public String getUser(){
  		return user;
+ 	}
+ 	
+ 		//	Käyttäjän id 
+ 	
+ 	public UUID getUserId(){
+ 		return userId;
+ 	}
+ 	
+ 	public void setUserId(UUID id){
+ 		userId = id;
  	}
  	
  	//------------ CONVEYER -------------------
@@ -132,7 +147,8 @@ package hojserver.tehdaskoneet;
  		//Ok, kunhan prosessointi ei ole käynnissä
  		if(r == false && tila != KoneenTila.PROCESSING){
  			reserved = r;
- 			System.out.println("Prosessoidaan, ei voi vapauttaa");
+ 			userId = null;
+ 			user = null;
  		}
  		//Reserve-painikkeen painaminen pohjaan on aina ok
  		else if(r == true){
