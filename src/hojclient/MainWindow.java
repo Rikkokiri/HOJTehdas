@@ -1172,23 +1172,30 @@ public class MainWindow extends javax.swing.JFrame {
     	
     	// Onko jo login painettu?
     	if (signIn.isSelected()){
-    		String RMIosoite ="tehdas";	
-    	try {
-    		registry = LocateRegistry.getRegistry(osoite, 2020);
-    		tehdas = (Tehdas) registry.lookup(RMIosoite); 		
-    	} catch (Exception e){System.out.println(e);}
-    	
-    	// Otetaan kirjoitettu käyttäjänimi talteen
-    	kayttajaNimi = userName.getText();
-    	try{
-    		tehdas.login(kayttajaNimi);
-    	}catch (RemoteException e){
-    		System.out.println(e);
-    	}
-    	online = true;
-    	new BackgroundUpdater(this).start();
-    	
-    	} // if
+    		if (userName.getText().contentEquals("") || userName.getText() == null){
+    			System.out.println("Anna käyttäjänimi");
+    			signIn.setSelected(false);
+    		}// if nimi kirjoitettu
+    		else{
+		    	String RMIosoite ="tehdas";	
+		    	try {
+		    		registry = LocateRegistry.getRegistry(osoite, 2020);
+		    		tehdas = (Tehdas) registry.lookup(RMIosoite); 		
+		    	} catch (Exception e){System.out.println(e);}
+		    	
+		    	// Otetaan kirjoitettu käyttäjänimi talteen
+		    	kayttajaNimi = userName.getText();
+		    	
+		    	try{
+		    		tehdas.login(kayttajaNimi);
+		    	}catch (RemoteException e){
+		    		System.out.println(e);
+		    	}
+		    	
+		    	online = true;
+		    	new BackgroundUpdater(this).start();
+    		}//else
+    	} // if signin
     	
     	// Jos login nappi on alhaalla niin Uloskirjaus
     	else{
