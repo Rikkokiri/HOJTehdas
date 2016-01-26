@@ -1,45 +1,49 @@
-Tehtaan toiminta
+Haujautetut järjestelmät -harjoitustyö
+Virvoitusjuomatehtaan ohjausjärjestelmä
 
-- Jos useammassa siilossa on varaus, ruuvikuljetin täyttää ylintä siiloa, jota pystyy täyttämään
+Tekijät:
+Ville Lehtinen
+Pilvi Rajala
 
+— - - - Tehtaan toiminta - - - -
 
+<<< Silo conveyer >>>
 
-Kysymyksiä
+Silo conveyer tuo lisää raaka-ainetta 
 
-- Mistä tiedetään mistä tankista pullotukseen vievän pumpun kuuluu ottaa?
+- Jos useammassa siilossa on varaus samanaikaisesti, ruuvikuljetin täyttää ylintä siiloa, jota pystyy täyttämään
+
 
 
 <<< Processor conveyer >>>
 
+Processor conveyer siirtää raaka-ainetta siiloista prosessoreihin (keittimiin).
+
 - Kun processor conveyerin start-painike vapautetaan, asetetaan prosessorit FREE-tilaan
 
 
-<<< Keitin >>>
+<<< Processor >>>
 
-Start-painikkeen vapauttaminen:
-- Voi painaa pohjaan, kun
-	- keitintä ei täytetä eikä tyhjennetä
-	- keittimessä on jotain mitä prosessoida
-	- keitin ei ole tilassa READY (eli saanut juomaa valmiiksi)
+Prosessori eli juomakeitin keittää raaka-aineesta ja vedestä tehtaassa valmistettavaa juomaa.
 
+- Reserve-painikkeen painaminen pohjaan varaa prosessorin reserve-painiketta painaneelle asiakkaalle.
+
+- Reserve-painikkeen vapauttaminen (?)
+	Ehto: Mahdollista kaikissa muissa tiloissa, paitsi kesken raaka-aineen prosessoinnin.
+		> Raaka-aineen prosessointia ei ole mahdollista keskeyttää.
+
+	- Poistaa varauksen prosessorista.
+	
+
+- Start-painikkeen painaminen pohjaan käynnistää raaka-aineen ja veden prosessoinnin (keittämisen).
+
+- Start-painikkeen vapauttaminen:
+	- Voi painaa pohjaan, kun
+		- prosessoria ei täytetä eikä tyhjennetä
+		- prosessorissa on jotain mitä prosessoida
+		- prosessorissa ei ole jo valmista tuotetta (
 - Saa vapauttaa, kun
 	- prosessointi valmis
 	- prosessointia ei ole aloitettu
 
 
-<<< Prosessori >>>
-
-Reserve
-- Kun reserve painike vapautetaan kesken täytön tai tyhjentämisen täyttö/tyhjentäminen keskeytetään
-
-Tilateksti:
-
-- Prosentin juoksemaan
-	- Täyttö
-	- Keitto
-	- Tyhjennys
-
-- 
-
-
-TO DO:
