@@ -28,47 +28,82 @@ public class ProcessorConveyer extends Conveyer {
 		limit = -1;
 	}
 	
-	// -------- RUN --------
+	// ---------- FIND METODIT ------------ //
+	
+	//Katsotaan mistä siilosta otetaan
+	private void findSilo(){
+		for(int i = 0; i < 4; i++){
+			if (!silos[i].isEmpty() && 
+					( silos[i].getTila() == KoneenTila.FREE || silos[i].getTila() == KoneenTila.EMPTYING
+					|| silos[i].getTila() == KoneenTila.FULL ) && running && silos[i].isReserved() 
+					&& (silos[i].getConveyer() == -1 || silos[i].getConveyer() == identity)){
+				siloToBeEmptied = i;
+				silos[i].setConveyer(identity);
+				break;
+			} // if
+		} // for
+	}//findSilo
+	
+	//Katsotaan mihin prosessotiin laitetaan
+	private void findProcessor(){
+		for (int i = 0; i < 3; i++){
+			if (!processors[i].isFull() 
+					&& (processors[i].getTila() == KoneenTila.FREE || processors[i].getTila() == KoneenTila.FILLING)
+					&& running && processors[i].isReserved() && processors[i].getProductAmount() == 0
+					&& (processors[i].getConveyer() == -1 || processors[i].getConveyer() == identity)){										
+				processors[i].setConveyer(identity);
+				processorToBeFilled = i;
+				break;
+			}//if
+		}//for
+	}//findProcessor
+	
+	
+	// -------- RUN -------- //
 	
 	public void run(){
 		
+		// Temporariset muuttujat edelisen while-kierroksen varausten tunnistamiseksi
+		int oldS;
+		int oldP;
+		
 		while(true){
+			
+			//TODO Näyttäisi toimivan oikein, Vähänvoisi vielä testata
 				
 				if (limit == 0){
 					running = false;
 				}
+				
+				oldS = siloToBeEmptied;
+				oldP = processorToBeFilled;
 		
 				siloToBeEmptied = -1;			//Temporariset muuttujat tyhjennettäville/
 				processorToBeFilled = -1;		//täytettäville siiloille / prosesseille
 				
-				reserved = false;
 		
 				// Katsotaan mistä siilosta otetaan
-				for(int i = 0; i < 4; i++){
-					if (!silos[i].isEmpty() && 
-							( silos[i].getTila() == KoneenTila.FREE || silos[i].getTila() == KoneenTila.EMPTYING
-							|| silos[i].getTila() == KoneenTila.FULL ) && running && silos[i].isReserved() && !reserved
-							&& (silos[i].getConveyer() == -1 || silos[i].getConveyer() == identity)){
-						siloToBeEmptied = i;
-						reserved = true;
-						silos[i].setConveyer(identity);
-						
-					} // if
-				} // for
+				if (oldS != -1 && silos[oldS].getConveyer() == identity && !silos[oldS].isEmpty() && 
+					( silos[oldS].getTila() == KoneenTila.FREE || silos[oldS].getTila() == KoneenTila.EMPTYING
+					|| silos[oldS].getTila() == KoneenTila.FULL ) && running && silos[oldS].isReserved() ){
+					//
+					siloToBeEmptied = oldS;
+				}
+				else{
+					findSilo();
+				}
 				
-				reserved = false;
 				
 				// Katsotaan mihin prosessoriin lisätään
-				for (int i = 0; i < 3; i++){
-					if (!processors[i].isFull() 
-							&& (processors[i].getTila() == KoneenTila.FREE || processors[i].getTila() == KoneenTila.FILLING)
-							&& running && processors[i].isReserved() && !reserved && processors[i].getProductAmount() == 0
-							&& (processors[i].getConveyer() == -1 || processors[i].getConveyer() == identity)){										
-						processors[i].setConveyer(identity);
-						processorToBeFilled = i;
-						reserved = true;
-					}//if
-				}//for
+				if (oldP != -1 && processors[oldP].getConveyer() == identity && !processors[oldP].isFull() 
+						&& (processors[oldP].getTila() == KoneenTila.FREE || processors[oldP].getTila() == KoneenTila.FILLING)
+						&& running && processors[oldP].isReserved() && processors[oldP].getProductAmount() == 0){
+					//
+					processorToBeFilled = oldP;
+				}
+				else{
+					findProcessor();
+				}
 				
 				// poistetaan siilosta ja lisätään prosessoriin (jos voidaan)
 				if (siloToBeEmptied != -1 && processorToBeFilled != -1){
