@@ -17,7 +17,6 @@ public class TankPump extends Pump {
 	private Processor[] processors;
 	private Tank[] tanks;
 	
-	private boolean reserved; //Onko pumppu jo käytössä?
 	private int processorToBeEmptied;
 	private int tankToBeFilled;
 	
@@ -44,9 +43,11 @@ public class TankPump extends Pump {
 	// Etsitään tyhjennetävä prosessori
 	private void findProcessor(){
 		for(int i = 0; i < 3; i++){
-			if((processors[i].getTila() == KoneenTila.READY || processors[i].getTila() == KoneenTila.EMPTYING) &&
-			!processors[i].isEmpty() && processors[i].isReserved()
-				&& (processors[i].getPump() == -1 || processors[i].getPump() == identity)){
+			if( (processors[i].getTila() == KoneenTila.READY || processors[i].getTila() == KoneenTila.EMPTYING)
+					&& !processors[i].isEmpty()
+					&& processors[i].isReserved()
+					&& (processors[i].getPump() == -1 || processors[i].getPump() == identity)
+				){
 				processorToBeEmptied = i;
 				processors[i].setPump(identity);
 				break;
@@ -56,15 +57,17 @@ public class TankPump extends Pump {
 	
 	private void findTank(){
 		for (int i = 0; i < 10; i++){
-			if ((tanks[i].getTila() == KoneenTila.FREE || tanks[i].getTila() == KoneenTila.FILLING) &&
-					!tanks[i].isFull() && tanks[i].isReserved() 
-					&& (tanks[i].getPump() == -1 || tanks[i].getPump() == identity )){
+			if ( (tanks[i].getTila() == KoneenTila.FREE || tanks[i].getTila() == KoneenTila.FILLING)
+					&& !tanks[i].isFull() && tanks[i].isReserved() 
+					&& (tanks[i].getPump() == -1 || tanks[i].getPump() == identity )
+				){
 				tankToBeFilled = i;
 				tanks[i].setPump(identity);
 				break;
 			}//if
 		}// for tanks
 	}//findTank
+	
 	
 	// ---------- RUN ----------//
 	
