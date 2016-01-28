@@ -5,12 +5,16 @@
  */
 package hojclient;
 
+import java.awt.event.WindowAdapter;
 import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.UUID;
 import javax.swing.JLabel;
 import javax.swing.JToggleButton;
+
+import com.sun.glass.events.WindowEvent;
+
 import hojserver.Tehdas;
 
 // Kommentoin pois importit, joita ilmeisesti ei tarvita
@@ -184,6 +188,8 @@ public class MainWindow extends javax.swing.JFrame {
     	
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+
+        
         siloPanel.setBackground(new java.awt.Color(204, 204, 204));
 
         silo1Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1182,12 +1188,14 @@ public class MainWindow extends javax.swing.JFrame {
 		    	String RMIosoite ="tehdas";	
 		    	try {
 		    		registry = LocateRegistry.getRegistry(osoite, 2020);
-		    		tehdas = (Tehdas) registry.lookup(RMIosoite); 		
+		    		tehdas = (Tehdas) registry.lookup(RMIosoite); 	
 		    	} catch (Exception e){System.out.println(e);}
 		    	
 		    	// Otetaan kirjoitettu käyttäjänimi talteen
 		    	kayttajaNimi = userName.getText();
 		    	
+		    	signIn.setText("Log out");
+
 		    	try{
 		    		//Otetaan käyttäjän henk. koht. userId talteen
 		    		userId = tehdas.login(kayttajaNimi);
@@ -1195,8 +1203,25 @@ public class MainWindow extends javax.swing.JFrame {
 		    		System.out.println(e);
 		    	}
 		    	
+		    	 //HANDLING EXIT BY PRESSING X
+		        addWindowListener(new WindowAdapter(){
+		        	public void windowClosing(WindowEvent e ) 
+		            {
+		              try {
+		            	//Kirjataan käyttäjä ulos  
+						tehdas.logout(userId);
+						
+					} catch (RemoteException e1) {
+						e1.printStackTrace();
+					}
+		              dispose() ;
+		              System.exit( 0 );
+		            }
+		        });
+		    	
 		    	online = true;
 		    	new BackgroundUpdater(this).start();
+		    	
     		}//else
     	} // if signin
     	
@@ -1210,6 +1235,9 @@ public class MainWindow extends javax.swing.JFrame {
     		}
     		registry = null;		//Keskeytetään yhteys ja ...
     		online = false;			//...Pysäytetään BackgroundUpdater thread	
+    		
+    		signIn.setText("Log in");
+    		
     	}
     	
     	
@@ -1845,7 +1873,7 @@ public class MainWindow extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+ 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -1862,7 +1890,7 @@ public class MainWindow extends javax.swing.JFrame {
             	//MainWindow-luokan kontruktorille annetaan parametrina osoite
                 new MainWindow(os).setVisible(true);
             }
-        });
+        }); 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

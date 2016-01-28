@@ -1,0 +1,19 @@
+Hajautetut ohjelmistojärjestelmät
+Harjoitustyö 2 - Juomatehdas
+
+Ville Lehtinen
+Pilvi Rajala
+
+
+OHJELMAN SUORITUSOHJEET
+
+1) Serverin käynnistys
+Serverin käynnistys tapahtuu ajamalla TehdasServer-luokka. Mitään kummempaa ei tarvitse tehdä.
+
+2) Asiakassovelluksen käynnistys
+Asiakassovellus käynnistetään ajamalla MainWindow-luokka. Luokalle voi antaa komentoriviparametrina serverin ip-osoitteen. Jos parametria ei anna, oletusosoitteena laitetaan localhost.
+
+2.1) Sisäänkirjautuminen
+Asiakassovellus ei näytä mitään tehtaan tietoja ennen kirjautumista. Kirjautuminen tapahtuu yksinkertaisesti antamalla jokin merkkijono Username-kenttään ja painamalla login-painiketta. Sitten ei muuta kuin leikkimään tehtaalla.
+
+2.2) Uloskirjautuminen tapahtuu painamalla login-painiketta uudelleen.

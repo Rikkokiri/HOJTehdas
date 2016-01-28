@@ -54,9 +54,15 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 	
 	// ULOSKIRJOITUS
 	public void logout(UUID idKey) throws RemoteException {
+		for(int i = 0; i < prosessorit.length; i++){
+			if(prosessorit[i].getUserId() != null && prosessorit[i].getUserId().equals(idKey)){
+				prosessorit[i].setReserved(false);
+			}
+		}
+		System.out.println("Käyttäjä " + userIdKeys.get(idKey) + ", " + idKey + " kirjautui ulos.");
+		
 		//Poistetaan käyttäjän id käyttäjien id-listalta
 		userIdKeys.remove(idKey);
-		System.out.println("Käyttäjä " + userIdKeys.get(idKey) + ", " + idKey + " kirjautui ulos.");
 	}
 	
 	//-------- Ruuvikuljettimet -------------
