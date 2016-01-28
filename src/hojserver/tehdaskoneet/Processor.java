@@ -81,6 +81,7 @@ import java.util.UUID;
  					running = false;
  					makeProduct();
  					this.setTila(KoneenTila.READY);
+ 					this.setReserved(false);
  					System.out.println("Processor: Juoma valmis keittimessä " + this + ", juomaa " + productAmount + " litraa.");
  				}
  			}//while(running...)
