@@ -142,7 +142,7 @@ public class TehdasImp extends UnicastRemoteObject implements Tehdas {
 
 	// PROSESSORIN KÄYNNISTYS
 	public void prosessorinKaynnistys(int prosessorinNro, UUID userId) throws RemoteException {
-		if(prosessorit[prosessorinNro].getUserId().equals(userId)){
+		if(prosessorit[prosessorinNro].getUserId() != null && prosessorit[prosessorinNro].getUserId().equals(userId)){
 			prosessorit[prosessorinNro].setRunning(true);
 		} else {
 			System.out.println("Käyttäjä: " + userIdKeys.get(userId) + ", " + userId + " yritti käynnistää prosessorin " + (prosessorinNro+1) + ".");
