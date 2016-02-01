@@ -10,10 +10,12 @@ import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.UUID;
+
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JToggleButton;
 
-import com.sun.glass.events.WindowEvent;
+import java.awt.event.WindowEvent;
 
 import hojserver.Tehdas;
 
@@ -62,7 +64,7 @@ public class MainWindow extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
+    	
         siloPanel = new javax.swing.JPanel();
         silo1Label = new javax.swing.JLabel();
         reserveSilo1 = new javax.swing.JToggleButton();
@@ -186,7 +188,7 @@ public class MainWindow extends javax.swing.JFrame {
     			reserveTank6, reserveTank7, reserveTank8, reserveTank9, reserveTank10};
     	
     	
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        
 
 
         
@@ -1203,22 +1205,6 @@ public class MainWindow extends javax.swing.JFrame {
 		    		System.out.println(e);
 		    	}
 		    	
-		    	 //HANDLING EXIT BY PRESSING X
-		        addWindowListener(new WindowAdapter(){
-		        	public void windowClosing(WindowEvent e ) 
-		            {
-		              try {
-		            	//Kirjataan käyttäjä ulos  
-						tehdas.logout(userId);
-						
-					} catch (RemoteException e1) {
-						e1.printStackTrace();
-					}
-		              dispose() ;
-		              System.exit( 0 );
-		            }
-		        });
-		    	
 		    	online = true;
 		    	new BackgroundUpdater(this).start();
 		    	
@@ -1732,6 +1718,13 @@ public class MainWindow extends javax.swing.JFrame {
     	// Tätä ei siis tarvita. Hoidettu muualla
     }//GEN-LAST:event_procLoadAmount1ActionPerformed
     
+    //---------- LOG OUT ON CLOSE ----------- //
+    
+    public void logoutOnClose() throws RemoteException {
+    	tehdas.logout(userId);
+    	System.exit(0);
+    }
+    
     
     // ---------- UPDATE ---------- //
     
@@ -1888,7 +1881,23 @@ public class MainWindow extends javax.swing.JFrame {
             	}
             	
             	//MainWindow-luokan kontruktorille annetaan parametrina osoite
-                new MainWindow(os).setVisible(true);
+                MainWindow window = new MainWindow(os);
+                
+                window.setVisible(true);
+                
+                window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+                
+                window.addWindowListener(new WindowAdapter(){
+                	@Override
+                	public void windowClosing(WindowEvent windowevent){
+                		try {
+							window.logoutOnClose();
+						} catch (RemoteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+                	}
+                });
             }
         }); 
     }
